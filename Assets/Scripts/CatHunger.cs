@@ -21,11 +21,23 @@ public class CatHunger : MonoBehaviour
     [Min(0)]
     [SerializeField] private float timeTillHungerGrows = 30f;
 
+    [Space]
+
+    [SerializeField] private Sprite hungryCat;
+    [SerializeField] private Sprite neutralCat;
+    [SerializeField] private Sprite happyCat;
+    [SerializeField] private float neutralThreshold;
+    [SerializeField] private float happyThreshold;
+    
+    [Space]
+    
     [SerializeField] private CatRelationship relations;
 
     public UnityEvent hungerChanged;
 
     private float timeElapsedSinceHungerGrowth;
+
+    private SpriteRenderer spriteRenderer;
     
     private float _currentCatFullness;
     public float currentCatFullness => _currentCatFullness;
@@ -34,6 +46,7 @@ public class CatHunger : MonoBehaviour
     {
         timeElapsedSinceHungerGrowth = 0f;
         _currentCatFullness = 0f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -54,6 +67,24 @@ public class CatHunger : MonoBehaviour
             {
                 relations.DecreaseRelations();
             }
+        }
+
+        HungerDisplay();
+    }
+
+    private void HungerDisplay()
+    {
+        if (_currentCatFullness < neutralThreshold)
+        {
+            spriteRenderer.sprite = hungryCat;
+        }
+        else if (_currentCatFullness >= neutralThreshold && _currentCatFullness < happyThreshold)
+        {
+            spriteRenderer.sprite = neutralCat;
+        }
+        else if (_currentCatFullness >= happyThreshold)
+        {
+            spriteRenderer.sprite = happyCat;
         }
     }
 

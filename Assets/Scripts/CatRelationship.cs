@@ -15,6 +15,10 @@ public class CatRelationship : MonoBehaviour
     [Min(0)]
     [SerializeField] private int decreaseRelationsAmount = 10;
 
+    [Space]
+
+    [SerializeField] private GameObject maxRelationshipIndicator;
+
     private int _currentRelations;
     public int currentRelations => _currentRelations;
 
@@ -27,15 +31,23 @@ public class CatRelationship : MonoBehaviour
 
     public void IncreaseRelations()
     {
-        print("Increasing relationship!");
         _currentRelations = Mathf.Clamp(_currentRelations + increaseRelationsAmount, 0, maxCatRelationship);
         relationsChanged?.Invoke();
+
+        if (_currentRelations == maxCatRelationship)
+        {
+            maxRelationshipIndicator.SetActive(true);
+        }
     }
 
     public void DecreaseRelations()
     {
-        print("Decreasing relationship!");
         _currentRelations = Mathf.Clamp(_currentRelations - decreaseRelationsAmount, 0, maxCatRelationship);
         relationsChanged?.Invoke();
+
+        if (maxRelationshipIndicator.active)
+        {
+            maxRelationshipIndicator.SetActive(false);
+        }
     }
 }
