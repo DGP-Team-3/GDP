@@ -22,6 +22,7 @@ public class RhythmEvent : MonoBehaviour
     {
         waitTimerRunning = true;
         scoreText.text = "Score: " + score.ToString();
+        outerSquare.rectTransform.localScale = new Vector3(0, 0, 1);
     }
 
 
@@ -49,9 +50,10 @@ public class RhythmEvent : MonoBehaviour
             qteText.text = "Tap the circle!";
             if (qteTimeRemaining > 0)
             {
+
                 if (Input.touchCount > 0)
                 {
-                    if (qteTimeRemaining < 1.2 && qteTimeRemaining > 1.0)
+                    if (qteTimeRemaining < 1.70 && qteTimeRemaining > 1.3)
                     {
                         score++;
                         qteTimeRemaining = 0;
