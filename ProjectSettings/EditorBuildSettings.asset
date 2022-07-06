@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Rhythm Event Prototype/Rhythm.unity
+    path: Assets/Scenes/QTE Prototype/Rhythm.unity
     guid: 2f9b2b85bc55795408a6b87507156f31
   - enabled: 1
     path: Assets/Scenes/Cat_Prototype/Cat_Game_Prototype.unity
