@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,4 +24,19 @@ public class GameManager : MonoBehaviour
     }
 
 
+    //////////////////////////////////////////
+    /// Load feeding minigame
+    ///
+    public void LoadFeedingMiniGame()
+    {
+        SceneManager.LoadScene(SceneBuildData.feedingSceneBuildIndex);
+    }
+
+    //////////////////////////////////////////
+    /// Load main game scene
+    ///
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene(SceneBuildData.mainSceneBuildIndex);
+    }
 }

@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/QTE Prototype/Rhythm.unity
-    guid: 2f9b2b85bc55795408a6b87507156f31
   - enabled: 1
-    path: Assets/Scenes/Cat_Prototype/Cat_Game_Prototype.unity
-    guid: 2770d3b1e94398444a5e3ab7653c7e1f
+    path: Assets/Scenes/Main Menu/Main Screen.unity
+    guid: c864ca226eec642498889302f0e6e22f
+  - enabled: 1
+    path: Assets/Scenes/Feeding_Minigame_Scene.unity
+    guid: 7ae8a68ed399509429415e9fc0140324
   m_configObjects: {}
