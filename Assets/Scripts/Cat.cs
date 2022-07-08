@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 public class Cat : MonoBehaviour
 {
-    private int relationship;
-    private int fullness;
+    [SerializeField]
+    public int relationship;
+    public int fullness;
     private Trait[] traits;
+    [SerializeField]
     private bool isOwned;
 
     [SerializeField]
     private SpriteRenderer sprite;
-    
-    public Cat (string[] allTraits)
+    private float hungerTimer = 0f;
+
+
+    /*public Cat (string[] allTraits)
     {
         Trait[] currentTraits = new Trait[allTraits.Length];
         for (int i = 0; i < allTraits.Length; i ++ )
@@ -21,15 +27,31 @@ public class Cat : MonoBehaviour
         }
         this.traits = currentTraits;
         this.isOwned = false;
+    }*/
+
+    private void Awake()
+    {
+        
     }
 
     void Update()
     {
-        while (this.fullness > 0)
+        if (fullness > 0)
         {
-            int seconds = Mathf.FloorToInt(Time.deltaTime % 60);
-            this.fullness -= seconds;
+            hungerTimer += Time.deltaTime;
+            int seconds = Mathf.FloorToInt(hungerTimer % 60);
+            fullness = 100 - seconds;
         }
+    }
+
+    public int getFullness()
+    {
+        return fullness;
+    }
+
+    void OnMouseDown()
+    {
+        GameObject.Find("SelectionManager").GetComponent<SelectionManager>().toggleSelection();
     }
 
 }
