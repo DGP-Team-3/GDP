@@ -36,8 +36,8 @@ public class Cat : MonoBehaviour
     {
         if (fullness > 0)
         {
-            hungerTimer += Time.deltaTime;
-            int seconds = Mathf.FloorToInt(hungerTimer % 60);
+            hungerTimer += Time.deltaTime % 60;
+            int seconds = Mathf.FloorToInt(hungerTimer);
             fullness = 100 - seconds;
         }
     }
