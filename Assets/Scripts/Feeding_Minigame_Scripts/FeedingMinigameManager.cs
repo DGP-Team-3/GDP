@@ -75,7 +75,6 @@ public class FeedingMinigameManager : MonoBehaviour
         if (isCatMad)
         {
             timeElapsed += Time.deltaTime;
-            print(timeElapsed);
             if (timeElapsed > expressionWaitTime)
             {
                 isCatMad = false;
@@ -88,8 +87,6 @@ public class FeedingMinigameManager : MonoBehaviour
         if (isCatHappy)
         {
             timeElapsed += Time.deltaTime;
-
-            print(timeElapsed);
             if (timeElapsed > expressionWaitTime)
             {
                 isCatHappy = false;
@@ -179,8 +176,10 @@ public class FeedingMinigameManager : MonoBehaviour
             spriteRenderer.color = Color.Lerp(originalColor, Color.black, blackoutTVal);
             yield return null;
         }
-        
-        //TODO: Return to main scene
+
+        yield return new WaitForSeconds(1f);
+
+        GameManager.Instance.LoadMainScene();
     }
 
 }
