@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Cat : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class Cat : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer sprite;
+
+    [SerializeField]
+    private Sprite portrait;
     private float hungerTimer = 0f;
 
 
@@ -28,11 +31,6 @@ public class Cat : MonoBehaviour
         this.traits = currentTraits;
         this.isOwned = false;
     }*/
-
-    private void Awake()
-    {
-        
-    }
 
     void Update()
     {
@@ -51,7 +49,10 @@ public class Cat : MonoBehaviour
 
     void OnMouseDown()
     {
-        GameObject.Find("SelectionManager").GetComponent<SelectionManager>().toggleSelection();
+
+        SelectionManager selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
+        selectionManager.setCat(this);
+        selectionManager.setDisplay(true);
     }
 
 }
