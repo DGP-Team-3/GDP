@@ -160,14 +160,14 @@ public class FeedingMinigameManager : MonoBehaviour
     /// 
     private void TransitionToMainScene()
     {
-        StartCoroutine(EnableBlackout());
+        StartCoroutine(Transition());
     }
 
 
     //////////////////////////////////////////
     ///
     /// 
-    private IEnumerator EnableBlackout()
+    private IEnumerator Transition()
     {
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
@@ -180,6 +180,7 @@ public class FeedingMinigameManager : MonoBehaviour
             yield return null;
         }
         
+        //TODO: Return to main scene
     }
 
 }
