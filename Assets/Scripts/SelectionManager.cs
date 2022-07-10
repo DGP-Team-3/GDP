@@ -5,45 +5,116 @@ using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
-    private Cat cat;
-    public Image fullnessBar;
-    public GameObject CatPopUpDisplay;
-    public Button homeButton;
-    public Button storageButton;
 
-    void Update()
+    private static SelectionManager _instance;
+    public static SelectionManager Instance { get { return _instance; } }
+    
+
+    [SerializeField] private GameObject catPopUpDisplay;
+    [SerializeField] private Button homeButton;
+    [SerializeField] private Button storageButton;
+
+    private Vector2 screenPos;
+    private Vector3 worldPos;
+    private CatPopUpHandler popupHandler;
+
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void Awake()
     {
-        if (cat)
+        if (_instance != null && _instance != this)
         {
-            float fullnessPercent = cat.fullness / 100f;
-            fullnessBar.fillAmount = Mathf.Clamp(fullnessPercent, 0, 1f);
+            Destroy(gameObject);
         }
+        else
+        {
+            _instance = this;
+        }
+
+        popupHandler = catPopUpDisplay.GetComponent<CatPopUpHandler>();
     }
 
-    public void setCat(Cat newCat)
+    //////////////////////////////////////////
+    ///
+    ///
+    private void Update()
     {
-        cat = newCat;
+        HandleSelection();
     }
 
-    public void toggleSelection()
+
+    //////////////////////////////////////////
+    /// Checks for selecting a cat
+    ///
+    private void HandleSelection()
     {
-        CatPopUpDisplay.SetActive(!CatPopUpDisplay.activeSelf);
-        handleButtonActivity();
+        //Update position data
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            screenPos = new Vector2(mousePos.x, mousePos.y);
+        }
+        else if (Input.touchCount > 0)
+        {
+            screenPos = Input.GetTouch(0).position;
+        }
+        //invalid input type
+        else
+        {
+            return;
+        }
+
+
+        worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+
+        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        if (hit.collider == null) return;
+
+        Cat cat = hit.transform.gameObject.GetComponent<Cat>();
+
+        if (cat == null)
+        {
+            DeselectCat();
+            return;
+        }
+
+        SelectCat(cat);
     }
 
-    public void setDisplay(bool displayPopup)
+    //////////////////////////////////////////
+    ///
+    ///
+    private void SelectCat(Cat newCat)
     {
-        CatPopUpDisplay.SetActive(displayPopup);
-        handleButtonActivity();
+        popupHandler.AssignCat(newCat);
+        catPopUpDisplay.SetActive(true);
+        HandleButtonActivity();
     }
 
-    private void handleButtonActivity()
+    //////////////////////////////////////////
+    ///
+    ///
+    public void DeselectCat()
     {
-        if (CatPopUpDisplay.activeSelf)
+        popupHandler.AssignCat(null);
+        catPopUpDisplay.SetActive(false);
+        HandleButtonActivity();
+    }
+
+    //////////////////////////////////////////
+    /// 
+    ///
+    private void HandleButtonActivity()
+    {
+        if (catPopUpDisplay.activeSelf)
         {
             homeButton.interactable = true;
             storageButton.interactable = false;
-        } else
+        } 
+        else
         {
             homeButton.interactable = false;
             storageButton.interactable = true;
