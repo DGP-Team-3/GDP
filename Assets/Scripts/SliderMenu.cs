@@ -6,7 +6,7 @@ public class SliderMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject PanelMenu;
-    // Start is called before the first frame update
+
     public void ShowHideMenu()
     {
         if (PanelMenu)

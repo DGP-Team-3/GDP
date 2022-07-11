@@ -1,58 +1,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Cat : MonoBehaviour
 {
-    [SerializeField]
-    public int relationship;
-    public int fullness;
-    private Trait[] traits;
-    [SerializeField]
-    private bool isOwned;
+    [Tooltip("How many seconds till increaseing cat's hunger.")]
+    [Min(0f)]
+    [SerializeField] private float hungerProcTime = 1f;
+    
+    [SerializeField] private Sprite catPortrait;
 
-    [SerializeField]
-    private SpriteRenderer sprite;
+    [Min(0f)]
+    [SerializeField] private int maxFullness = 100;
+    public float MaxFullness => maxFullness;
 
-    [SerializeField]
-    private Sprite portrait;
+
+    private int _fullness;
+    public int Fullness => _fullness;
+
+
+    private int _relationship;
+    public int Relationship => _relationship;
+
+    private int _entertainment;
+    public int Entertainment => _entertainment;
+
+
     private float hungerTimer = 0f;
 
+    private Trait[] traits;
 
-    /*public Cat (string[] allTraits)
+    private SelectionManager selectionManager;
+
+
+
+    public delegate void HungerUpdated(int fullness);
+    public event HungerUpdated OnHungerUpdated;   
+    
+    public delegate void RelationshipUpdated(int relationship);
+    public event RelationshipUpdated OnRelationshipUpdated;    
+    
+    public delegate void EntertainmentUpdated(int entertainment);
+    public event EntertainmentUpdated OnEntertainmentUpdated;
+
+
+    private void Awake()
     {
-        Trait[] currentTraits = new Trait[allTraits.Length];
-        for (int i = 0; i < allTraits.Length; i ++ )
-        {
-            Trait current = new Trait(allTraits[i]);
-            currentTraits[i] = current;
-        }
-        this.traits = currentTraits;
-        this.isOwned = false;
-    }*/
+        selectionManager = SelectionManager.Instance;
+        _fullness = maxFullness;
+    }
+
 
     void Update()
     {
-        if (fullness > 0)
+        HandleHunger();
+    }
+
+
+    //////////////////////////////////////////
+    /// update hunger value
+    ///
+    private void HandleHunger()
+    {
+        hungerTimer += Time.deltaTime;
+
+        if (hungerTimer >= hungerProcTime)
         {
-            hungerTimer += Time.deltaTime % 60;
-            int seconds = Mathf.FloorToInt(hungerTimer);
-            fullness = 100 - seconds;
+            _fullness = Mathf.Clamp(--_fullness, 0, maxFullness);
+            OnHungerUpdated?.Invoke(_fullness);
+            hungerTimer = 0f;
         }
     }
 
-    public int getFullness()
+    //////////////////////////////////////////
+    /// 
+    ///
+    public Sprite GetPortrait()
     {
-        return fullness;
+        return catPortrait;
     }
-
-    void OnMouseDown()
-    {
-
-        SelectionManager selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
-        selectionManager.setCat(this);
-        selectionManager.setDisplay(true);
-    }
-
 }
