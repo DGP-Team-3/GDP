@@ -103,7 +103,6 @@ public class SelectionManager : MonoBehaviour
     ///
     public void DeselectCat()
     {
-        print("Deselect");
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
         HandleButtonActivity();
