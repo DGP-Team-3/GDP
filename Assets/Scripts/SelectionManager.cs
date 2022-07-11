@@ -42,35 +42,38 @@ public class SelectionManager : MonoBehaviour
     ///
     private void Update()
     {
-        HandleSelection();
+        HandleInput();
     }
 
 
     //////////////////////////////////////////
-    /// Checks for selecting a cat
+    /// Gathers input positions
     ///
-    private void HandleSelection()
+    private void HandleInput()
     {
         //Update position data
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePos = Input.mousePosition;
-            screenPos = new Vector2(mousePos.x, mousePos.y);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos = new Vector2(mousePos.x, mousePos.y);
+
+            HandleCatSelection(mousePos);
         }
         else if (Input.touchCount > 0)
         {
             screenPos = Input.GetTouch(0).position;
+
+            HandleCatSelection(screenPos);
         }
-        //invalid input type
-        else
-        {
-            return;
-        }
+    }
 
+    //////////////////////////////////////////
+    /// Checks for selecting a cat
+    ///
+    private void HandleCatSelection(Vector2 inputPosition)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero);
 
-        worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
         if (hit.collider == null) return;
 
         Cat cat = hit.transform.gameObject.GetComponent<Cat>();
@@ -83,6 +86,7 @@ public class SelectionManager : MonoBehaviour
 
         SelectCat(cat);
     }
+
 
     //////////////////////////////////////////
     ///
@@ -99,6 +103,7 @@ public class SelectionManager : MonoBehaviour
     ///
     public void DeselectCat()
     {
+        print("Deselect");
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
         HandleButtonActivity();

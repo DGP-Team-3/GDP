@@ -16,14 +16,6 @@ public class CatPopUpHandler : MonoBehaviour
     //////////////////////////////////////////
     /// 
     ///
-    void OnEnable()
-    {
-        Subscribe();
-    }
-
-    //////////////////////////////////////////
-    /// 
-    ///
     void OnDisable()
     {
         Unsubscribe();
@@ -37,6 +29,7 @@ public class CatPopUpHandler : MonoBehaviour
         Unsubscribe();
 
         currentCat = newCat;
+        ResetDisplay();
 
         Subscribe();
     }
@@ -66,6 +59,23 @@ public class CatPopUpHandler : MonoBehaviour
         currentCat.OnRelationshipUpdated -= UpdateRelationshipBar;
     }
 
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void ResetDisplay()
+    {
+        if (currentCat == null) return;
+
+        float fullnessPercent = currentCat.Fullness / currentCat.MaxFullness;
+        catFullnessBar.fillAmount = Mathf.Clamp(fullnessPercent, 0, 1f);
+
+        float relationshipPercent = currentCat.Relationship / 100f;
+        catRelationshipImage.fillAmount = Mathf.Clamp(relationshipPercent, 0, 1f);
+
+        float entertainmentPercent = currentCat.Entertainment / 100f;
+        catEntertainmentBar.fillAmount = Mathf.Clamp(entertainmentPercent, 0, 1f);
+    }
 
     //////////////////////////////////////////
     ///

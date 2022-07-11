@@ -18,7 +18,13 @@ public class Cat : MonoBehaviour
     private int _fullness;
     public int Fullness => _fullness;
 
-    private int relationship;
+
+    private int _relationship;
+    public int Relationship => _relationship;
+
+    private int _entertainment;
+    public int Entertainment => _entertainment;
+
 
     private float hungerTimer = 0f;
 
@@ -60,7 +66,6 @@ public class Cat : MonoBehaviour
 
         if (hungerTimer >= hungerProcTime)
         {
-            print(Fullness);
             _fullness = Mathf.Clamp(--_fullness, 0, maxFullness);
             OnHungerUpdated?.Invoke(_fullness);
             hungerTimer = 0f;
@@ -70,7 +75,7 @@ public class Cat : MonoBehaviour
     //////////////////////////////////////////
     /// 
     ///
-    private Sprite GetCatPortrait()
+    public Sprite GetPortrait()
     {
         return catPortrait;
     }
