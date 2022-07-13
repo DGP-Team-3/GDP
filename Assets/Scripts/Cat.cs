@@ -46,7 +46,6 @@ public class Cat : MonoBehaviour
 
     private void Awake()
     {
-        selectionManager = SelectionManager.Instance;
         _fullness = maxFullness;
     }
 
