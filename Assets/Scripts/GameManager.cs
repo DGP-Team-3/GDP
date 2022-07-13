@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
 
 
+    [SerializeField] private List<Cat> cats; //stores all cats collected
+
 
     private void Awake()
     {

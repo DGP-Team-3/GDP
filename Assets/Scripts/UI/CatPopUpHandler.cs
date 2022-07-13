@@ -26,12 +26,16 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void AssignCat(Cat newCat)
     {
+        if (currentCat == newCat) return;
+
         Unsubscribe();
 
         currentCat = newCat;
-        ResetDisplay();
-
+        
+        SetDisplay();
+        
         Subscribe();
+
     }
 
 
@@ -63,7 +67,7 @@ public class CatPopUpHandler : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
-    private void ResetDisplay()
+    private void SetDisplay()
     {
         if (currentCat == null) return;
 

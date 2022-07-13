@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -11,13 +12,12 @@ public class SelectionManager : MonoBehaviour
     
 
     [SerializeField] private GameObject catPopUpDisplay;
+    [SerializeField] private GameObject catPopUpCanvas; //temporary. Remove when popup display is finished
     [SerializeField] private Button homeButton;
     [SerializeField] private Button storageButton;
+    [SerializeField] private LayerMask collidableLayers;
 
-    private Vector2 screenPos;
-    private Vector3 worldPos;
     private CatPopUpHandler popupHandler;
-
 
 
     //////////////////////////////////////////
@@ -52,16 +52,16 @@ public class SelectionManager : MonoBehaviour
     private void HandleInput()
     {
         //Update position data
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos = new Vector2(mousePos.x, mousePos.y);
 
             HandleCatSelection(mousePos);
         }
-        else if (Input.touchCount > 0)
+        else if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject())
         {
-            screenPos = Input.GetTouch(0).position;
+            Vector2 screenPos = Input.GetTouch(0).position;
 
             HandleCatSelection(screenPos);
         }
@@ -72,7 +72,7 @@ public class SelectionManager : MonoBehaviour
     ///
     private void HandleCatSelection(Vector2 inputPosition)
     {
-        RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero, 10, collidableLayers);
 
         if (hit.collider == null) return;
 
@@ -83,7 +83,6 @@ public class SelectionManager : MonoBehaviour
             DeselectCat();
             return;
         }
-
         SelectCat(cat);
     }
 
@@ -91,11 +90,11 @@ public class SelectionManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
-    private void SelectCat(Cat newCat)
+    public void SelectCat(Cat newCat)
     {
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
-        HandleButtonActivity();
+        catPopUpCanvas.SetActive(true);
     }
 
     //////////////////////////////////////////
@@ -105,24 +104,7 @@ public class SelectionManager : MonoBehaviour
     {
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
-        HandleButtonActivity();
-    }
-
-    //////////////////////////////////////////
-    /// 
-    ///
-    private void HandleButtonActivity()
-    {
-        if (catPopUpDisplay.activeSelf)
-        {
-            homeButton.interactable = true;
-            storageButton.interactable = false;
-        } 
-        else
-        {
-            homeButton.interactable = false;
-            storageButton.interactable = true;
-        }
+        catPopUpCanvas.SetActive(false);
     }
 
 }
