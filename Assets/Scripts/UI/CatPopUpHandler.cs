@@ -6,8 +6,31 @@ using UnityEngine.UI;
 public class CatPopUpHandler : MonoBehaviour
 {
     [SerializeField] private Image catFullnessBar;
-    [SerializeField] private Image catRelationshipImage;
     [SerializeField] private Image catEntertainmentBar;
+    [SerializeField] private Image catRelationshipImage;
+    [SerializeField] private List<Image> catRelationshipImages;
+
+    [Space]
+    [Space]
+
+    [SerializeField] private GameObject progressRelationshipDialogueBox;
+    [SerializeField] private Text progressRelationshipText;
+    [SerializeField] private GameObject maxRelationshipDialogueBox;
+    [SerializeField] private Text maxRelationshipText;
+
+    [Space]
+
+    [SerializeField] private GameObject progressFeedDialogueBox;
+    [SerializeField] private Text progressFeedText;
+    [SerializeField] private GameObject maxFeedDialogueBox;
+    [SerializeField] private Text maxFeedText;
+
+    [Space]
+
+    [SerializeField] private GameObject progressEntertainmentDialogueBox;    
+    [SerializeField] private Text progressEntertainmentText;
+    [SerializeField] private GameObject maxEntertainmentDialogueBox;
+    [SerializeField] private Text maxEntertainmentText;
 
 
     private Cat currentCat;
