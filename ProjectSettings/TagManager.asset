@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ValidDrop
   - InvalidDrop
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
