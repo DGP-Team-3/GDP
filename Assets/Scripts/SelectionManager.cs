@@ -12,9 +12,6 @@ public class SelectionManager : MonoBehaviour
     
 
     [SerializeField] private GameObject catPopUpDisplay;
-    [SerializeField] private GameObject catPopUpCanvas; //temporary. Remove when popup display is finished
-    [SerializeField] private Button homeButton;
-    [SerializeField] private Button storageButton;
     [SerializeField] private LayerMask collidableLayers;
 
     private CatPopUpHandler popupHandler;
@@ -94,7 +91,6 @@ public class SelectionManager : MonoBehaviour
     {
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
-        catPopUpCanvas.SetActive(true);
     }
 
     //////////////////////////////////////////
@@ -104,7 +100,6 @@ public class SelectionManager : MonoBehaviour
     {
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
-        catPopUpCanvas.SetActive(false);
     }
 
 }

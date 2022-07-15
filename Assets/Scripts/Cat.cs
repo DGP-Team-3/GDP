@@ -14,6 +14,14 @@ public class Cat : MonoBehaviour
     [SerializeField] private int maxFullness = 100;
     public float MaxFullness => maxFullness;
 
+    [Min(0f)]
+    [SerializeField] private int maxRelationship = 100;
+    public float MaxRelationship => maxRelationship;
+
+    [Min(0f)]
+    [SerializeField] private int maxEntertainment = 100;
+    public float MaxEntertainment => maxEntertainment;
+
 
     private int _fullness;
     public int Fullness => _fullness;
@@ -22,15 +30,12 @@ public class Cat : MonoBehaviour
     private int _relationship;
     public int Relationship => _relationship;
 
+
     private int _entertainment;
     public int Entertainment => _entertainment;
 
 
     private float hungerTimer = 0f;
-
-    private Trait[] traits;
-
-    private SelectionManager selectionManager;
 
 
 
@@ -47,6 +52,8 @@ public class Cat : MonoBehaviour
     private void Awake()
     {
         _fullness = maxFullness;
+        _relationship = maxRelationship / 2;
+        _entertainment = maxEntertainment;
     }
 
 
@@ -69,6 +76,22 @@ public class Cat : MonoBehaviour
             OnHungerUpdated?.Invoke(_fullness);
             hungerTimer = 0f;
         }
+    }
+
+    //////////////////////////////////////////
+    /// update relationship value
+    ///
+    public void AddRelationship(int value)
+    {
+        _relationship = Mathf.Clamp(value + _relationship, 0, maxRelationship);
+    }    
+    
+    //////////////////////////////////////////
+    /// update entertainment value
+    ///
+    public void AddEntertainment(int value)
+    {
+        _entertainment = Mathf.Clamp(value + _entertainment, 0, maxEntertainment);
     }
 
     //////////////////////////////////////////
