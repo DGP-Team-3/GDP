@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TargetCircle : MonoBehaviour
+public class TargetCircleScript : MonoBehaviour
 {
-    PettingScore pettingScore;
-    GameObject scoreManager;
-
-
-    public UnityEvent circleClicked;
+    GameObject _owner;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager");
-        pettingScore = scoreManager.GetComponent<PettingScore>();
     }
 
     // Update is called once per frame
@@ -25,11 +19,15 @@ public class TargetCircle : MonoBehaviour
         
     }
 
+    public void setOwner(GameObject owner)
+    {
+        _owner = owner;
+    }
+
     private void OnMouseDown()
     {
         print("Circle clicked!");
-        pettingScore.AwardPoints();
-        //circleClicked?.Invoke();
+        _owner.GetComponent<PettingGameManager>().CircleClicked();
         Destroy(this.gameObject);
     }
 }
