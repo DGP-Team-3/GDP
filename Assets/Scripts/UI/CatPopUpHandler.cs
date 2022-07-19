@@ -6,14 +6,17 @@ using TMPro;
 
 public class CatPopUpHandler : MonoBehaviour
 {
+    [SerializeField] private CatData catData;
     [SerializeField] private Image catFullnessBar;
     [SerializeField] private Image catEntertainmentBar;
     [SerializeField] private Image catRelationshipImage;
-    [SerializeField] private List<Sprite> catRelationshipImages;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private Button storeCatButton;
 
     [Space]
     [Space]
 
+    [Header("Dialogue Boxes")]
     [SerializeField] private GameObject progressRelationshipDialogueBox;
     [SerializeField] private TMP_Text progressRelationshipText;
     [SerializeField] private GameObject maxRelationshipDialogueBox;
@@ -32,10 +35,14 @@ public class CatPopUpHandler : MonoBehaviour
     [SerializeField] private TMP_Text entertainmentText;
 
 
-
     private Cat currentCat;
     private List<GameObject> dialogueBoxes = new List<GameObject>();
 
+
+
+    //////////////////////////////////////////
+    ///
+    ///
     private void Awake()
     {
         dialogueBoxes.Add(progressRelationshipDialogueBox);
@@ -104,6 +111,8 @@ public class CatPopUpHandler : MonoBehaviour
     {
         if (currentCat == null) return;
 
+        nameText.text = currentCat.GetName();
+
         UpdateHungerUI(currentCat.Fullness);
 
         UpdateEntertainmentUI(currentCat.Entertainment);
@@ -138,6 +147,8 @@ public class CatPopUpHandler : MonoBehaviour
     private void UpdateRelationshipUI(int relationship)
     {
         if (currentCat == null) return;
+
+         List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
 
         float catRelationshipRatio = currentCat.MaxRelationship / catRelationshipImages.Count;
 
@@ -208,6 +219,9 @@ public class CatPopUpHandler : MonoBehaviour
 
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public void CloseEntertainmentDialogueBox()
     {
         entertainmentDialogueBox.SetActive(false);
@@ -230,12 +244,18 @@ public class CatPopUpHandler : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public void CloseFullnessDialogueBox()
     {
         maxFeedDialogueBox.SetActive(false);
         progressFeedDialogueBox.SetActive(false);
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public void CloseOpenDialogueBoxes()
     {
         foreach (GameObject dialogueBox in dialogueBoxes)
