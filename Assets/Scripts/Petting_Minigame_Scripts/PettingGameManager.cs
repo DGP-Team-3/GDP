@@ -22,6 +22,13 @@ public class PettingGameManager : MonoBehaviour
 
     private float score;
 
+    [Min(0f)]
+    [SerializeField] private float blackoutSpeed = 1f;
+
+    [SerializeField] private GameObject blackout;
+    private bool isBlackingOut = false;
+    private float blackoutTVal = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,11 @@ public class PettingGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (isBlackingOut)
+        {
+            blackoutTVal += Time.deltaTime * blackoutSpeed;
+        }
 
     }
 
@@ -69,8 +81,30 @@ public class PettingGameManager : MonoBehaviour
         {
 
             print("You Won!");
+            StartCoroutine(Transition());
             // Win
         }
+    }
+
+    //////////////////////////////////////////
+    ///
+    /// 
+    private IEnumerator Transition()
+    {
+        isBlackingOut = true;
+        SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+
+        while (spriteRenderer.color != Color.black)
+        {
+
+            spriteRenderer.color = Color.Lerp(originalColor, Color.black, blackoutTVal);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        GameManager.Instance.LoadMainScene();
     }
 }
 
