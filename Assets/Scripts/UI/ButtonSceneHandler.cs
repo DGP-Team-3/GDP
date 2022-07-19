@@ -13,5 +13,15 @@ public class ButtonSceneHandler : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         GameManager.Instance.LoadFeedingMiniGame();
+    }    
+    
+    //////////////////////////////////////////
+    ///
+    ///
+    public void RequestLoadEntertainmentMiniGame()
+    {
+        if (GameManager.Instance == null) return;
+
+        GameManager.Instance.LoadEntertainmentMiniGame();
     }
 }

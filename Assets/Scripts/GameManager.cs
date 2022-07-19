@@ -35,6 +35,14 @@ public class GameManager : MonoBehaviour
     public void LoadFeedingMiniGame()
     {
         SceneManager.LoadScene(SceneBuildData.feedingSceneBuildIndex);
+    }    
+    
+    //////////////////////////////////////////
+    /// Load entertainment minigame
+    ///
+    public void LoadEntertainmentMiniGame()
+    {
+        SceneManager.LoadScene(SceneBuildData.pettingSceneBuildIndex);
     }
 
     //////////////////////////////////////////
