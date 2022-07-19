@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum FoodType
 {
-    Shrimp = 0,
-    Beef = 1,
-    Chicken = 2,
+    Shrimp,
+    Beef,
+    Chicken
 }
 
 public class Food : MonoBehaviour

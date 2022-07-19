@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cab37e961abcbb949a91cb0e04fa1888
+guid: 4c375531b0d626549925d58628e61d6f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: normcat1_walk_0
+      name: komi_walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 318194d5c2c8fcc41828d1b85ac2cf94
-      internalID: -147887709
+      spriteID: 14a87a6a05824b84e82e79b4de436847
+      internalID: 2067643110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_1
+      name: komi_walk_1
       rect:
         serializedVersion: 2
         x: 48
@@ -163,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77b88e15d96923542b291c6e40afdef4
-      internalID: 1641916856
+      spriteID: ce91803d19cf3854099af3494de98b3e
+      internalID: -1883523695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_2
+      name: komi_walk_2
       rect:
         serializedVersion: 2
         x: 96
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1cb22d086aeb01418d322d2a1452bdb
-      internalID: 924028342
+      spriteID: 38c32a6e4e465484da3b92ef9da457fa
+      internalID: -59212389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_3
+      name: komi_walk_3
       rect:
         serializedVersion: 2
         x: 144
@@ -205,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b66eacff37e397449b749fa5fda71465
-      internalID: 2013455886
+      spriteID: 4605f98e0141bad4287fdbb49094bbda
+      internalID: -348726985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_4
+      name: komi_walk_4
       rect:
         serializedVersion: 2
         x: 192
@@ -226,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd865b495a4e9045a1a94bf58958cc9
-      internalID: 912179370
+      spriteID: 9cfab3d168135b8408f17ad54946e5f3
+      internalID: 2048734143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_5
+      name: komi_walk_5
       rect:
         serializedVersion: 2
         x: 240
@@ -247,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e17a84d8f2a0154dbfd06cc50d591cc
-      internalID: 1699822359
+      spriteID: 4f1970aecf56ba44798947fbff803769
+      internalID: -1730881252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_6
+      name: komi_walk_6
       rect:
         serializedVersion: 2
         x: 288
@@ -268,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 565878613642ce248afb58e5d8e44125
-      internalID: 40536135
+      spriteID: 1ccb4de98778c2240a418cd40b9b9baf
+      internalID: 2020804461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_7
+      name: komi_walk_7
       rect:
         serializedVersion: 2
         x: 336
@@ -289,14 +289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 448ea04c80526604daab3972700fe378
-      internalID: -529386774
+      spriteID: c03a2d324319f934c84148234f11cf45
+      internalID: 507924416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_8
+      name: komi_walk_8
       rect:
         serializedVersion: 2
         x: 384
@@ -310,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83fc13669fb2c884e9758b9698f03a16
-      internalID: 1065465886
+      spriteID: 66da68a9bebb2e649bc84c87d06fb8a4
+      internalID: -1093728811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_9
+      name: komi_walk_9
       rect:
         serializedVersion: 2
         x: 432
@@ -331,14 +331,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf6043a92bdeb074589622188733da3f
-      internalID: -970053052
+      spriteID: dd986839c788d7b4296eee6bccc2e74d
+      internalID: -1809240133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_10
+      name: komi_walk_10
       rect:
         serializedVersion: 2
         x: 480
@@ -352,14 +352,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9be969e837dc8524f8cdaf4e5c3e088b
-      internalID: 1894376600
+      spriteID: cc9a23973719af14bac59b478fdafce7
+      internalID: 124591696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_11
+      name: komi_walk_11
       rect:
         serializedVersion: 2
         x: 528
@@ -373,14 +373,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8ae1d445eddaa545a4a7fe2d637aeb9
-      internalID: 1753927531
+      spriteID: 5e52c06152bcd814a8b9c7abc3fda6cb
+      internalID: -1738403942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_12
+      name: komi_walk_12
       rect:
         serializedVersion: 2
         x: 576
@@ -394,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 427a199fa5ff69943a20d9b386eb0f7d
-      internalID: 756169849
+      spriteID: e32f667cb4723a0478eccf53956356ec
+      internalID: -1910047121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_13
+      name: komi_walk_13
       rect:
         serializedVersion: 2
         x: 624
@@ -415,14 +415,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9416ab58d1b9d8438b6b0a45bcd903d
-      internalID: 1167399145
+      spriteID: 061e3a6f21f1cc243b311de31ac07ee7
+      internalID: -500689788
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_14
+      name: komi_walk_14
       rect:
         serializedVersion: 2
         x: 672
@@ -436,14 +436,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c4eca3f81176ce4592733c55546dd19
-      internalID: 1308907387
+      spriteID: 7eb701e9d432dd048b1ef9eecd13b167
+      internalID: 893697106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_walk_15
+      name: komi_walk_15
       rect:
         serializedVersion: 2
         x: 720
@@ -457,8 +457,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a1884cae03e1e94d8c550ab119affa0
-      internalID: -1782911100
+      spriteID: c9e4d5620a024834da3fd590c120ef4c
+      internalID: 1741206561
       vertices: []
       indices: 
       edges: []
@@ -474,22 +474,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      normcat1_walk_15: -1782911100
-      normcat1_walk_10: 1894376600
-      normcat1_walk_1: 1641916856
-      normcat1_walk_14: 1308907387
-      normcat1_walk_4: 912179370
-      normcat1_walk_13: 1167399145
-      normcat1_walk_11: 1753927531
-      normcat1_walk_2: 924028342
-      normcat1_walk_8: 1065465886
-      normcat1_walk_9: -970053052
-      normcat1_walk_0: -147887709
-      normcat1_walk_6: 40536135
-      normcat1_walk_3: 2013455886
-      normcat1_walk_5: 1699822359
-      normcat1_walk_12: 756169849
-      normcat1_walk_7: -529386774
+      komi_walk_9: -1809240133
+      komi_walk_14: 893697106
+      komi_walk_12: -1910047121
+      komi_walk_13: -500689788
+      komi_walk_3: -348726985
+      komi_walk_1: -1883523695
+      komi_walk_5: -1730881252
+      komi_walk_2: -59212389
+      komi_walk_7: 507924416
+      komi_walk_6: 2020804461
+      komi_walk_4: 2048734143
+      komi_walk_15: 1741206561
+      komi_walk_0: 2067643110
+      komi_walk_10: 124591696
+      komi_walk_8: -1093728811
+      komi_walk_11: -1738403942
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

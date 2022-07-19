@@ -1,18 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Trait
+public enum Trait
 {
-    private string traitName;
-
-    public Trait(string nameParam)
-    {
-        this.traitName = nameParam;
-    }
-
-    public string getTraitName()
-    {
-        return this.traitName;
-    }
+    Loner,
+    Shy,
+    Quiet,
+    Adventurous,
+    Roudy,
+    Loving,
+    Obedient,
+    Curious,
+    Intelligent,
+    Swift,
+    Loyal,
+    Graceful,
+    Affectionate,
+    Gentle,
+    Patient,
+    Alert,
+    Competitive,
+    Strong,
+    Menace,
+    Gremlin,
+    Round,
+    Social,
+    Playful,
+    Loud,
+    Grumpy,
+    Calm,
+    Mischeivous,
+    Lazy,
+    Clumsy,
+    Reserved,
+    Humble,
+    Dainty,
+    Polite,
+    Friendshaped,
 }
