@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Discover : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class Discover : MonoBehaviour
     [SerializeField] private float timeTillCatReshuffle = 30f;
 
     private float reshuffleTimeElapsed = 0f;
+
+    private void Start()
+    {
+        foreach (GameObject container in containers)
+        {
+            GenerateNewCatDisplay(container);
+        }
+    }
 
     //////////////////////////////////////////
     ///
@@ -34,6 +43,7 @@ public class Discover : MonoBehaviour
             foreach (GameObject container in containers)
             {
                 GenerateNewCatDisplay(container);
+                container.GetComponent<CatContainer>().EnableButton();
             }
         }
     }
@@ -44,19 +54,51 @@ public class Discover : MonoBehaviour
     ///
     private void GenerateNewCatDisplay(GameObject container)
     {
-        //Pick random cat type
-        //take container and get children objects that need to be updated
-        //name
+        CatContainer catContainer = container.GetComponent<CatContainer>();
+        Trait firstTrait;
+        Trait secondTrait;
+        string catName;
+        Sprite catPortrait;
+
+
+        //TODO: Use probability instead for each cat type
+        int catTypeIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(CatType)).Length);
+        CatType catType = (CatType)catTypeIndex;
+
+
+        catContainer.SetCatType(catType);
+
+
         //portrait
-        //traits
+        catPortrait = catData.GetCatPortrait(catType);
+        catContainer.SetPortrait(catPortrait);
+
+        if (catData.IsUniqueCatType(catType))
+        {
+            //name
+            catName = catData.GetUniqueCatName(catType);
+            catContainer.SetName(catName);
+        }
+        else
+        {
+            //name
+            catName = catData.GetRandomName();
+            catContainer.SetName(catName);
+
+            //traits
+            firstTrait = catData.GetRandomTrait();
+            secondTrait = catData.GetRandomTrait();
+            while (firstTrait == secondTrait)
+            {
+                firstTrait = catData.GetRandomTrait();
+                secondTrait = catData.GetRandomTrait();
+            }
+
+            catContainer.SetFirstTrait(firstTrait);
+            catContainer.SetSecondTrait(secondTrait);
+
+        }
     }
 
-
-    //////////////////////////////////////////
-    ///
-    ///
-    public void FosterCat(int containerIndex)
-    {
-
-    }
 }
+

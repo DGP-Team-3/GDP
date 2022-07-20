@@ -91,6 +91,7 @@ public class SelectionManager : MonoBehaviour
     {
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
+        GameManager.Instance.SetSelectedCat(newCat);
     }
 
     //////////////////////////////////////////
@@ -100,6 +101,7 @@ public class SelectionManager : MonoBehaviour
     {
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
+        GameManager.Instance.SetSelectedCat(null);
     }
 
 }

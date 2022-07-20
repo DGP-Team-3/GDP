@@ -138,6 +138,8 @@ public class FeedingMinigameManager : MonoBehaviour
         isCatHappy = true;
         foodDeposit.SetExpressionSprite(true);
         Destroy(foodObjects[wantedFoodItemIndex].gameObject);
+
+        GameManager.Instance.IncreaseSelectedCatFullness();
     }
 
     //////////////////////////////////////////

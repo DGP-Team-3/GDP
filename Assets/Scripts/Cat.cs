@@ -8,20 +8,32 @@ public class Cat : MonoBehaviour
     [SerializeField] private Sprite catPortrait;
     [SerializeField] private Trait firstTrait;
     [SerializeField] private Trait secondTrait;
-    
+
     [Space]
 
     [Tooltip("Seconds till cat's fullness decreases.")]
     [Min(0f)]
-    [SerializeField] private float hungerProcTime = 1f;    
-    
+    [SerializeField] private float hungerProcTime = 1f;
+
     [Tooltip("Seconds till cat's entertainment decreases.")]
     [Min(0f)]
     [SerializeField] private float entertainmentProcTime = 1f;
 
-    [Tooltip("Amount to decrease relationship when hunger or entertainment is 0.")]
+    [Tooltip("Amount to decrease relationship.")]
     [Min(0f)]
-    [SerializeField] private int relationshipDecreaseValue = 5;
+    [SerializeField] private int relationshipDecreaseAmount = 5;
+
+    [Tooltip("Amount to increase relationship.")]
+    [Min(0f)]
+    [SerializeField] private int relationshipIncreaseAmount = 10;
+
+    [Tooltip("Amount to increase fullness.")]
+    [Min(0f)]
+    [SerializeField] private int feedAmount = 85;
+
+    [Tooltip("Amount to increase entertainment.")]
+    [Min(0f)]
+    [SerializeField] private int entertainAmount = 90;
 
     [Min(0f)]
     [SerializeField] private int maxFullness = 100;
@@ -56,14 +68,15 @@ public class Cat : MonoBehaviour
     private float hungerTimer = 0f;
     private float entertainmentTimer = 0f;
 
+    private bool isActive = true;
 
 
     public delegate void HungerUpdated(int fullness);
-    public event HungerUpdated OnHungerUpdated;   
-    
+    public event HungerUpdated OnHungerUpdated;
+
     public delegate void RelationshipUpdated(int relationship);
-    public event RelationshipUpdated OnRelationshipUpdated;    
-    
+    public event RelationshipUpdated OnRelationshipUpdated;
+
     public delegate void EntertainmentUpdated(int entertainment);
     public event EntertainmentUpdated OnEntertainmentUpdated;
 
@@ -74,8 +87,11 @@ public class Cat : MonoBehaviour
     ///
     void Update()
     {
-        HandleHunger();
-        HandleEntertainment();
+        if (isActive && !GameManager.Instance.IsMinigameActive)
+        {
+            HandleHunger();
+            HandleEntertainment();
+        }
     }
 
     //////////////////////////////////////////
@@ -84,10 +100,16 @@ public class Cat : MonoBehaviour
     public void InitCatValues(string name, Trait traitOne, Trait traitTwo, Sprite portrait, int relationshipMaxValue)
     {
         catName = name;
-        firstTrait = traitOne;
-        secondTrait = traitTwo;
+
+        //for common cats. Unique cat traits set by prefab
+        if (traitOne != null && traitTwo != null)
+        {
+            firstTrait = traitOne;
+            secondTrait = traitTwo;
+        }
+
         catPortrait = portrait;
-        
+
         maxFullness = 100;
         maxEntertainment = 100;
         maxRelationship = relationshipMaxValue;
@@ -113,11 +135,11 @@ public class Cat : MonoBehaviour
 
             if (_fullness == 0)
             {
-                ModifyRelationship(relationshipDecreaseValue);
+                ModifyRelationship(relationshipDecreaseAmount);
             }
         }
-    }    
-    
+    }
+
     //////////////////////////////////////////
     /// update entertainment value
     ///
@@ -133,11 +155,30 @@ public class Cat : MonoBehaviour
 
             if (_entertainment == 0)
             {
-                ModifyRelationship(relationshipDecreaseValue);
+                ModifyRelationship(relationshipDecreaseAmount);
             }
         }
     }
 
+    //////////////////////////////////////////
+    /// update fullness value
+    ///
+    public void FeedCat()
+    {
+        _fullness = Mathf.Clamp(_fullness + feedAmount, 0, maxFullness);
+        ModifyRelationship(relationshipIncreaseAmount);
+        OnHungerUpdated?.Invoke(_fullness);
+    }
+
+    //////////////////////////////////////////
+    /// update entertainment value
+    ///
+    public void EntertainCat()
+    {
+        _entertainment = Mathf.Clamp(_entertainment + entertainAmount, 0, maxEntertainment);
+        ModifyRelationship(relationshipIncreaseAmount);
+        OnEntertainmentUpdated?.Invoke(_entertainment);
+    }
 
     //////////////////////////////////////////
     /// update relationship value
@@ -146,7 +187,7 @@ public class Cat : MonoBehaviour
     {
         _relationship = Mathf.Clamp(value + _relationship, 0, maxRelationship);
         OnRelationshipUpdated?.Invoke(_relationship);
-    }    
+    }
 
     //////////////////////////////////////////
     /// 
@@ -179,4 +220,14 @@ public class Cat : MonoBehaviour
     {
         return secondTrait;
     }
+
+    //////////////////////////////////////////
+    /// 
+    ///
+    public void SetCatActive(bool active)
+    {
+        isActive = active;
+    }
+
+
 }
