@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d69a3467880d484db0c951998ff2065, type: 3}
   m_Name: CatData
   m_EditorClassIdentifier: 
+  numUniqueCatTypes: 0
   catPrefabs:
   - {fileID: 135702524336014078, guid: c530ae9a5e523e3439bf5243d2800003, type: 3}
+  relationshipValues: 64000000
   catRelationshipImages:
   - {fileID: 21300000, guid: 3a2ea748a7dbfc04cb1937ee1289e9a4, type: 3}
   - {fileID: 21300000, guid: 118cc801afc07aa478f302078bd1b481, type: 3}
@@ -28,8 +30,24 @@ MonoBehaviour:
   - Queen
   - Sploot
   - Splat
+  - Bee
+  - Pumpkin
+  - Pollo
+  - Midnight
+  - Luna
+  - Lola
+  - Ollie
+  - Milo
+  - Bella
+  - Ragatoni
+  - Nala
+  - Zeus
+  - Chief
+  - Ivy
+  - Iris
+  - Sunny
+  - Juju
+  - Pawpaw
+  - Paws
   uniqueCatNames:
   - Loaf
-  hungerValues: 6400000064000000
-  relationshipValues: 6400000064000000
-  entertainmentValues: 6400000064000000

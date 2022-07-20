@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-//note for polish: keep basic cat types at start. Have int for num of basic cats. put smaller chance for unique cats.
+//note for polish: keep basic cat types at start and unique cats at end of enum.
+//Have int for num of basic cats. put smaller chance for unique cats.
 public enum CatType
 {
     loafCat,
@@ -13,6 +14,8 @@ public enum CatType
 public class CatData : ScriptableObject
 {
     [Header("Cats")]
+    [Min(0)]
+    [SerializeField] private int numUniqueCatTypes = 0;
     [SerializeField] private List<GameObject> catPrefabs;
     [SerializeField] private List<int> relationshipValues;
 
@@ -37,7 +40,7 @@ public class CatData : ScriptableObject
     //////////////////////////////////////////
     ///
     ///
-    public string PickRandomName()
+    public string GetRandomName()
     {
         int index = UnityEngine.Random.Range(0, catNames.Count);
         return catNames[index];
@@ -48,7 +51,14 @@ public class CatData : ScriptableObject
     ///
     public string GetUniqueCatName(CatType cat)
     {
-        return uniqueCatNames[(int)cat];
+        if (!IsUniqueCatType(cat)) return null;
+
+        int numCatTypes = Enum.GetValues(typeof(CatType)).Length;
+        int numCommonCatTypes = numCatTypes - numUniqueCatTypes;
+
+        int index = numCommonCatTypes - (int)cat;
+
+        return uniqueCatNames[index];
     }
 
     //////////////////////////////////////////
@@ -68,13 +78,34 @@ public class CatData : ScriptableObject
         return (Trait)index;
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public GameObject GetCatPrefab(CatType cat)
     {
         return catPrefabs[(int)cat];
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public List<Sprite> GetRelationshipImages()
     {
         return catRelationshipImages;
+    }
+
+    //////////////////////////////////////////
+    /// Checks if given cat type is a unique cat type
+    ///
+    public bool IsUniqueCatType(CatType catType)
+    {
+        int numCatTypes = Enum.GetValues(typeof(CatType)).Length;
+        int numCommonCatTypes = numCatTypes - numUniqueCatTypes;
+        
+        if ((int)catType < numCommonCatTypes)
+        {
+            return false;
+        }
+        return true;
     }
 }

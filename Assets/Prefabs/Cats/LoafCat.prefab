@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 135702524336014068}
   - component: {fileID: 135702524336014075}
   m_Layer: 0
-  m_Name: Loaf
+  m_Name: LoafCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
