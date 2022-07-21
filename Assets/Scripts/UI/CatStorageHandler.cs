@@ -24,6 +24,7 @@ public class CatStorageHandler : MonoBehaviour
     {
         GameObject container = Instantiate(catStoragePrefab);
         container.transform.SetParent(containerParentObject.transform);
+        container.transform.localScale = new Vector3(1.0707f, 1.0707f, 1.0707f);
 
         catStorageContainters.Add(container);
 

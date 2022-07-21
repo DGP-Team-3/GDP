@@ -20,7 +20,6 @@ public class Cat : MonoBehaviour
     [SerializeField] private float entertainmentProcTime = 1f;
 
     [Tooltip("Amount to decrease relationship.")]
-    [Min(0f)]
     [SerializeField] private int relationshipDecreaseAmount = 5;
 
     [Tooltip("Amount to increase relationship.")]
