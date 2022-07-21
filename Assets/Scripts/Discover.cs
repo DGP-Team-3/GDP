@@ -43,7 +43,7 @@ public class Discover : MonoBehaviour
             foreach (GameObject container in containers)
             {
                 GenerateNewCatDisplay(container);
-                container.GetComponent<CatContainer>().EnableButton();
+                container.GetComponent<CatDiscoveryContainer>().EnableButton();
             }
         }
     }
@@ -54,7 +54,7 @@ public class Discover : MonoBehaviour
     ///
     private void GenerateNewCatDisplay(GameObject container)
     {
-        CatContainer catContainer = container.GetComponent<CatContainer>();
+        CatDiscoveryContainer catContainer = container.GetComponent<CatDiscoveryContainer>();
         Trait firstTrait;
         Trait secondTrait;
         string catName;

@@ -98,4 +98,11 @@ public class SliderMenu : MonoBehaviour
         ToggleSideDisplay();
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
+    public void HideSelf()
+    {
+        gameObject.SetActive(false);
+    }
 }

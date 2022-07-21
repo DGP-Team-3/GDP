@@ -12,6 +12,7 @@ public class CatPopUpHandler : MonoBehaviour
     [SerializeField] private Image catRelationshipImage;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private Button storeCatButton;
+    [SerializeField] private Button returnButton;
 
     [Space]
     [Space]
@@ -148,7 +149,7 @@ public class CatPopUpHandler : MonoBehaviour
     {
         if (currentCat == null) return;
 
-         List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
+        List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
 
         float catRelationshipRatio = currentCat.MaxRelationship / catRelationshipImages.Count;
 
@@ -265,5 +266,13 @@ public class CatPopUpHandler : MonoBehaviour
                 dialogueBox.SetActive(false);
             }
         }
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void HideSelf()
+    {
+        gameObject.SetActive(false);
     }
 }

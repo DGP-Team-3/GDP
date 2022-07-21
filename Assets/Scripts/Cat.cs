@@ -70,6 +70,8 @@ public class Cat : MonoBehaviour
 
     private bool isActive = true;
 
+    private CatType catType;
+    public CatType CatType => catType;
 
     public delegate void HungerUpdated(int fullness);
     public event HungerUpdated OnHungerUpdated;
@@ -87,7 +89,7 @@ public class Cat : MonoBehaviour
     ///
     void Update()
     {
-        if (isActive && !GameManager.Instance.IsMinigameActive)
+        if (IsCatActive() && !GameManager.Instance.IsMinigameActive)
         {
             HandleHunger();
             HandleEntertainment();
@@ -97,7 +99,7 @@ public class Cat : MonoBehaviour
     //////////////////////////////////////////
     /// Called when fostering a generated cat
     ///
-    public void InitCatValues(string name, Trait traitOne, Trait traitTwo, Sprite portrait, int relationshipMaxValue)
+    public void InitCatValues(string name, Trait traitOne, Trait traitTwo, Sprite portrait, int relationshipMaxValue, CatType catType)
     {
         catName = name;
 
@@ -109,6 +111,7 @@ public class Cat : MonoBehaviour
         }
 
         catPortrait = portrait;
+        this.catType = catType;
 
         maxFullness = 100;
         maxEntertainment = 100;
@@ -230,4 +233,24 @@ public class Cat : MonoBehaviour
     }
 
 
+    //////////////////////////////////////////
+    /// 
+    ///
+    public bool IsCatActive()
+    {
+        return isActive;
+    }
+
+
+    //////////////////////////////////////////
+    /// TODO: CALL BY GAME MANAGER WHEN FOSTERING CAT 
+    ///
+    public void DestroyCat()
+    {
+        //REFACTOR SUGGESTION: HAVE THIS CALLED BY GAME MANAGER INSTEAD OF CAT
+        FindObjectOfType<CatStorageHandler>().DestroyContainer(gameObject); //remove storage entry
+
+
+        Destroy(gameObject);
+    }    
 }
