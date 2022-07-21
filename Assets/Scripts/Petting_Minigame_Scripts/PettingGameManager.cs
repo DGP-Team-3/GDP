@@ -50,8 +50,10 @@ public class PettingGameManager : MonoBehaviour
     public void CircleClicked()
     {
         AwardPoints();
-        SpawnCircle();
-        CheckForWin();
+        if (!CheckForWin())
+        {
+            SpawnCircle();
+        }
     }
 
     void SpawnCircle()
@@ -75,14 +77,19 @@ public class PettingGameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    void CheckForWin()
+    bool CheckForWin()
     {
         if (score >= pointWin)
         {
 
             print("You Won!");
             StartCoroutine(Transition());
+            return true;
             // Win
+        }
+        else
+        {
+            return false;
         }
     }
 
