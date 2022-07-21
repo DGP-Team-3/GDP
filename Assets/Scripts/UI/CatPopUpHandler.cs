@@ -7,11 +7,14 @@ using TMPro;
 public class CatPopUpHandler : MonoBehaviour
 {
     [SerializeField] private CatData catData;
+    [SerializeField] private RehomeManager rehomeManager;
+    [SerializeField] private CatStorageHandler storageHandler;
     [SerializeField] private Image catFullnessBar;
     [SerializeField] private Image catEntertainmentBar;
     [SerializeField] private Image catRelationshipImage;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private Button storeCatButton;
+    [SerializeField] private Button returnButton;
 
     [Space]
     [Space]
@@ -148,7 +151,7 @@ public class CatPopUpHandler : MonoBehaviour
     {
         if (currentCat == null) return;
 
-         List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
+        List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
 
         float catRelationshipRatio = currentCat.MaxRelationship / catRelationshipImages.Count;
 
@@ -266,4 +269,30 @@ public class CatPopUpHandler : MonoBehaviour
             }
         }
     }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void HideSelf()
+    {
+        gameObject.SetActive(false);
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void RehomeSelectedCat()
+    {
+        rehomeManager.SetCatDisplay(currentCat.gameObject);
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void StoreCat()
+    {
+        GameManager.Instance.MakeCatInactive(currentCat.gameObject, true);
+        storageHandler.RefreshStorage(GameManager.Instance.GetCatList());
+    }
+
 }

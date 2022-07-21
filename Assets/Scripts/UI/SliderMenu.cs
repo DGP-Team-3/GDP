@@ -8,6 +8,8 @@ public class SliderMenu : MonoBehaviour
 
     [SerializeField] private Animator panelAnimator;
 
+    [SerializeField] private RehomeManager rehomeManager;
+
     [Tooltip("All display windows that can be opened.")]
     [SerializeField] private List<GameObject> displayWindows;
 
@@ -81,6 +83,9 @@ public class SliderMenu : MonoBehaviour
         storageButton.interactable = true;
         rehomeButton.interactable = false;
         settingsButton.interactable = true;
+
+        rehomeManager.SetCatDisplay(null);
+
         ToggleSideDisplay();
     }
 
@@ -98,4 +103,11 @@ public class SliderMenu : MonoBehaviour
         ToggleSideDisplay();
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
+    public void HideSelf()
+    {
+        gameObject.SetActive(false);
+    }
 }

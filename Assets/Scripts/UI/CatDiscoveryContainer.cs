@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CatContainer : MonoBehaviour
+public class CatDiscoveryContainer : MonoBehaviour
 {
 
     [SerializeField] private TMP_Text nameField;
@@ -18,8 +18,6 @@ public class CatContainer : MonoBehaviour
     private Trait secondTrait;
     private string catName;
     private Sprite catPortrait;
-    private int relationshipValue;
-
 
 
     //////////////////////////////////////////
@@ -45,13 +43,6 @@ public class CatContainer : MonoBehaviour
         catPortraitImg.sprite = portrait;
     }
 
-    //////////////////////////////////////////
-    ///
-    ///
-    public Sprite GetPortrait()
-    {
-        return catPortrait;
-    }
 
     //////////////////////////////////////////
     ///
@@ -65,26 +56,10 @@ public class CatContainer : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
-    public string GetName()
-    {
-        return catName;
-    }
-
-    //////////////////////////////////////////
-    ///
-    ///
     public void SetSecondTrait(Trait trait)
     {
         secondTrait = trait;
         secondTraitField.text = trait.ToString();
-    }
-
-    //////////////////////////////////////////
-    ///
-    ///
-    public Trait GetSecondTrait()
-    {
-        return secondTrait;
     }
 
 
@@ -97,13 +72,6 @@ public class CatContainer : MonoBehaviour
         firstTraitField.text = trait.ToString();
     }
 
-    //////////////////////////////////////////
-    ///
-    ///
-    public Trait GetFirstTrait()
-    {
-        return firstTrait;
-    }
 
 
     //////////////////////////////////////////
@@ -112,22 +80,5 @@ public class CatContainer : MonoBehaviour
     public void SetCatType(CatType catType)
     {
         this.catType = catType;
-    }
-
-    //////////////////////////////////////////
-    ///
-    ///
-    public CatType GetCatType()
-    {
-        return catType;
-    }
-
-
-    //////////////////////////////////////////
-    ///
-    ///
-    public Button GetFosterButton()
-    {
-        return fosterButton;
     }
 }

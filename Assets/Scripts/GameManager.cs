@@ -8,22 +8,35 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+
     [SerializeField] private CatData catData;
+
     [SerializeField] private List<GameObject> cats;
+
     [SerializeField] private int maxActiveCats = 3;
+
     [SerializeField] private Vector2 hidePos = new Vector2(-100, -100);
+
+    [Min(0f)]
+    [SerializeField] private float blackoutSpeed = 1f;
+
+
+    private float blackoutTVal = 0f;
 
 
     private int currentActiveCats = 0;
-
     private List<GameObject> activeCats = new List<GameObject>();
     private List<Vector2> activeCatPositions = new List<Vector2>();
 
-    private bool isMinigameActive = false;
-    public bool IsMinigameActive => isMinigameActive;
+    private GameObject blackout;
 
     private Cat selectedCat;
 
+    private bool isMinigameActive = false;
+    public bool IsMinigameActive => isMinigameActive;    
+
+    private bool isBlackingOut = false;
+    public bool IsBlackingOut => isBlackingOut;
 
     //////////////////////////////////////////
     ///
@@ -41,6 +54,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, catData.GetCatPortrait(CatType.loafCat));
+    }
+
+    private void Update()
+    {
+        if (isBlackingOut)
+        {
+            blackoutTVal += Time.deltaTime * blackoutSpeed;
+        }
+    }
 
     //////////////////////////////////////////
     /// Adds cat to the collection
@@ -53,7 +78,7 @@ public class GameManager : MonoBehaviour
         cats.Add(catGO);
 
         Cat cat = catGO.GetComponent<Cat>();
-        cat.InitCatValues(catName, firstTrait, secondTrait, catPortrait, catData.GetCatRelationshipValue(catType));
+        cat.InitCatValues(catName, firstTrait, secondTrait, catPortrait, catData.GetCatRelationshipValue(catType), catType);
 
         if (currentActiveCats < maxActiveCats)
         {
@@ -63,6 +88,8 @@ public class GameManager : MonoBehaviour
         {
             MakeCatInactive(catGO, false);
         }
+
+        UpdateStorageSystem(catGO);
     }
 
     private Vector2 RetrieveRandomPosition()
@@ -87,12 +114,7 @@ public class GameManager : MonoBehaviour
     ///
     public void LoadFeedingMiniGame()
     {
-        SetMinigameActive(true);
-
-        SaveActiveCatPositions();
-        MoveAllActiveCats(false);
-
-        SceneManager.LoadScene(SceneBuildData.feedingSceneBuildIndex);
+        StartCoroutine(Transition(SceneBuildData.feedingSceneBuildIndex));
     }    
     
     //////////////////////////////////////////
@@ -100,12 +122,7 @@ public class GameManager : MonoBehaviour
     ///
     public void LoadEntertainmentMiniGame()
     {
-        SetMinigameActive(true);
-
-        SaveActiveCatPositions();
-        MoveAllActiveCats(false);
-
-        SceneManager.LoadScene(SceneBuildData.pettingSceneBuildIndex);
+        StartCoroutine(Transition(SceneBuildData.pettingSceneBuildIndex));
     }
 
     //////////////////////////////////////////
@@ -118,6 +135,37 @@ public class GameManager : MonoBehaviour
         MoveAllActiveCats(true);
 
         SceneManager.LoadScene(SceneBuildData.mainSceneBuildIndex);
+    }
+
+    //////////////////////////////////////////
+    ///
+    /// 
+    private IEnumerator Transition(int buildIndex)
+    {
+        isBlackingOut = true;
+        blackout = GameObject.FindGameObjectWithTag("Blackout");
+
+        FindObjectOfType<CatPopUpHandler>().HideSelf();
+        FindObjectOfType<SliderMenu>().HideSelf();
+
+        SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+        while (spriteRenderer.color != Color.black)
+        {
+            spriteRenderer.color = Color.Lerp(originalColor, Color.black, blackoutTVal);
+            yield return null;
+        }
+
+        isBlackingOut = false;
+
+        yield return new WaitForSeconds(1f);
+
+        SetMinigameActive(true);
+        SaveActiveCatPositions();
+        MoveAllActiveCats(false);
+        blackoutTVal = 0f;
+
+        SceneManager.LoadScene(buildIndex);
     }
 
     //////////////////////////////////////////
@@ -171,7 +219,6 @@ public class GameManager : MonoBehaviour
     public void MakeCatActive(GameObject catGO, bool isPreviouslyInactive)
     {
         currentActiveCats++;
-        catGO.SetActive(true);
         catGO.GetComponent<Cat>().SetCatActive(true);
         activeCats.Add(catGO);
 
@@ -190,11 +237,19 @@ public class GameManager : MonoBehaviour
         {
             activeCats.Remove(catGO);
             currentActiveCats--;
-            catGO.transform.position = hidePos;
         }
-        
+
+        catGO.transform.position = hidePos;
         catGO.GetComponent<Cat>().SetCatActive(false);
-        catGO.SetActive(false);
+    }
+
+    //////////////////////////////////////////
+    /// Updated the storage display with the new cat
+    ///
+    private void UpdateStorageSystem(GameObject catGO)
+    {
+        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
+        storageHandler.AddContainer(catGO);
     }
 
     //////////////////////////////////////////
@@ -219,5 +274,43 @@ public class GameManager : MonoBehaviour
     public void IncreaseSelectedCatEntertainment()
     {
         selectedCat.EntertainCat();
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public List<GameObject> GetCatList()
+    {
+        return cats;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void RemoveCat(GameObject catGO)
+    {
+        cats.Remove(catGO);
+        
+        for (int i = 0; i < activeCats.Count; i++)
+        {
+            if (activeCats[i] == catGO)
+            {
+                activeCatPositions.RemoveAt(i);
+                activeCats.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public bool CanActivateMoreCats()
+    {
+        if (currentActiveCats < maxActiveCats)
+        {
+            return true;
+        }
+        return false;
     }
 }
