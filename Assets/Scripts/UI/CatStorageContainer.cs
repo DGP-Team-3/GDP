@@ -34,6 +34,11 @@ public class CatStorageContainer : MonoBehaviour
         associatedCat.GetComponent<Cat>().OnRelationshipUpdated -= UpdateRelationshipDisplay;
     }
 
+    private void Update()
+    {
+        UpdateRelationshipDisplay(associatedCat.Relationship);
+    }
+
     //////////////////////////////////////////
     ///
     ///
@@ -91,8 +96,31 @@ public class CatStorageContainer : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     public GameObject GetAssociatedCat()
     {
         return associatedCatGO;
+    }
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void StorageButtonClicked()
+    {
+        if (associatedCat.IsCatActive())
+        {
+            GameManager.Instance.MakeCatInactive(associatedCatGO, true);
+            UpdateButtonDisplay();
+        }
+        else
+        {
+            if (!GameManager.Instance.CanActivateMoreCats()) return;
+
+            GameManager.Instance.MakeCatActive(associatedCatGO, true);
+            UpdateButtonDisplay();
+        }
     }
 }

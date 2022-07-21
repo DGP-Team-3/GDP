@@ -51,7 +51,7 @@ public class CatStorageHandler : MonoBehaviour
     //////////////////////////////////////////
     /// Deletes current container listing and generates new one
     ///
-    private void RefreshStorage(List<GameObject> cats)
+    public void RefreshStorage(List<GameObject> cats)
     {
         DeleteCurrentStorage();
 

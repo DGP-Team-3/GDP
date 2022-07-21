@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, catData.GetCatPortrait(CatType.loafCat));
+    }
+
     private void Update()
     {
         if (isBlackingOut)
@@ -214,7 +219,6 @@ public class GameManager : MonoBehaviour
     public void MakeCatActive(GameObject catGO, bool isPreviouslyInactive)
     {
         currentActiveCats++;
-        //catGO.SetActive(true);
         catGO.GetComponent<Cat>().SetCatActive(true);
         activeCats.Add(catGO);
 
@@ -233,11 +237,10 @@ public class GameManager : MonoBehaviour
         {
             activeCats.Remove(catGO);
             currentActiveCats--;
-            catGO.transform.position = hidePos;
         }
-        
+
+        catGO.transform.position = hidePos;
         catGO.GetComponent<Cat>().SetCatActive(false);
-        //catGO.SetActive(false);
     }
 
     //////////////////////////////////////////
@@ -279,5 +282,35 @@ public class GameManager : MonoBehaviour
     public List<GameObject> GetCatList()
     {
         return cats;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void RemoveCat(GameObject catGO)
+    {
+        cats.Remove(catGO);
+        
+        for (int i = 0; i < activeCats.Count; i++)
+        {
+            if (activeCats[i] == catGO)
+            {
+                activeCatPositions.RemoveAt(i);
+                activeCats.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public bool CanActivateMoreCats()
+    {
+        if (currentActiveCats < maxActiveCats)
+        {
+            return true;
+        }
+        return false;
     }
 }

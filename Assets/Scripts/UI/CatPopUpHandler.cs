@@ -7,6 +7,8 @@ using TMPro;
 public class CatPopUpHandler : MonoBehaviour
 {
     [SerializeField] private CatData catData;
+    [SerializeField] private RehomeManager rehomeManager;
+    [SerializeField] private CatStorageHandler storageHandler;
     [SerializeField] private Image catFullnessBar;
     [SerializeField] private Image catEntertainmentBar;
     [SerializeField] private Image catRelationshipImage;
@@ -275,4 +277,22 @@ public class CatPopUpHandler : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void RehomeSelectedCat()
+    {
+        rehomeManager.SetCatDisplay(currentCat.gameObject);
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void StoreCat()
+    {
+        GameManager.Instance.MakeCatInactive(currentCat.gameObject, true);
+        storageHandler.RefreshStorage(GameManager.Instance.GetCatList());
+    }
+
 }

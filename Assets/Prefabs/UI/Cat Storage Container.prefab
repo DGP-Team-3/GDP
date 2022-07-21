@@ -777,9 +777,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CatContainer, Assembly-CSharp
-        m_MethodName: FosterCat
+      - m_Target: {fileID: 6396887720511680911}
+        m_TargetAssemblyTypeName: CatStorageContainer, Assembly-CSharp
+        m_MethodName: StorageButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

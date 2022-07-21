@@ -247,9 +247,9 @@ public class Cat : MonoBehaviour
     ///
     public void DestroyCat()
     {
-        //REFACTOR SUGGESTION: HAVE THIS CALLED BY GAME MANAGER INSTEAD OF CAT
-        FindObjectOfType<CatStorageHandler>().DestroyContainer(gameObject); //remove storage entry
+        FindObjectOfType<CatStorageHandler>().DestroyContainer(gameObject);
 
+        GameManager.Instance.RemoveCat(gameObject);
 
         Destroy(gameObject);
     }    

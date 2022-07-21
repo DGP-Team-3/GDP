@@ -19,9 +19,11 @@ public class CatData : ScriptableObject
     [SerializeField] private List<GameObject> catPrefabs;
     [SerializeField] private List<int> relationshipValues;
 
+
     [Header("Sprites")]
     [SerializeField] private List<Sprite> catRelationshipImages;
     [SerializeField] private List<Sprite> catPortraits;
+    [SerializeField] private List<Sprite> catSittingImages;
 
     [Header("Names")]
     [SerializeField] private List<string> catNames;
@@ -92,6 +94,14 @@ public class CatData : ScriptableObject
     public List<Sprite> GetRelationshipImages()
     {
         return catRelationshipImages;
+    }    
+    
+    //////////////////////////////////////////
+    ///
+    ///
+    public Sprite GetCatSittingImage(CatType catType)
+    {
+        return catSittingImages[(int)catType];
     }
 
     //////////////////////////////////////////

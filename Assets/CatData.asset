@@ -24,6 +24,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 23d7abfd5a3bc084eaef4b36dbd2df0e, type: 3}
   catPortraits:
   - {fileID: 21300000, guid: 6e31b46d841883648b35175bee96f9a0, type: 3}
+  catSittingImages:
+  - {fileID: 21300000, guid: 9a72829d97d328c458b282f9d8ba2bad, type: 3}
   catNames:
   - Cheese
   - Violet
