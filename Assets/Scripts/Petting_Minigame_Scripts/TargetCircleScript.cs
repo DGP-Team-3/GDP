@@ -7,18 +7,6 @@ public class TargetCircleScript : MonoBehaviour
 {
     GameObject _owner;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setOwner(GameObject owner)
     {
         _owner = owner;
@@ -26,8 +14,8 @@ public class TargetCircleScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        print("Circle clicked!");
+        if (_owner == null) return;
         _owner.GetComponent<PettingGameManager>().CircleClicked();
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

@@ -26,6 +26,7 @@ public class FeedingMinigameManager : MonoBehaviour
     [SerializeField] private float blackoutSpeed = 1f;
 
     [SerializeField] private GameObject blackout;
+    [SerializeField] private GameObject greenCheck;
 
 
     private FoodType wantedFoodType;
@@ -139,7 +140,15 @@ public class FeedingMinigameManager : MonoBehaviour
         foodDeposit.SetExpressionSprite(true);
         Destroy(foodObjects[wantedFoodItemIndex].gameObject);
 
+        StartCoroutine(EnableGreenCheck());
+
         GameManager.Instance.IncreaseSelectedCatFullness();
+    }
+
+    private IEnumerator EnableGreenCheck()
+    {
+        yield return new WaitForSeconds(0.75f);
+        greenCheck.SetActive(true);
     }
 
     //////////////////////////////////////////
@@ -168,6 +177,7 @@ public class FeedingMinigameManager : MonoBehaviour
     /// 
     private IEnumerator Transition()
     {
+        yield return new WaitForSeconds(1f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
         Color originalColor = spriteRenderer.color;

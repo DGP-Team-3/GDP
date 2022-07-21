@@ -127,7 +127,7 @@ MonoBehaviour:
   hungerProcTime: 5
   entertainmentProcTime: 1
   relationshipDecreaseAmount: 5
-  relationshipIncreaseAmount: 35
+  relationshipIncreaseAmount: 50
   feedAmount: 85
   entertainAmount: 90
   maxFullness: 100

@@ -65,6 +65,8 @@ public class CatStorageContainer : MonoBehaviour
     ///
     private void UpdateRelationshipDisplay(int relationship)
     {
+        if (associatedCat == null || relationshipIcon == null) return;
+
         List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
 
         float catRelationshipRatio = associatedCat.MaxRelationship / catRelationshipImages.Count;

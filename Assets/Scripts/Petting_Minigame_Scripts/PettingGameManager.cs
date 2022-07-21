@@ -20,14 +20,21 @@ public class PettingGameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text scoreText;
 
-    private float score;
-
     [Min(0f)]
     [SerializeField] private float blackoutSpeed = 1f;
 
     [SerializeField] private GameObject blackout;
+    [SerializeField] private GameObject greenCheck;
+
+
+    
     private bool isBlackingOut = false;
     private float blackoutTVal = 0f;
+    
+    
+    private float score;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,12 +46,10 @@ public class PettingGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (isBlackingOut)
         {
             blackoutTVal += Time.deltaTime * blackoutSpeed;
         }
-
     }
 
     public void CircleClicked()
@@ -67,8 +72,7 @@ public class PettingGameManager : MonoBehaviour
     }
     void AwardPoints()
     {
-        print("Award points!" + score);
-        score = score + pointGain;
+        score += pointGain;
         UpdateFullnessText();
     }
 
@@ -81,16 +85,12 @@ public class PettingGameManager : MonoBehaviour
     {
         if (score >= pointWin)
         {
-
-            print("You Won!");
+            greenCheck.SetActive(true);
+            GameManager.Instance.IncreaseSelectedCatEntertainment();
             StartCoroutine(Transition());
             return true;
-            // Win
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     //////////////////////////////////////////
@@ -98,6 +98,7 @@ public class PettingGameManager : MonoBehaviour
     /// 
     private IEnumerator Transition()
     {
+        yield return new WaitForSeconds(1f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
         Color originalColor = spriteRenderer.color;
