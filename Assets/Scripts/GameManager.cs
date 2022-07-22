@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     private bool isBlackingOut = false;
     public bool IsBlackingOut => isBlackingOut;
 
+
+
     //////////////////////////////////////////
     ///
     ///
@@ -54,11 +56,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     private void Start()
     {
         CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, catData.GetCatPortrait(CatType.loafCat));
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     private void Update()
     {
         if (isBlackingOut)
