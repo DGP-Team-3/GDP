@@ -9,7 +9,6 @@ public enum CatState
     pose1,
     pose2,
     loaf,
-    selected,
     COUNT
 }
 public class CatAI : MonoBehaviour
@@ -18,6 +17,7 @@ public class CatAI : MonoBehaviour
     private Animator mAnimator;
     private CatState currentState;
     private Vector3 targetLocation;
+    private bool isSelected;
     [SerializeField] private float speed = 1;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class CatAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentState == CatState.selected)
+        if (isSelected)
         {
 
         }
@@ -85,7 +85,7 @@ public class CatAI : MonoBehaviour
         mAnimator.SetBool("IsPose1", false);
         mAnimator.SetBool("IsPose2", false);
         mAnimator.SetBool("IsLoafing", false);
-        currentState = (CatState)Random.Range(0, (int)CatState.COUNT - 1);
+        currentState = (CatState)Random.Range(0, (int)CatState.COUNT);
         if (currentState == CatState.idle)
         {
             stateTimer = Random.Range(1, 5);
@@ -123,5 +123,17 @@ public class CatAI : MonoBehaviour
         float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
         float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
         return new Vector2(xPos, yPos);
+    }
+    
+    public void selectCat()
+    {
+        mAnimator.SetBool("IsSelected", true);
+        isSelected = true;
+    }
+
+    public void deselectCat()
+    {
+        mAnimator.SetBool("IsSelected", false);
+        isSelected = false;
     }
 }
