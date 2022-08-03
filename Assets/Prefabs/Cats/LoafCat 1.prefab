@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 135702524336014074}
   - component: {fileID: 135702524336014068}
   - component: {fileID: 135702524336014075}
-  - component: {fileID: -3200891242388197338}
   m_Layer: 0
-  m_Name: LoafCat
+  m_Name: LoafCat 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 135702524336014078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 2114a8c4855306949a217c1fba7d7e94, type: 2}
+  m_Controller: {fileID: 9100000, guid: 84b80a402d0df6b409f904e0300fcc4d, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -182,16 +181,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.570625, y: 0.58}
   m_EdgeRadius: 0
---- !u!114 &-3200891242388197338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135702524336014078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde28c0e8c6278743a27c9b3f53baa81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1

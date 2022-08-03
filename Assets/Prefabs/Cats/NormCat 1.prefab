@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 135702524336014074}
   - component: {fileID: 135702524336014068}
   - component: {fileID: 135702524336014075}
-  - component: {fileID: -3200891242388197338}
   m_Layer: 0
-  m_Name: LoafCat
+  m_Name: NormCat 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 756268250, guid: 5c26076d9f2ad3641bb6cb856b823283, type: 3}
+  m_Sprite: {fileID: -248742247, guid: 9bf09ca921775a94dad6eee2e52f6a3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 135702524336014078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 2114a8c4855306949a217c1fba7d7e94, type: 2}
+  m_Controller: {fileID: 9100000, guid: 84b80a402d0df6b409f904e0300fcc4d, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -173,7 +172,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.570625, y: 0.58}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.570625, y: 0.58}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -182,16 +181,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.570625, y: 0.58}
   m_EdgeRadius: 0
---- !u!114 &-3200891242388197338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135702524336014078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde28c0e8c6278743a27c9b3f53baa81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
