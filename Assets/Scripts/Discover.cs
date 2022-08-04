@@ -18,6 +18,8 @@ public class Discover : MonoBehaviour
     ///
     private void Start()
     {
+        GameManager.Instance.AddToClearList(gameObject);
+
         foreach (GameObject container in containers)
         {
             GenerateNewCatDisplay(container);

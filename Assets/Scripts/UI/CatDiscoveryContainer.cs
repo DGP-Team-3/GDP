@@ -17,8 +17,15 @@ public class CatDiscoveryContainer : MonoBehaviour
     private Trait firstTrait;
     private Trait secondTrait;
     private string catName;
-    private Sprite catPortrait;
 
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void Start()
+    {
+        GameManager.Instance.AddToClearList(gameObject);
+    }
 
     //////////////////////////////////////////
     ///
@@ -26,7 +33,7 @@ public class CatDiscoveryContainer : MonoBehaviour
     public void FosterCat()
     {
         fosterButton.interactable = false;
-        GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, catPortrait);
+        GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, 0, 100, 100);
     }
 
     public void EnableButton()
@@ -39,7 +46,6 @@ public class CatDiscoveryContainer : MonoBehaviour
     ///
     public void SetPortrait(Sprite portrait)
     {
-        catPortrait = portrait;
         catPortraitImg.sprite = portrait;
     }
 

@@ -11,8 +11,13 @@ public class CatStorageHandler : MonoBehaviour
     private List<GameObject> catStorageContainters = new List<GameObject>();
 
 
+    //////////////////////////////////////////
+    ///
+    ///
     private void Start()
     {
+        GameManager.Instance.AddToClearList(gameObject);
+
         RefreshStorage(GameManager.Instance.GetCatList());
     }
 

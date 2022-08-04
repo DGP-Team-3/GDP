@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public bool IsBlackingOut => isBlackingOut;
 
 
+    private List<GameObject> gameObjectsToClear = new List<GameObject>();
+
 
     //////////////////////////////////////////
     ///
@@ -61,7 +63,8 @@ public class GameManager : MonoBehaviour
     ///
     private void Start()
     {
-        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, catData.GetCatPortrait(CatType.loafCat));
+        //temporary
+        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100);
     }
 
     //////////////////////////////////////////
@@ -75,39 +78,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //////////////////////////////////////////
-    /// Adds cat to the collection
-    ///
-    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, Sprite catPortrait)
-    {
-        Vector2 pos = RetrieveRandomPosition();
-        GameObject catGO = Instantiate(catData.GetCatPrefab(catType), pos, Quaternion.identity);
-        DontDestroyOnLoad(catGO);
-        cats.Add(catGO);
 
-        Cat cat = catGO.GetComponent<Cat>();
-        cat.InitCatValues(catName, firstTrait, secondTrait, catPortrait, catData.GetCatRelationshipValue(catType), catType);
 
-        if (currentActiveCats < maxActiveCats)
-        {
-            MakeCatActive(catGO, false);
-        }
-        else
-        {
-            MakeCatInactive(catGO, false);
-        }
-
-        UpdateStorageSystem(catGO);
-    }
-
-    private Vector2 RetrieveRandomPosition()
-    {
-        SpawnArea area = FindObjectOfType<SpawnArea>();
-
-        float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
-        float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
-        return new Vector2(xPos, yPos);
-    }
+#region Scene Management
 
     //////////////////////////////////////////
     ///
@@ -166,6 +139,8 @@ public class GameManager : MonoBehaviour
 
         isBlackingOut = false;
 
+        DeleteClearList();
+
         yield return new WaitForSeconds(1f);
 
         SetMinigameActive(true);
@@ -174,6 +149,88 @@ public class GameManager : MonoBehaviour
         blackoutTVal = 0f;
 
         SceneManager.LoadScene(buildIndex);
+    }
+
+    //////////////////////////////////////////
+    /// Check if a cat can be activated
+    ///
+    public bool CanActivateMoreCats()
+    {
+        if (currentActiveCats < maxActiveCats)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void AddToClearList(GameObject go)
+    {
+        gameObjectsToClear.Add(go);
+    }
+
+    //////////////////////////////////////////
+    /// Clears list and destroys game objects in scene
+    ///
+    private void DeleteClearList()
+    {
+        foreach (GameObject go in gameObjectsToClear)
+        {
+            Destroy(go);
+        }
+
+        gameObjectsToClear.Clear();
+    }
+
+#endregion //Scene Management
+
+
+
+#region Cat Management
+
+    //////////////////////////////////////////
+    /// Adds cat to the collection
+    ///
+    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue)
+    {
+        Vector2 pos = RetrieveRandomPosition();
+        GameObject catGO = Instantiate(catData.GetCatPrefab(catType), pos, Quaternion.identity);
+        DontDestroyOnLoad(catGO);
+        cats.Add(catGO);
+
+        Cat cat = catGO.GetComponent<Cat>();
+        cat.InitCatValues(catName, firstTrait, secondTrait, catData.GetCatRelationshipValue(catType), currentRelationshipValue, currentFullnessValue, currentEntertainmentValue, catType);
+
+        if (currentActiveCats < maxActiveCats)
+        {
+            MakeCatActive(catGO, false);
+        }
+        else
+        {
+            MakeCatInactive(catGO, false);
+        }
+
+        UpdateStorageSystem(catGO);
+    }
+
+    //////////////////////////////////////////
+    /// Updated the storage display with the new cat
+    ///
+    private void UpdateStorageSystem(GameObject catGO)
+    {
+        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
+        storageHandler.AddContainer(catGO);
+    }
+
+    private Vector2 RetrieveRandomPosition()
+    {
+        SpawnArea area = FindObjectOfType<SpawnArea>();
+
+        float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
+        float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
+        return new Vector2(xPos, yPos);
     }
 
     //////////////////////////////////////////
@@ -252,15 +309,6 @@ public class GameManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    /// Updated the storage display with the new cat
-    ///
-    private void UpdateStorageSystem(GameObject catGO)
-    {
-        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
-        storageHandler.AddContainer(catGO);
-    }
-
-    //////////////////////////////////////////
     ///
     ///
     public void SetSelectedCat(Cat selectedCat)
@@ -273,6 +321,8 @@ public class GameManager : MonoBehaviour
     ///
     public void IncreaseSelectedCatFullness ()
     {
+        if (selectedCat == null) return;
+
         selectedCat.FeedCat();
     }
 
@@ -281,6 +331,8 @@ public class GameManager : MonoBehaviour
     ///
     public void IncreaseSelectedCatEntertainment()
     {
+        if (selectedCat == null) return;
+
         selectedCat.EntertainCat();
     }
 
@@ -293,12 +345,12 @@ public class GameManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    ///
+    /// Removes cat data and destroys cat
     ///
     public void RemoveCat(GameObject catGO)
     {
         cats.Remove(catGO);
-        
+
         for (int i = 0; i < activeCats.Count; i++)
         {
             if (activeCats[i] == catGO)
@@ -308,17 +360,19 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
+        //remove cat storage container
+        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
+        if (storageHandler != null)
+        {
+            storageHandler.DestroyContainer(catGO);
+        }
+
+        catGO.GetComponent<Cat>().DestroyCat();
     }
 
-    //////////////////////////////////////////
-    ///
-    ///
-    public bool CanActivateMoreCats()
-    {
-        if (currentActiveCats < maxActiveCats)
-        {
-            return true;
-        }
-        return false;
-    }
+#endregion //Cat Management
+
+
+
 }

@@ -37,6 +37,14 @@ public class SelectionManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
+    private void Start()
+    {
+        GameManager.Instance.AddToClearList(gameObject);
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
     private void Update()
     {
         HandleInput();
