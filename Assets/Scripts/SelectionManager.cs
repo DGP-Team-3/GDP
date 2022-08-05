@@ -16,6 +16,8 @@ public class SelectionManager : MonoBehaviour
 
     private CatPopUpHandler popupHandler;
 
+    private Cat selectedCat;
+
 
     //////////////////////////////////////////
     ///
@@ -89,6 +91,8 @@ public class SelectionManager : MonoBehaviour
     ///
     public void SelectCat(Cat newCat)
     {
+        selectedCat = newCat;
+        selectedCat.GetComponent<CatAI>().selectCat();
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
         GameManager.Instance.SetSelectedCat(newCat);
@@ -99,6 +103,8 @@ public class SelectionManager : MonoBehaviour
     ///
     public void DeselectCat()
     {
+        selectedCat.GetComponent<CatAI>().deselectCat();
+        selectedCat = null;
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
         GameManager.Instance.SetSelectedCat(null);
