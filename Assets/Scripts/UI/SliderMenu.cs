@@ -9,6 +9,7 @@ public class SliderMenu : MonoBehaviour
     [SerializeField] private Animator panelAnimator;
 
     [SerializeField] private RehomeManager rehomeManager;
+    [SerializeField] private IDHandler idHandler;
 
     [Tooltip("All display windows that can be opened.")]
     [SerializeField] private List<GameObject> displayWindows;
@@ -16,7 +17,7 @@ public class SliderMenu : MonoBehaviour
     [SerializeField] private Button homeButton;
     [SerializeField] private Button discoverButton;
     [SerializeField] private Button storageButton;
-    [SerializeField] private Button rehomeButton;
+    [SerializeField] private Button idButton;
     [SerializeField] private Button settingsButton;
 
 
@@ -38,7 +39,7 @@ public class SliderMenu : MonoBehaviour
         homeButton.interactable = false;
         discoverButton.interactable = true;
         storageButton.interactable = true;
-        rehomeButton.interactable = true;
+        idButton.interactable = true;
         settingsButton.interactable = true;
         ToggleSideDisplay();
 
@@ -53,7 +54,7 @@ public class SliderMenu : MonoBehaviour
         homeButton.interactable = true;
         discoverButton.interactable = false;
         storageButton.interactable = true;
-        rehomeButton.interactable = true;
+        idButton.interactable = true;
         settingsButton.interactable = true;
         ToggleSideDisplay();
     }
@@ -67,7 +68,7 @@ public class SliderMenu : MonoBehaviour
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = false;
-        rehomeButton.interactable = true;
+        idButton.interactable = true;
         settingsButton.interactable = true;
         ToggleSideDisplay();
     }
@@ -76,15 +77,15 @@ public class SliderMenu : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
-    public void OnRehomeButtonClicked()
+    public void OnIDButtonClicked()
     {
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = true;
-        rehomeButton.interactable = false;
+        idButton.interactable = false;
         settingsButton.interactable = true;
 
-        rehomeManager.SetCatDisplay(null);
+        idHandler.UpdateIDData();
 
         ToggleSideDisplay();
     }
@@ -98,7 +99,7 @@ public class SliderMenu : MonoBehaviour
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = true;
-        rehomeButton.interactable = true;
+        idButton.interactable = true;
         settingsButton.interactable = false;
         ToggleSideDisplay();
     }

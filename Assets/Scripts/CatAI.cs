@@ -31,6 +31,8 @@ public class CatAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!mCat.IsCatActive() || GameManager.Instance.IsMinigameActive) return;
+
         if (isSelected || isAngry)
         {
 

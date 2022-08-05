@@ -143,5 +143,6 @@ public class RehomeManager : MonoBehaviour
         containers[containerIndex].GetComponent<OwnerContainer>().GetTextField().text = "Thank you!";
 
         GameManager.Instance.RemoveCat(selectedCat.gameObject);
+        GameManager.Instance.IncrementNumCatsRehomed();
     }
 }

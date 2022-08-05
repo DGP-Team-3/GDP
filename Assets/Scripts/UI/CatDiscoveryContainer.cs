@@ -34,6 +34,7 @@ public class CatDiscoveryContainer : MonoBehaviour
     {
         fosterButton.interactable = false;
         GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, 0, 100, 100, true);
+        GameManager.Instance.IncrementNumCatsFound(catType);
     }
 
     public void EnableButton()

@@ -115,7 +115,6 @@ public class SelectionManager : MonoBehaviour
         selectedCat = null;
         popupHandler.AssignCat(null);
         catPopUpDisplay.SetActive(false);
-        GameManager.Instance.SetSelectedCat(null);
     }
 
 }
