@@ -16,6 +16,7 @@ public class CatData : ScriptableObject
     [Header("Cats")]
     [Min(0)]
     [SerializeField] private int numUniqueCatTypes = 0;
+    [SerializeField] private int numUniqueCatTraits = 8;
     [SerializeField] private List<GameObject> catPrefabs;
     [SerializeField] private List<int> relationshipValues;
 
@@ -76,7 +77,7 @@ public class CatData : ScriptableObject
     ///
     public Trait GetRandomTrait()
     {
-        int index = UnityEngine.Random.Range(0, Enum.GetValues(typeof(Trait)).Length);
+        int index = UnityEngine.Random.Range(0, Enum.GetValues(typeof(Trait)).Length - numUniqueCatTraits);
         return (Trait)index;
     }
 

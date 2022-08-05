@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CatData
   m_EditorClassIdentifier: 
   numUniqueCatTypes: 0
+  numUniqueCatTraits: 8
   catPrefabs:
   - {fileID: 135702524336014078, guid: c530ae9a5e523e3439bf5243d2800003, type: 3}
   relationshipValues: 64000000

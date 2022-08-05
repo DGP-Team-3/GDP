@@ -19,8 +19,12 @@ public class GameManager : MonoBehaviour
 
     [Min(0f)]
     [SerializeField] private float blackoutSpeed = 1f;
+    
+    [Tooltip("Time till autosaving occurs.")]
+    [SerializeField] private float autoSaveTime = 30f;
 
 
+    private float timeElapsedTillSave = 0f;
     private float blackoutTVal = 0f;
 
 
@@ -63,8 +67,11 @@ public class GameManager : MonoBehaviour
     ///
     private void Start()
     {
-        //temporary
-        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100);
+        //try loading saved data
+        if (!LoadData())
+        {
+            CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
+        }
     }
 
     //////////////////////////////////////////
@@ -72,11 +79,110 @@ public class GameManager : MonoBehaviour
     ///
     private void Update()
     {
+        if (!IsMinigameActive)
+        {
+            timeElapsedTillSave += Time.deltaTime;
+
+            if (timeElapsedTillSave >= autoSaveTime)
+            {
+                SaveData();
+                timeElapsedTillSave = 0f;
+            }
+        }
+
+
         if (isBlackingOut)
         {
             blackoutTVal += Time.deltaTime * blackoutSpeed;
         }
     }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SaveData();
+        }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            SaveData();
+        }
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void OnApplicationQuit()
+    {
+
+    }
+
+
+    #region Data Management
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void SaveData()
+    {
+        int numCats = cats.Count;
+        string[] names = new string[numCats];
+        int[] catTypes = new int[numCats];
+        int[] firstTraits = new int[numCats];
+        int[] secondTraits = new int[numCats];
+        int[] relationshipValues = new int[numCats];
+        int[] fullnessValues = new int[numCats];
+        int[] entertainmentValues = new int[numCats];
+        bool[] activeStates = new bool[numCats];
+
+        for (int i = 0; i < numCats; i++)
+        {
+            Cat cat = cats[i].GetComponent<Cat>();
+
+            names[i] = cat.GetName();
+            catTypes[i] = (int)cat.CatType;
+            firstTraits[i] = (int)cat.GetFirstTrait();
+            secondTraits[i] = (int)cat.GetSecondTrait();
+            relationshipValues[i] = cat.Relationship;
+            fullnessValues[i] = cat.Fullness;
+            entertainmentValues[i] = cat.Entertainment;
+            activeStates[i] = cat.IsCatActive();
+        }
+
+        SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, relationshipValues, fullnessValues, entertainmentValues, activeStates);
+    }
+
+
+    //////////////////////////////////////////
+    /// returns a bool value based on if data loading was successful or not, which is determined on a file existing already or not
+    ///
+    private bool LoadData()
+    {
+        //load previously saved data
+        PlayerData data = SaveSystem.LoadPlayerData();
+
+        if (data == null) return false;
+
+        //Load each cat into game
+        for (int i = 0; i < data.numCats; i++)
+        {
+            CreateCat((CatType)data.catTypes[i], data.names[i], (Trait)data.firstTraits[i], (Trait)data.secondTraits[i],
+                data.relationshipValues[i], data.fullnessValues[i], data.entertainmentValues[i], data.activeStates[i]);
+        }
+
+        return true;
+    }
+
+
+#endregion //Data Management
 
 
 
@@ -111,6 +217,8 @@ public class GameManager : MonoBehaviour
     ///
     public void LoadMainScene()
     {
+        SaveData();
+
         SetMinigameActive(false);
 
         MoveAllActiveCats(true);
@@ -123,6 +231,8 @@ public class GameManager : MonoBehaviour
     /// 
     private IEnumerator Transition(int buildIndex)
     {
+        SaveData();
+
         isBlackingOut = true;
         blackout = GameObject.FindGameObjectWithTag("Blackout");
 
@@ -151,17 +261,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(buildIndex);
     }
 
-    //////////////////////////////////////////
-    /// Check if a cat can be activated
-    ///
-    public bool CanActivateMoreCats()
-    {
-        if (currentActiveCats < maxActiveCats)
-        {
-            return true;
-        }
-        return false;
-    }
 
     //////////////////////////////////////////
     ///
@@ -193,7 +292,8 @@ public class GameManager : MonoBehaviour
     //////////////////////////////////////////
     /// Adds cat to the collection
     ///
-    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue)
+    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, 
+        int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue, bool tryActivateCat)
     {
         Vector2 pos = RetrieveRandomPosition();
         GameObject catGO = Instantiate(catData.GetCatPrefab(catType), pos, Quaternion.identity);
@@ -203,7 +303,7 @@ public class GameManager : MonoBehaviour
         Cat cat = catGO.GetComponent<Cat>();
         cat.InitCatValues(catName, firstTrait, secondTrait, catData.GetCatRelationshipValue(catType), currentRelationshipValue, currentFullnessValue, currentEntertainmentValue, catType);
 
-        if (currentActiveCats < maxActiveCats)
+        if (tryActivateCat && currentActiveCats < maxActiveCats)
         {
             MakeCatActive(catGO, false);
         }
@@ -254,6 +354,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    /// Check if a cat can be activated
+    ///
+    public bool CanActivateMoreCats()
+    {
+        if (currentActiveCats < maxActiveCats)
+        {
+            return true;
+        }
+        return false;
+    }
 
     //////////////////////////////////////////
     ///
@@ -371,8 +482,7 @@ public class GameManager : MonoBehaviour
         catGO.GetComponent<Cat>().DestroyCat();
     }
 
-#endregion //Cat Management
-
+    #endregion //Cat Management
 
 
 }
