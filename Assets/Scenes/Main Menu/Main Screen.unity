@@ -5538,6 +5538,7 @@ MonoBehaviour:
   maxActiveCats: 3
   hidePos: {x: -100, y: -100}
   blackoutSpeed: 1
+  autoSaveTime: 30
 --- !u!4 &1297295332
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Cat : MonoBehaviour
 {
     [SerializeField] private string catName;
-    [SerializeField] private Sprite catPortrait;
     [SerializeField] private Trait firstTrait;
     [SerializeField] private Trait secondTrait;
 
@@ -96,9 +95,10 @@ public class Cat : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    /// Called when fostering a generated cat
+    /// 
+    /// Note: Called when fostering a generated cat or when populating when loading data
     ///
-    public void InitCatValues(string name, Trait traitOne, Trait traitTwo, Sprite portrait, int relationshipMaxValue, CatType catType)
+    public void InitCatValues(string name, Trait traitOne, Trait traitTwo, int relationshipMaxValue, int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue, CatType catType)
     {
         catName = name;
 
@@ -109,17 +109,16 @@ public class Cat : MonoBehaviour
             secondTrait = traitTwo;
         }
 
-        catPortrait = portrait;
         this.catType = catType;
 
+        maxRelationship = relationshipMaxValue;
         maxFullness = 100;
         maxEntertainment = 100;
-        maxRelationship = relationshipMaxValue;
 
 
-        _fullness = maxFullness;
-        _relationship = 0;
-        _entertainment = maxEntertainment;
+        _relationship = currentRelationshipValue;
+        _fullness = currentFullnessValue;
+        _entertainment = currentEntertainmentValue;
     }
 
     //////////////////////////////////////////
@@ -194,14 +193,6 @@ public class Cat : MonoBehaviour
     //////////////////////////////////////////
     /// 
     ///
-    public Sprite GetPortrait()
-    {
-        return catPortrait;
-    }
-
-    //////////////////////////////////////////
-    /// 
-    ///
     public string GetName()
     {
         return catName;
@@ -242,14 +233,10 @@ public class Cat : MonoBehaviour
 
 
     //////////////////////////////////////////
-    /// TODO: CALL BY GAME MANAGER WHEN FOSTERING CAT 
+    /// Removes cat from game
     ///
     public void DestroyCat()
     {
-        FindObjectOfType<CatStorageHandler>().DestroyContainer(gameObject);
-
-        GameManager.Instance.RemoveCat(gameObject);
-
         Destroy(gameObject);
     }    
 }

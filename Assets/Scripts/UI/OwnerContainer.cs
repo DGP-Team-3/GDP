@@ -11,6 +11,13 @@ public class OwnerContainer : MonoBehaviour
     [SerializeField] private Image ownerPortrait;
     [SerializeField] private Button rehomeButton;
 
+    //////////////////////////////////////////
+    ///
+    ///
+    private void Start()
+    {
+        GameManager.Instance.AddToClearList(gameObject);
+    }
 
     //////////////////////////////////////////
     ///

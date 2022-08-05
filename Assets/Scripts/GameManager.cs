@@ -19,8 +19,12 @@ public class GameManager : MonoBehaviour
 
     [Min(0f)]
     [SerializeField] private float blackoutSpeed = 1f;
+    
+    [Tooltip("Time till autosaving occurs.")]
+    [SerializeField] private float autoSaveTime = 30f;
 
 
+    private float timeElapsedTillSave = 0f;
     private float blackoutTVal = 0f;
 
 
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour
     private bool isBlackingOut = false;
     public bool IsBlackingOut => isBlackingOut;
 
+
+    private List<GameObject> gameObjectsToClear = new List<GameObject>();
 
 
     //////////////////////////////////////////
@@ -61,7 +67,11 @@ public class GameManager : MonoBehaviour
     ///
     private void Start()
     {
-        CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, catData.GetCatPortrait(CatType.loafCat));
+        //try loading saved data
+        if (!LoadData())
+        {
+            CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
+        }
     }
 
     //////////////////////////////////////////
@@ -69,6 +79,18 @@ public class GameManager : MonoBehaviour
     ///
     private void Update()
     {
+        if (!IsMinigameActive)
+        {
+            timeElapsedTillSave += Time.deltaTime;
+
+            if (timeElapsedTillSave >= autoSaveTime)
+            {
+                SaveData();
+                timeElapsedTillSave = 0f;
+            }
+        }
+
+
         if (isBlackingOut)
         {
             blackoutTVal += Time.deltaTime * blackoutSpeed;
@@ -76,38 +98,95 @@ public class GameManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    /// Adds cat to the collection
     ///
-    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, Sprite catPortrait)
+    ///
+    private void OnApplicationPause(bool pause)
     {
-        Vector2 pos = RetrieveRandomPosition();
-        GameObject catGO = Instantiate(catData.GetCatPrefab(catType), pos, Quaternion.identity);
-        DontDestroyOnLoad(catGO);
-        cats.Add(catGO);
-
-        Cat cat = catGO.GetComponent<Cat>();
-        cat.InitCatValues(catName, firstTrait, secondTrait, catPortrait, catData.GetCatRelationshipValue(catType), catType);
-
-        if (currentActiveCats < maxActiveCats)
+        if (pause)
         {
-            MakeCatActive(catGO, false);
+            SaveData();
         }
-        else
-        {
-            MakeCatInactive(catGO, false);
-        }
-
-        UpdateStorageSystem(catGO);
     }
 
-    private Vector2 RetrieveRandomPosition()
+    private void OnApplicationFocus(bool focus)
     {
-        SpawnArea area = FindObjectOfType<SpawnArea>();
-
-        float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
-        float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
-        return new Vector2(xPos, yPos);
+        if (!focus)
+        {
+            SaveData();
+        }
     }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void OnApplicationQuit()
+    {
+
+    }
+
+
+    #region Data Management
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void SaveData()
+    {
+        int numCats = cats.Count;
+        string[] names = new string[numCats];
+        int[] catTypes = new int[numCats];
+        int[] firstTraits = new int[numCats];
+        int[] secondTraits = new int[numCats];
+        int[] relationshipValues = new int[numCats];
+        int[] fullnessValues = new int[numCats];
+        int[] entertainmentValues = new int[numCats];
+        bool[] activeStates = new bool[numCats];
+
+        for (int i = 0; i < numCats; i++)
+        {
+            Cat cat = cats[i].GetComponent<Cat>();
+
+            names[i] = cat.GetName();
+            catTypes[i] = (int)cat.CatType;
+            firstTraits[i] = (int)cat.GetFirstTrait();
+            secondTraits[i] = (int)cat.GetSecondTrait();
+            relationshipValues[i] = cat.Relationship;
+            fullnessValues[i] = cat.Fullness;
+            entertainmentValues[i] = cat.Entertainment;
+            activeStates[i] = cat.IsCatActive();
+        }
+
+        SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, relationshipValues, fullnessValues, entertainmentValues, activeStates);
+    }
+
+
+    //////////////////////////////////////////
+    /// returns a bool value based on if data loading was successful or not, which is determined on a file existing already or not
+    ///
+    private bool LoadData()
+    {
+        //load previously saved data
+        PlayerData data = SaveSystem.LoadPlayerData();
+
+        if (data == null) return false;
+
+        //Load each cat into game
+        for (int i = 0; i < data.numCats; i++)
+        {
+            CreateCat((CatType)data.catTypes[i], data.names[i], (Trait)data.firstTraits[i], (Trait)data.secondTraits[i],
+                data.relationshipValues[i], data.fullnessValues[i], data.entertainmentValues[i], data.activeStates[i]);
+        }
+
+        return true;
+    }
+
+
+#endregion //Data Management
+
+
+
+#region Scene Management
 
     //////////////////////////////////////////
     ///
@@ -138,6 +217,8 @@ public class GameManager : MonoBehaviour
     ///
     public void LoadMainScene()
     {
+        SaveData();
+
         SetMinigameActive(false);
 
         MoveAllActiveCats(true);
@@ -150,6 +231,8 @@ public class GameManager : MonoBehaviour
     /// 
     private IEnumerator Transition(int buildIndex)
     {
+        SaveData();
+
         isBlackingOut = true;
         blackout = GameObject.FindGameObjectWithTag("Blackout");
 
@@ -166,6 +249,8 @@ public class GameManager : MonoBehaviour
 
         isBlackingOut = false;
 
+        DeleteClearList();
+
         yield return new WaitForSeconds(1f);
 
         SetMinigameActive(true);
@@ -174,6 +259,78 @@ public class GameManager : MonoBehaviour
         blackoutTVal = 0f;
 
         SceneManager.LoadScene(buildIndex);
+    }
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void AddToClearList(GameObject go)
+    {
+        gameObjectsToClear.Add(go);
+    }
+
+    //////////////////////////////////////////
+    /// Clears list and destroys game objects in scene
+    ///
+    private void DeleteClearList()
+    {
+        foreach (GameObject go in gameObjectsToClear)
+        {
+            Destroy(go);
+        }
+
+        gameObjectsToClear.Clear();
+    }
+
+#endregion //Scene Management
+
+
+
+#region Cat Management
+
+    //////////////////////////////////////////
+    /// Adds cat to the collection
+    ///
+    public void CreateCat(CatType catType, string catName, Trait firstTrait, Trait secondTrait, 
+        int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue, bool tryActivateCat)
+    {
+        Vector2 pos = RetrieveRandomPosition();
+        GameObject catGO = Instantiate(catData.GetCatPrefab(catType), pos, Quaternion.identity);
+        DontDestroyOnLoad(catGO);
+        cats.Add(catGO);
+
+        Cat cat = catGO.GetComponent<Cat>();
+        cat.InitCatValues(catName, firstTrait, secondTrait, catData.GetCatRelationshipValue(catType), currentRelationshipValue, currentFullnessValue, currentEntertainmentValue, catType);
+
+        if (tryActivateCat && currentActiveCats < maxActiveCats)
+        {
+            MakeCatActive(catGO, false);
+        }
+        else
+        {
+            MakeCatInactive(catGO, false);
+        }
+
+        UpdateStorageSystem(catGO);
+    }
+
+    //////////////////////////////////////////
+    /// Updated the storage display with the new cat
+    ///
+    private void UpdateStorageSystem(GameObject catGO)
+    {
+        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
+        storageHandler.AddContainer(catGO);
+    }
+
+    private Vector2 RetrieveRandomPosition()
+    {
+        SpawnArea area = FindObjectOfType<SpawnArea>();
+
+        float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
+        float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
+        return new Vector2(xPos, yPos);
     }
 
     //////////////////////////////////////////
@@ -197,6 +354,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    /// Check if a cat can be activated
+    ///
+    public bool CanActivateMoreCats()
+    {
+        if (currentActiveCats < maxActiveCats)
+        {
+            return true;
+        }
+        return false;
+    }
 
     //////////////////////////////////////////
     ///
@@ -252,15 +420,6 @@ public class GameManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    /// Updated the storage display with the new cat
-    ///
-    private void UpdateStorageSystem(GameObject catGO)
-    {
-        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
-        storageHandler.AddContainer(catGO);
-    }
-
-    //////////////////////////////////////////
     ///
     ///
     public void SetSelectedCat(Cat selectedCat)
@@ -273,6 +432,8 @@ public class GameManager : MonoBehaviour
     ///
     public void IncreaseSelectedCatFullness ()
     {
+        if (selectedCat == null) return;
+
         selectedCat.FeedCat();
     }
 
@@ -281,6 +442,8 @@ public class GameManager : MonoBehaviour
     ///
     public void IncreaseSelectedCatEntertainment()
     {
+        if (selectedCat == null) return;
+
         selectedCat.EntertainCat();
     }
 
@@ -293,12 +456,12 @@ public class GameManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    ///
+    /// Removes cat data and destroys cat
     ///
     public void RemoveCat(GameObject catGO)
     {
         cats.Remove(catGO);
-        
+
         for (int i = 0; i < activeCats.Count; i++)
         {
             if (activeCats[i] == catGO)
@@ -308,17 +471,18 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
+        //remove cat storage container
+        CatStorageHandler storageHandler = FindObjectOfType<CatStorageHandler>();
+        if (storageHandler != null)
+        {
+            storageHandler.DestroyContainer(catGO);
+        }
+
+        catGO.GetComponent<Cat>().DestroyCat();
     }
 
-    //////////////////////////////////////////
-    ///
-    ///
-    public bool CanActivateMoreCats()
-    {
-        if (currentActiveCats < maxActiveCats)
-        {
-            return true;
-        }
-        return false;
-    }
+    #endregion //Cat Management
+
+
 }

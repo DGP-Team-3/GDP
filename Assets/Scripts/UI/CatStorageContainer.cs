@@ -50,7 +50,7 @@ public class CatStorageContainer : MonoBehaviour
         nameField.text = associatedCat.GetName();
         firstTraitField.text = associatedCat.GetFirstTrait().ToString();
         secondTraitField.text = associatedCat.GetSecondTrait().ToString();
-        catPortraitImg.sprite = associatedCat.GetPortrait();
+        catPortraitImg.sprite = catData.GetCatPortrait(associatedCat.CatType);
 
         associatedCat.OnRelationshipUpdated += UpdateRelationshipDisplay;
 
@@ -75,7 +75,7 @@ public class CatStorageContainer : MonoBehaviour
         {
             if (relationship <= catRelationshipRatio * (i + 1))
             {
-                relationshipIcon.overrideSprite = catRelationshipImages[i];
+                relationshipIcon.sprite = catRelationshipImages[i];
                 break;
             }
         }
@@ -90,11 +90,11 @@ public class CatStorageContainer : MonoBehaviour
         Image buttonImg = storageButton.gameObject.GetComponent<Image>();
         if (associatedCat.IsCatActive())
         {
-            buttonImg.overrideSprite = storeCatSprite;
+            buttonImg.sprite = storeCatSprite;
         }
         else
         {
-            buttonImg.overrideSprite = takeOutCatSprite;
+            buttonImg.sprite = takeOutCatSprite;
         }
     }
 

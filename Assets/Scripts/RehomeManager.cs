@@ -31,6 +31,8 @@ public class RehomeManager : MonoBehaviour
     ///
     private void Start()
     {
+        GameManager.Instance.AddToClearList(gameObject);
+
         foreach (GameObject container in containers)
         {
             GenerateNewOwnerDisplay(container);
@@ -132,7 +134,7 @@ public class RehomeManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
-    ///
+    /// Initiates cat delete from game
     ///
     public void RehomeSelectedCat(int containerIndex)
     {
@@ -140,7 +142,6 @@ public class RehomeManager : MonoBehaviour
 
         containers[containerIndex].GetComponent<OwnerContainer>().GetTextField().text = "Thank you!";
 
-        //rehome the cat
-        selectedCat.DestroyCat();
+        GameManager.Instance.RemoveCat(selectedCat.gameObject);
     }
 }
