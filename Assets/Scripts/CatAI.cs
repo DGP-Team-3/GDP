@@ -13,22 +13,25 @@ public enum CatState
 }
 public class CatAI : MonoBehaviour
 {
-    private float stateTimer;
-    private Animator mAnimator;
+    [SerializeField] private Animator mAnimator;
+    [SerializeField] private Cat mCat;
+    [SerializeField] private SpriteRenderer mSprite;
     private CatState currentState;
+    private float stateTimer;
     private Vector3 targetLocation;
     private bool isSelected;
+    private bool isAngry;
+    private int prevRelationship;
     [SerializeField] private float speed = 1;
     // Start is called before the first frame update
     void Start()
     {
-        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isSelected)
+        if (isSelected || isAngry)
         {
 
         }
@@ -45,6 +48,14 @@ public class CatAI : MonoBehaviour
             else if (currentState == CatState.walk)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
+                if (transform.position.x < targetLocation.x)
+                {
+                    mSprite.flipX = true;
+                }
+                else
+                {
+                    mSprite.flipX = false;
+                }
                 if (Vector3.Distance(transform.position, targetLocation) < 0.001f)
                 {
                     FindNewState();
@@ -77,7 +88,39 @@ public class CatAI : MonoBehaviour
             }
         }
     }
+    private void OnEnable()
+    {
+        Subscribe();
+    }
+    void OnDisable()
+    {
+        Unsubscribe();
+    }
+    private void Subscribe()
+    {
+        if (mCat == null) return;
+        mCat.OnRelationshipUpdated += CheckStats;
+    }
+    private void Unsubscribe()
+    {
+        if (mCat == null) return;
+        mCat.OnRelationshipUpdated -= CheckStats;
+    }
 
+    private void CheckStats(int newRelationship)
+    {
+        if (newRelationship < prevRelationship || newRelationship == 0)
+        {
+            mAnimator.SetBool("IsAngry", true);
+            isAngry = true;
+        }
+        else
+        {
+            mAnimator.SetBool("IsAngry", false);
+            isAngry = false;
+        }
+        prevRelationship = newRelationship;
+    }
     private void FindNewState()
     {
         mAnimator.SetBool("IsMoving", false);
@@ -88,7 +131,7 @@ public class CatAI : MonoBehaviour
         currentState = (CatState)Random.Range(0, (int)CatState.COUNT);
         if (currentState == CatState.idle)
         {
-            stateTimer = Random.Range(1, 5);
+            stateTimer = Random.Range(1, 10);
         }
         else if (currentState == CatState.walk)
         {
@@ -98,17 +141,17 @@ public class CatAI : MonoBehaviour
         else if (currentState == CatState.pose1)
         {
             mAnimator.SetBool("IsPose1", true);
-            stateTimer = Random.Range(1, 5);
+            stateTimer = Random.Range(3, 8);
         }
         else if (currentState == CatState.pose2)
         {
             mAnimator.SetBool("IsPose2", true);
-            stateTimer = Random.Range(1, 5);
+            stateTimer = Random.Range(3, 8);
         }
         else if (currentState == CatState.loaf)
         {
             mAnimator.SetBool("IsLoafing", true);
-            stateTimer = Random.Range(1, 5);
+            stateTimer = Random.Range(3, 8);
         }
         else
         {

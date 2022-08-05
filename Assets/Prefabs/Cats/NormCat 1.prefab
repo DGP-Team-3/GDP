@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 135702524336014074}
   - component: {fileID: 135702524336014068}
   - component: {fileID: 135702524336014075}
+  - component: {fileID: 2971721475230902989}
   m_Layer: 0
   m_Name: NormCat 1
   m_TagString: Untagged
@@ -98,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 135702524336014078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84b80a402d0df6b409f904e0300fcc4d, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1749137812ab6a04c98409e10f8eba03, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -120,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99527a320aa191b46a7d034a207663a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catName: Loaf
-  catPortrait: {fileID: 21300000, guid: 6e31b46d841883648b35175bee96f9a0, type: 3}
+  catName: NormCat1
+  catPortrait: {fileID: 21300000, guid: 9c311ee57b425dd4c81b73e4436d4030, type: 3}
   firstTrait: 8
   secondTrait: 33
   hungerProcTime: 5
@@ -181,3 +182,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.570625, y: 0.58}
   m_EdgeRadius: 0
+--- !u!114 &2971721475230902989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135702524336014078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde28c0e8c6278743a27c9b3f53baa81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mAnimator: {fileID: 135702524336014079}
+  mCat: {fileID: 135702524336014074}
+  mSprite: {fileID: 135702524336014072}
+  speed: 1
