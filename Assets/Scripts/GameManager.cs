@@ -46,6 +46,12 @@ public class GameManager : MonoBehaviour
     private List<GameObject> gameObjectsToClear = new List<GameObject>();
 
 
+    private int numCatsRehomed = 0;
+    private int numSpecialCatsFound = 0;
+    private int numNormalCatsFound = 0;
+
+
+
     //////////////////////////////////////////
     ///
     ///
@@ -71,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (!LoadData())
         {
             CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
+            IncrementNumCatsFound(CatType.loafCat);
         }
     }
 
@@ -116,16 +123,51 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+#region Data Management
+
+
+
+    //////////////////////////////////////////
+    /// Will increment the number of cats found based on uniqueness or not
+    ///
+    public void IncrementNumCatsFound(CatType catType)
+    {
+        if (catData.IsUniqueCatType(catType))
+        {
+            numSpecialCatsFound++;
+        }
+        else
+        {
+            numNormalCatsFound++;
+        }
+
+        SaveData();
+    }
+
     //////////////////////////////////////////
     ///
     ///
-    private void OnApplicationQuit()
+    public void IncrementNumCatsRehomed()
     {
-
+        numCatsRehomed++;
+        SaveData();
     }
 
+    public int GetNumCatsRehomed()
+    {
+        return numCatsRehomed;
+    }
 
-    #region Data Management
+    public int GetNumNormalCatsFound()
+    {
+        return numNormalCatsFound;
+    }
+
+    public int GetNumSpecialCatsFound()
+    {
+        return numSpecialCatsFound;
+    }
 
 
     //////////////////////////////////////////
@@ -157,7 +199,8 @@ public class GameManager : MonoBehaviour
             activeStates[i] = cat.IsCatActive();
         }
 
-        SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, relationshipValues, fullnessValues, entertainmentValues, activeStates);
+        SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
+            relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed);
     }
 
 
@@ -177,6 +220,10 @@ public class GameManager : MonoBehaviour
             CreateCat((CatType)data.catTypes[i], data.names[i], (Trait)data.firstTraits[i], (Trait)data.secondTraits[i],
                 data.relationshipValues[i], data.fullnessValues[i], data.entertainmentValues[i], data.activeStates[i]);
         }
+
+        numNormalCatsFound = data.numNormalCatsFound;
+        numSpecialCatsFound = data.numSpecialCatsFound;
+        numCatsRehomed = data.numCatsRehomed;
 
         return true;
     }
@@ -236,8 +283,16 @@ public class GameManager : MonoBehaviour
         isBlackingOut = true;
         blackout = GameObject.FindGameObjectWithTag("Blackout");
 
-        FindObjectOfType<CatPopUpHandler>().HideSelf();
-        FindObjectOfType<SliderMenu>().HideSelf();
+        CatPopUpHandler popup = FindObjectOfType<CatPopUpHandler>();
+        if (popup != null)
+        {
+            popup.HideSelf();
+        }
+        SliderMenu slider = FindObjectOfType<SliderMenu>();
+        if (slider != null)
+        {
+            slider.HideSelf();
+        }
 
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
         Color originalColor = spriteRenderer.color;

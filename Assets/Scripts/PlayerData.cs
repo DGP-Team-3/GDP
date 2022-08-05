@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerData
 {
     public int numCats;
+    public int numNormalCatsFound;
+    public int numSpecialCatsFound;
+    public int numCatsRehomed;
     public int[] catTypes;
     public int[] firstTraits;
     public int[] secondTraits;
@@ -16,12 +19,11 @@ public class PlayerData
     public bool[] activeStates;
 
 
-
     //////////////////////////////////////////
     /// Class Constructor
     ///
     public PlayerData(int numCats, string[] names, int[] catTypes, int[] firstTraits, int[] secondTraits, 
-        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates)
+        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed)
     {
         this.numCats = numCats;
         
@@ -45,6 +47,9 @@ public class PlayerData
             this.entertainmentValues[i] = entertainmentValues[i];
             this.activeStates[i] = activeStates[i];
         }
-        
+
+        this.numNormalCatsFound = numNormalCatsFound;
+        this.numSpecialCatsFound = numSpecialCatsFound;
+        this.numCatsRehomed = numCatsRehomed;
     }
 }
