@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: NormCat3
-  catPortrait: {fileID: 21300000, guid: 3f8c135d7ec8be4448ab5116eeac7feb, type: 3}
   firstTrait: 8
   secondTrait: 33
   hungerProcTime: 5
@@ -135,6 +134,7 @@ MonoBehaviour:
   maxRelationship: 100
   maxEntertainment: 100
   animator: {fileID: 135702524336014079}
+  pettingGameSprite: {fileID: 21300000, guid: 1d0e111ac45512b4e9bd9d787dc8539d, type: 3}
 --- !u!50 &135702524336014068
 Rigidbody2D:
   serializedVersion: 4

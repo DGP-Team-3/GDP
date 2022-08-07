@@ -23,22 +23,34 @@ public class PettingGameManager : MonoBehaviour
     [Min(0f)]
     [SerializeField] private float blackoutSpeed = 1f;
 
+    [SerializeField] private GameObject catSprite;
     [SerializeField] private GameObject blackout;
     [SerializeField] private GameObject greenCheck;
 
+    [Tooltip("List of happy cat icons.")]
+    [SerializeField] List<GameObject> happyCatIcons;
+    [Tooltip("List of mad cat icons.")]
+    [SerializeField] List<GameObject> madCatIcons;
+
+    private GameObject cat;
 
     
     private bool isBlackingOut = false;
+    private bool isLosing = false;
     private float blackoutTVal = 0f;
     
     
     private float score;
-
+    private int strikes = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        cat = Instantiate(GameManager.Instance.GetSelectedCat().gameObject, new Vector3 (0, 0, 0), Quaternion.identity);
+        cat.GetComponent<CatAI>().selectCat();
+        cat.transform.localScale = new Vector3(16, 16, 1);
+        cat.GetComponent<CatAI>().mSprite.flipX = false;
         spawnAreas = GetComponents<Collider2D>();
         SpawnCircle();
     }
@@ -46,6 +58,10 @@ public class PettingGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isLosing)
+        {
+            cat.transform.position = Vector2.MoveTowards(cat.transform.position, new Vector2(-100, 0), Time.deltaTime);
+        }
         if (isBlackingOut)
         {
             blackoutTVal += Time.deltaTime * blackoutSpeed;
@@ -59,6 +75,21 @@ public class PettingGameManager : MonoBehaviour
         {
             SpawnCircle();
         }
+    }
+
+    public void CircleExpired()
+    {
+        happyCatIcons[strikes].SetActive(false);
+        madCatIcons[strikes].SetActive(true);
+        strikes++;
+        if (strikes >= 3)
+        {
+            cat.GetComponent<CatAI>().PlayLose();
+            isLosing = true;
+            StartCoroutine(LoseTransition());
+            return;
+        }
+        SpawnCircle();
     }
 
     void SpawnCircle()
@@ -85,9 +116,9 @@ public class PettingGameManager : MonoBehaviour
     {
         if (score >= pointWin)
         {
-            greenCheck.SetActive(true);
+            cat.GetComponent<CatAI>().PlayWin();
             GameManager.Instance.IncreaseSelectedCatEntertainment();
-            StartCoroutine(Transition());
+            StartCoroutine(WinTransition());
             return true;
         }
         return false;
@@ -96,9 +127,27 @@ public class PettingGameManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     /// 
-    private IEnumerator Transition()
+    private IEnumerator WinTransition()
     {
+        yield return new WaitForSeconds(2f);
+        isBlackingOut = true;
+        SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+
+        while (spriteRenderer.color != Color.black)
+        {
+
+            spriteRenderer.color = Color.Lerp(originalColor, Color.black, blackoutTVal);
+            yield return null;
+        }
+
         yield return new WaitForSeconds(1f);
+
+        GameManager.Instance.LoadMainScene();
+    }
+    private IEnumerator LoseTransition()
+    {
+        yield return new WaitForSeconds(2f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
         Color originalColor = spriteRenderer.color;

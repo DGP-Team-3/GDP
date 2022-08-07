@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: WitchCat
-  catPortrait: {fileID: 21300000, guid: 0de3ebdfe231dbb498dbee86cd032da2, type: 3}
   firstTrait: 8
   secondTrait: 33
   hungerProcTime: 5
@@ -135,6 +134,7 @@ MonoBehaviour:
   maxRelationship: 100
   maxEntertainment: 100
   animator: {fileID: 135702524336014079}
+  pettingGameSprite: {fileID: 21300000, guid: a21660409957d634aa122b8cebb8e089, type: 3}
 --- !u!50 &135702524336014068
 Rigidbody2D:
   serializedVersion: 4

@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: Momotaro
-  catPortrait: {fileID: 21300000, guid: 3cd2d332f9e0e4845be1cd2f06ba91e3, type: 3}
   firstTrait: 8
   secondTrait: 33
   hungerProcTime: 5
@@ -135,6 +134,7 @@ MonoBehaviour:
   maxRelationship: 100
   maxEntertainment: 100
   animator: {fileID: 135702524336014079}
+  pettingGameSprite: {fileID: 21300000, guid: ad13b722e1ff4c942a55a91f68618e7c, type: 3}
 --- !u!50 &135702524336014068
 Rigidbody2D:
   serializedVersion: 4

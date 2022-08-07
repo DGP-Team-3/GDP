@@ -6,6 +6,8 @@ public class FoodDeposit : MonoBehaviour
 {
     [Tooltip("The renderer for thought bubbles.")]
     [SerializeField] private SpriteRenderer bubbleSpriteRenderer;
+    [SerializeField] private Animator mAnimator;
+    [SerializeField] private Animation mAnim;
 
     [Header("Sprite Assets")]
     [SerializeField] private Sprite chickenSprite;
@@ -22,30 +24,52 @@ public class FoodDeposit : MonoBehaviour
     {
         if (foodType == FoodType.Shrimp)
         {
-            bubbleSpriteRenderer.sprite = shrimpSprite;
+            mAnimator.Play("food_think_shrimp");
         }
         if (foodType == FoodType.Beef)
         {
-            bubbleSpriteRenderer.sprite = beefSprite;
+            mAnimator.Play("food_think_meat");
         }
         if (foodType == FoodType.Chicken)
         {
-            bubbleSpriteRenderer.sprite = chickenSprite;
+            mAnimator.Play("food_think_chicken");
         }
     }
 
     //////////////////////////////////////////
     /// Sets the bubble renderer with an emotion sprite
     /// 
-    public void SetExpressionSprite(bool isRightFood)
+    public void SetExpressionSprite(bool isRightFood, FoodType foodType)
     {
         if (isRightFood)
         {
-            bubbleSpriteRenderer.sprite = happySprite;
+            if (foodType == FoodType.Shrimp)
+            {
+                mAnimator.Play("food_eat_shrimp");
+            }
+            if (foodType == FoodType.Beef)
+            {
+                mAnimator.Play("food_eat_meat");
+            }
+            if (foodType == FoodType.Chicken)
+            {
+                mAnimator.Play("food_eat_chicken");
+            }
         }
         else
         {
-            bubbleSpriteRenderer.sprite = madSprite;
+            if (foodType == FoodType.Shrimp)
+            {
+                mAnimator.Play("food_wrong_shrimp");
+            }
+            if (foodType == FoodType.Beef)
+            {
+                mAnimator.Play("food_wrong_meat");
+            }
+            if (foodType == FoodType.Chicken)
+            {
+                mAnimator.Play("food_wrong_chicken");
+            }
         }
     }
 }

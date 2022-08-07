@@ -485,6 +485,13 @@ public class GameManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
+    public Cat GetSelectedCat()
+    {
+        return this.selectedCat;
+    }
+    //////////////////////////////////////////
+    ///
+    ///
     public void IncreaseSelectedCatFullness ()
     {
         if (selectedCat == null) return;

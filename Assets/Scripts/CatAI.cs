@@ -15,7 +15,7 @@ public class CatAI : MonoBehaviour
 {
     [SerializeField] private Animator mAnimator;
     [SerializeField] private Cat mCat;
-    [SerializeField] private SpriteRenderer mSprite;
+    [SerializeField] public SpriteRenderer mSprite;
     private CatState currentState;
     private float stateTimer;
     private Vector3 targetLocation;
@@ -31,7 +31,7 @@ public class CatAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!mCat.IsCatActive() || GameManager.Instance.IsMinigameActive) return;
+        if (!mCat.IsCatActive()) return;
 
         if (isSelected || isAngry)
         {
@@ -49,7 +49,7 @@ public class CatAI : MonoBehaviour
             }
             else if (currentState == CatState.walk)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
+                transform.position = Vector2.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
                 if (transform.position.x < targetLocation.x)
                 {
                     mSprite.flipX = true;
@@ -181,4 +181,18 @@ public class CatAI : MonoBehaviour
         mAnimator.SetBool("IsSelected", false);
         isSelected = false;
     }
+
+    public void PlayWin()
+    {
+        mAnimator.SetBool("IsSelected", false);
+        isSelected = false;
+        mAnimator.SetBool("Win", true);
+    }
+    public void PlayLose()
+    {
+        mAnimator.SetBool("IsSelected", false);
+        isSelected = false;
+        mAnimator.SetBool("Lose", true);
+    }
 }
+
