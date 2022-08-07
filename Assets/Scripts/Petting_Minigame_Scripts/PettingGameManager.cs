@@ -26,6 +26,7 @@ public class PettingGameManager : MonoBehaviour
     [SerializeField] private GameObject catSprite;
     [SerializeField] private GameObject blackout;
     [SerializeField] private GameObject greenCheck;
+    [SerializeField] private GameObject progressBar;
 
     [Tooltip("List of happy cat icons.")]
     [SerializeField] List<GameObject> happyCatIcons;
@@ -47,6 +48,7 @@ public class PettingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        progressBar.GetComponent<ProgressBar>().SetMax(pointWin);
         cat = Instantiate(GameManager.Instance.GetSelectedCat().gameObject, new Vector3 (0, 0, 0), Quaternion.identity);
         cat.GetComponent<CatAI>().selectCat();
         cat.transform.localScale = new Vector3(16, 16, 1);
@@ -58,10 +60,6 @@ public class PettingGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLosing)
-        {
-            cat.transform.position = Vector2.MoveTowards(cat.transform.position, new Vector2(-100, 0), Time.deltaTime);
-        }
         if (isBlackingOut)
         {
             blackoutTVal += Time.deltaTime * blackoutSpeed;
@@ -87,6 +85,7 @@ public class PettingGameManager : MonoBehaviour
             cat.GetComponent<CatAI>().PlayLose();
             isLosing = true;
             StartCoroutine(LoseTransition());
+            StartCoroutine(MoveCatOffScreen(cat.transform, new Vector3(-13, 0, 0), 2.0f));
             return;
         }
         SpawnCircle();
@@ -104,6 +103,7 @@ public class PettingGameManager : MonoBehaviour
     void AwardPoints()
     {
         score += pointGain;
+        progressBar.GetComponent<ProgressBar>().UpdateFill(score);
         UpdateFullnessText();
     }
 
@@ -162,6 +162,19 @@ public class PettingGameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         GameManager.Instance.LoadMainScene();
+    }
+
+    private IEnumerator MoveCatOffScreen(Transform transform, Vector3 position, float time)
+    {
+        yield return new WaitForSeconds(0.5f);
+        var startingPos = transform.position;
+        var t = 0.0f;
+        while (t < 1)
+        {
+            t += Time.deltaTime / time;
+            transform.position = Vector3.Lerp(startingPos, position, t);
+            yield return null;
+        }
     }
 }
 
