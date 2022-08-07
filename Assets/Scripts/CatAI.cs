@@ -17,19 +17,17 @@ public class CatAI : MonoBehaviour
     [SerializeField] private Cat mCat;
     [SerializeField] private SpriteRenderer mSprite;
     [SerializeField] private SpawnArea area;
+    [SerializeField] private float speed = 1;
+
     private CatState currentState;
     private float stateTimer;
     private Vector3 targetLocation;
     private bool isSelected;
     private bool isAngry;
     private int prevRelationship;
-    [SerializeField] private float speed = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
+
+
     void Update()
     {
         if (!mCat.IsCatActive() || GameManager.Instance.IsMinigameActive) return;
@@ -91,24 +89,17 @@ public class CatAI : MonoBehaviour
             }
         }
     }
+
     private void OnEnable()
     {
-        Subscribe();
-    }
-    void OnDisable()
-    {
-        Unsubscribe();
-    }
-    private void Subscribe()
-    {
-        if (mCat == null) return;
         mCat.OnRelationshipUpdated += CheckStats;
     }
-    private void Unsubscribe()
+
+    void OnDisable()
     {
-        if (mCat == null) return;
         mCat.OnRelationshipUpdated -= CheckStats;
     }
+
 
     private void CheckStats(int newRelationship)
     {
@@ -124,6 +115,8 @@ public class CatAI : MonoBehaviour
         }
         prevRelationship = newRelationship;
     }
+
+
     private void FindNewState()
     {
         mAnimator.SetBool("IsMoving", false);
@@ -162,12 +155,15 @@ public class CatAI : MonoBehaviour
             currentState = CatState.idle;
         }
     }
+
+
     private Vector2 RetrieveRandomPosition()
     {
         float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
         float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
         return new Vector2(xPos, yPos);
     }
+
     
     public void selectCat()
     {
@@ -187,6 +183,7 @@ public class CatAI : MonoBehaviour
         isSelected = false;
         mAnimator.SetBool("Win", true);
     }
+
     public void PlayLose()
     {
         mAnimator.SetBool("IsSelected", false);

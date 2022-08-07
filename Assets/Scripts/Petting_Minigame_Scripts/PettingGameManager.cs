@@ -7,9 +7,6 @@ public class PettingGameManager : MonoBehaviour
 {
     [SerializeField] GameObject targetCirclePrefab;
 
-    private Collider2D[] spawnAreas;
-    private Collider2D spawnArea;
-
     [Tooltip("The amount of points gained when succesfully tapping a circle.")]
     [Min(0)]
     [SerializeField] private float pointGain;
@@ -33,31 +30,33 @@ public class PettingGameManager : MonoBehaviour
     [Tooltip("List of mad cat icons.")]
     [SerializeField] List<GameObject> madCatIcons;
 
+    private Collider2D[] spawnAreas;
+    
     private GameObject cat;
-
+    private CatAI catAI;
     
     private bool isBlackingOut = false;
-    private bool isLosing = false;
     private float blackoutTVal = 0f;
-    
     
     private float score;
     private int strikes = 0;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         progressBar.GetComponent<ProgressBar>().SetMax(pointWin);
         cat = Instantiate(GameManager.Instance.GetSelectedCat().gameObject, new Vector3 (0, 0, 0), Quaternion.identity);
-        cat.GetComponent<CatAI>().selectCat();
+        catAI = cat.GetComponent<CatAI>();
+
+        catAI.selectCat();
         cat.transform.localScale = new Vector3(16, 16, 1);
-        cat.GetComponent<CatAI>().GetSprite().flipX = false;
+        catAI.GetSprite().flipX = false;
+
         spawnAreas = GetComponents<Collider2D>();
         SpawnCircle();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (isBlackingOut)
@@ -82,8 +81,7 @@ public class PettingGameManager : MonoBehaviour
         strikes++;
         if (strikes >= 3)
         {
-            cat.GetComponent<CatAI>().PlayLose();
-            isLosing = true;
+            catAI.PlayLose();
             StartCoroutine(LoseTransition());
             StartCoroutine(MoveCatOffScreen(cat.transform, new Vector3(-13, 0, 0), 2.0f));
             return;
@@ -98,7 +96,7 @@ public class PettingGameManager : MonoBehaviour
         var y_pos = Random.Range(spawnAreas[i].bounds.min.y, spawnAreas[i].bounds.max.y);
         GameObject target = Instantiate(targetCirclePrefab, new Vector3(x_pos, y_pos), Quaternion.identity);
         TargetCircleScript script = target.GetComponent<TargetCircleScript>();
-        script.setOwner(this.gameObject);
+        script.setOwner(gameObject);
     }
     void AwardPoints()
     {
@@ -116,7 +114,7 @@ public class PettingGameManager : MonoBehaviour
     {
         if (score >= pointWin)
         {
-            cat.GetComponent<CatAI>().PlayWin();
+            catAI.PlayWin();
             GameManager.Instance.IncreaseSelectedCatEntertainment();
             StartCoroutine(WinTransition());
             return true;
@@ -145,6 +143,8 @@ public class PettingGameManager : MonoBehaviour
 
         GameManager.Instance.LoadMainScene();
     }
+
+
     private IEnumerator LoseTransition()
     {
         yield return new WaitForSeconds(2f);

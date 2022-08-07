@@ -49,8 +49,6 @@ public class Cat : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
-    [SerializeField] public Sprite pettingGameSprite;
-
 
 
     private int _fullness;
@@ -240,5 +238,5 @@ public class Cat : MonoBehaviour
     public void DestroyCat()
     {
         Destroy(gameObject);
-    }    
+    }
 }
