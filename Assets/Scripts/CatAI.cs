@@ -15,7 +15,8 @@ public class CatAI : MonoBehaviour
 {
     [SerializeField] private Animator mAnimator;
     [SerializeField] private Cat mCat;
-    [SerializeField] public SpriteRenderer mSprite;
+    [SerializeField] private SpriteRenderer mSprite;
+    [SerializeField] private SpawnArea area;
     private CatState currentState;
     private float stateTimer;
     private Vector3 targetLocation;
@@ -31,7 +32,7 @@ public class CatAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!mCat.IsCatActive()) return;
+        if (!mCat.IsCatActive() || GameManager.Instance.IsMinigameActive) return;
 
         if (isSelected || isAngry)
         {
@@ -163,8 +164,6 @@ public class CatAI : MonoBehaviour
     }
     private Vector2 RetrieveRandomPosition()
     {
-        SpawnArea area = FindObjectOfType<SpawnArea>();
-
         float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
         float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
         return new Vector2(xPos, yPos);
@@ -193,6 +192,11 @@ public class CatAI : MonoBehaviour
         mAnimator.SetBool("IsSelected", false);
         isSelected = false;
         mAnimator.SetBool("Lose", true);
+    }
+
+    public SpriteRenderer GetSprite()
+    {
+        return mSprite;
     }
 }
 

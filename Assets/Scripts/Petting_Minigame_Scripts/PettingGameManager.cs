@@ -52,7 +52,7 @@ public class PettingGameManager : MonoBehaviour
         cat = Instantiate(GameManager.Instance.GetSelectedCat().gameObject, new Vector3 (0, 0, 0), Quaternion.identity);
         cat.GetComponent<CatAI>().selectCat();
         cat.transform.localScale = new Vector3(16, 16, 1);
-        cat.GetComponent<CatAI>().mSprite.flipX = false;
+        cat.GetComponent<CatAI>().GetSprite().flipX = false;
         spawnAreas = GetComponents<Collider2D>();
         SpawnCircle();
     }

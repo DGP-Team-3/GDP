@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float autoSaveTime = 30f;
 
 
+    [SerializeField] private SpawnArea spawnArea;
+
+
     private float timeElapsedTillSave = 0f;
     private float blackoutTVal = 0f;
 
@@ -381,10 +384,8 @@ public class GameManager : MonoBehaviour
 
     private Vector2 RetrieveRandomPosition()
     {
-        SpawnArea area = FindObjectOfType<SpawnArea>();
-
-        float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
-        float yPos = Random.Range(area.YMinSpawn, area.YMaxSpawn);
+        float xPos = Random.Range(spawnArea.XMinSpawn, spawnArea.XMaxSpawn);
+        float yPos = Random.Range(spawnArea.YMinSpawn, spawnArea.YMaxSpawn);
         return new Vector2(xPos, yPos);
     }
 

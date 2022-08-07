@@ -197,4 +197,5 @@ MonoBehaviour:
   mAnimator: {fileID: 135702524336014079}
   mCat: {fileID: 135702524336014074}
   mSprite: {fileID: 135702524336014072}
+  area: {fileID: 11400000, guid: 5aec5acd266da73449461f3e3e487041, type: 2}
   speed: 1
