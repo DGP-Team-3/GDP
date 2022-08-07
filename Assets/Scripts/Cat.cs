@@ -238,5 +238,5 @@ public class Cat : MonoBehaviour
     public void DestroyCat()
     {
         Destroy(gameObject);
-    }    
+    }
 }

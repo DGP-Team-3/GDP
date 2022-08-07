@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 135702524336014078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 2114a8c4855306949a217c1fba7d7e94, type: 2}
+  m_Controller: {fileID: 9100000, guid: ccca37f3b1aa80040adaf7746c66674b, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: Loaf
-  catPortrait: {fileID: 21300000, guid: 6e31b46d841883648b35175bee96f9a0, type: 3}
   firstTrait: 8
   secondTrait: 33
   hungerProcTime: 5
@@ -135,6 +134,7 @@ MonoBehaviour:
   maxRelationship: 100
   maxEntertainment: 100
   animator: {fileID: 135702524336014079}
+  pettingGameSprite: {fileID: 21300000, guid: 9a72829d97d328c458b282f9d8ba2bad, type: 3}
 --- !u!50 &135702524336014068
 Rigidbody2D:
   serializedVersion: 4
@@ -197,4 +197,5 @@ MonoBehaviour:
   mAnimator: {fileID: 135702524336014079}
   mCat: {fileID: 135702524336014074}
   mSprite: {fileID: 135702524336014072}
+  area: {fileID: 11400000, guid: 5aec5acd266da73449461f3e3e487041, type: 2}
   speed: 1

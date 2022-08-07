@@ -26,7 +26,7 @@ public class FeedingMinigameManager : MonoBehaviour
     [SerializeField] private float blackoutSpeed = 1f;
 
     [SerializeField] private GameObject blackout;
-    [SerializeField] private GameObject greenCheck;
+    [SerializeField] private GameObject successIcon;
 
 
     private FoodType wantedFoodType;
@@ -132,12 +132,12 @@ public class FeedingMinigameManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     /// 
-    public void CorrectFoodDelivered()
+    public void CorrectFoodDelivered(FoodType draggedFoodType)
     {
         DisableDragControls();
         expressionAudioPlayer.PlayHappySound();
         isCatHappy = true;
-        foodDeposit.SetExpressionSprite(true);
+        foodDeposit.SetExpressionSprite(true, draggedFoodType);
         Destroy(foodObjects[wantedFoodItemIndex].gameObject);
 
         StartCoroutine(EnableGreenCheck());
@@ -148,18 +148,18 @@ public class FeedingMinigameManager : MonoBehaviour
     private IEnumerator EnableGreenCheck()
     {
         yield return new WaitForSeconds(0.75f);
-        greenCheck.SetActive(true);
+        successIcon.SetActive(true);
     }
 
     //////////////////////////////////////////
     ///
     /// 
-    public void IncorrectFoodDelivered()
+    public void IncorrectFoodDelivered(FoodType draggedFoodType)
     {
         DisableDragControls();
         expressionAudioPlayer.PlayMadSound();
         isCatMad = true;
-        foodDeposit.SetExpressionSprite(false);
+        foodDeposit.SetExpressionSprite(false, draggedFoodType);
     }
 
 
@@ -177,7 +177,7 @@ public class FeedingMinigameManager : MonoBehaviour
     /// 
     private IEnumerator Transition()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
         Color originalColor = spriteRenderer.color;
@@ -193,5 +193,4 @@ public class FeedingMinigameManager : MonoBehaviour
 
         GameManager.Instance.LoadMainScene();
     }
-
 }

@@ -65,15 +65,16 @@ public class Draggable : MonoBehaviour
         }
 
         //Correct item placed
-        if (FeedingMinigameManager.Instance.CheckValidFood(gameObject.GetComponent<Food>().GetFoodType))
+        FoodType draggedFoodType = gameObject.GetComponent<Food>().GetFoodType;
+        if (FeedingMinigameManager.Instance.CheckValidFood(draggedFoodType))
         {
             movementDestination = other.transform.position;
-            FeedingMinigameManager.Instance.CorrectFoodDelivered();
+            FeedingMinigameManager.Instance.CorrectFoodDelivered(draggedFoodType);
         }
         else
         {
             movementDestination = returnPosition;
-            FeedingMinigameManager.Instance.IncorrectFoodDelivered();
+            FeedingMinigameManager.Instance.IncorrectFoodDelivered(draggedFoodType);
         }
     }
 
