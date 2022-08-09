@@ -7,7 +7,17 @@ using UnityEngine;
 //Have int for num of basic cats. put smaller chance for unique cats.
 public enum CatType
 {
+    normCat1,
+    normCat2,
+    normCat3,
+    normCat4,
+    normCat5,
+    frogCat,
+    komiCat,
     loafCat,
+    momoCat,
+    skyCat,
+    witchCat
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CatData", order = 1)]

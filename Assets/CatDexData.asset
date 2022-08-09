@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42370090558205449613c6a84ad1a68, type: 3}
+  m_Name: CatDexData
+  m_EditorClassIdentifier: 
+  catType:
+  - normCat
+  - normCat
+  - normCat
+  - frogCat
+  - komiCat
+  - loafCat
+  - skyCat
+  - witchcat
+  - witchcat
+  milestone1:
+  - ' is ignoring you.'
+  - '''s ears flatten as you approach.'
+  - ' walks away from you.'
+  - Frederick regards you from afar with an air of cold indifference.
+  - 
+  - Loaf is loafing around.
+  - Momo flicks her ears at you and yawns.
+  - 'Small rainclouds follow Akash as he scampers away from you. \n Forecast: Stormy'
+  - Moon seems preoccupied reading a spellbook and doesn't seem to notice you...
+  milestone2:
+  - ' is giving you a curious glance.'
+  - ' watches you carefully.'
+  - ' is staring at you from across the room.'
+  - Frederick eyes you with apprehension, but permits you to approach.
+  - 
+  - 'Loaf is happily sleeping, warm and toasty. '
+  - Momo is rolling away from you. It's almost as if she's waiting for you to give
+    chase.
+  - 'Akash thinks about approaching you, but quickly thinks better of it. \n Forecast:
+    Partly Cloudy'
+  - 'Moon watches you intently as you clean her broom. She meows with concern but
+    seems to trust you. '
+  milestone3:
+  - ' meows at you to get your attention.'
+  - ' allows you to brush their fur.'
+  - ' headbutts your leg.'
+  - Having recognized your noble spirit, Frederick beckons for you to sit with him.
+  - 
+  - Loaf rolls over and allows you to pet the dough!
+  - Momo nestles in next to your leg for her afternoon nap.
+  - 'It''s a bit warm today in the inn, but a mysterious breeze is keeping you cool.
+    \n Forecast: Windy'
+  - Moon casts magic in the air and excitedly looks towards your way for your reaction.
+  milestone4:
+  - ' is purring contentedly.'
+  - ' leans happily into your touch.'
+  - ' rubs up on your ankles with a meow.'
+  - 'Frederick has bestowed upon you his highest honor: a lovingly crafted replica
+    of his suit. You''ll wear it always, won''t you?'
+  - Komi has chosen you. Each day is spent exploring the wilds together, and each
+    night you are at each other's sides.
+  - Loaf loves making biscuits on you! They're fresh and full of love!
+  - Momo touches her nose to yours and blinks very slowly. She smells like soft summer
+    peaches.
+  - 'Akash''s golden glow and the sound of his purring blanket you in gentle warmth.
+    \n Forecast: Sunny'
+  - 'Moon hops off the broom and bunts your leg. In the name of the stars, Moon promises
+    to protect you! '
