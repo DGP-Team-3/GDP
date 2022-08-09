@@ -153,14 +153,14 @@ public class CatPopUpHandler : MonoBehaviour
 
         List<Sprite> catRelationshipImages = catData.GetRelationshipImages();
 
-        float catRelationshipRatio = currentCat.MaxRelationship / catRelationshipImages.Count;
+        float catRelationshipRatio = currentCat.MaxRelationship / (catRelationshipImages.Count - 1);
 
         //update relationship image
         for (int i = 0; i < catRelationshipImages.Count; i++)
         {
-            if (relationship <= catRelationshipRatio * (i + 1))
+            if (relationship < catRelationshipRatio * (i + 1))
             {
-                catRelationshipImage.overrideSprite = catRelationshipImages[i];
+                catRelationshipImage.sprite = catRelationshipImages[i];
                 break;
             }
         }
