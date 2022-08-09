@@ -126,15 +126,14 @@ MonoBehaviour:
   secondTrait: 33
   hungerProcTime: 5
   entertainmentProcTime: 1
-  relationshipDecreaseAmount: -25
-  relationshipIncreaseAmount: 50
+  relationshipDecreaseAmount: -20
+  relationshipIncreaseAmount: 24
   feedAmount: 85
   entertainAmount: 90
   maxFullness: 100
   maxRelationship: 100
   maxEntertainment: 100
   animator: {fileID: 135702524336014079}
-  pettingGameSprite: {fileID: 21300000, guid: 9a72829d97d328c458b282f9d8ba2bad, type: 3}
 --- !u!50 &135702524336014068
 Rigidbody2D:
   serializedVersion: 4
