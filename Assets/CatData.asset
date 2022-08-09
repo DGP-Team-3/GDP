@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d69a3467880d484db0c951998ff2065, type: 3}
   m_Name: CatData
   m_EditorClassIdentifier: 
-  numUniqueCatTypes: 0
+  numUniqueCatTypes: 6
   numUniqueCatTraits: 8
   catPrefabs:
+  - {fileID: 135702524336014078, guid: e519591d793f45f41b87b883faaf861d, type: 3}
+  - {fileID: 135702524336014078, guid: 0b4c4222dd4189b44abce0be1b37a420, type: 3}
+  - {fileID: 135702524336014078, guid: fbe29713c70d3fa4ea4fe179eea34156, type: 3}
+  - {fileID: 135702524336014078, guid: 11f5aa8e65d6ea044a04aaf31faa8493, type: 3}
+  - {fileID: 135702524336014078, guid: 8656345a56ca8c7468e407a3cd95d55b, type: 3}
+  - {fileID: 135702524336014078, guid: 8e7d993726c3bb543b2788152adc9628, type: 3}
+  - {fileID: 135702524336014078, guid: 4452eae272a9a5f4f81fa2b6e527faf5, type: 3}
   - {fileID: 135702524336014078, guid: c530ae9a5e523e3439bf5243d2800003, type: 3}
-  relationshipValues: 64000000
+  - {fileID: 135702524336014078, guid: ad6ed68e24955824596cdc0e14cac2ca, type: 3}
+  - {fileID: 135702524336014078, guid: 55d1f7ef3338f984b85b1e1158db7937, type: 3}
+  - {fileID: 135702524336014078, guid: 7bf53027aa4a68248861deb337170d91, type: 3}
+  relationshipValues: 6400000064000000640000006400000064000000640000006400000064000000640000006400000064000000
   catRelationshipImages:
   - {fileID: 21300000, guid: 3a2ea748a7dbfc04cb1937ee1289e9a4, type: 3}
   - {fileID: 21300000, guid: 118cc801afc07aa478f302078bd1b481, type: 3}
@@ -24,9 +34,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a75bc6290d0916e4ba0403862a3abe35, type: 3}
   - {fileID: 21300000, guid: 23d7abfd5a3bc084eaef4b36dbd2df0e, type: 3}
   catPortraits:
+  - {fileID: 21300000, guid: 9c311ee57b425dd4c81b73e4436d4030, type: 3}
+  - {fileID: 21300000, guid: 1117e6b3a1361ce4d8385b70f432208a, type: 3}
+  - {fileID: 21300000, guid: 3f8c135d7ec8be4448ab5116eeac7feb, type: 3}
+  - {fileID: 21300000, guid: 9194faef600e92b40a15bdad88779062, type: 3}
+  - {fileID: 21300000, guid: feac4cb9e4de7364ea44cffcc7a4a412, type: 3}
+  - {fileID: 21300000, guid: 4cc99e66f095173449051b5676180942, type: 3}
+  - {fileID: 21300000, guid: 1caf5ca118ba2df489a54b7e0371c4cd, type: 3}
   - {fileID: 21300000, guid: 6e31b46d841883648b35175bee96f9a0, type: 3}
+  - {fileID: 21300000, guid: 3cd2d332f9e0e4845be1cd2f06ba91e3, type: 3}
+  - {fileID: 21300000, guid: 0b4fa1c5227ad6c40bc8921bcefbb459, type: 3}
+  - {fileID: 21300000, guid: 0de3ebdfe231dbb498dbee86cd032da2, type: 3}
   catSittingImages:
+  - {fileID: 21300000, guid: a989ed0a906dafb41b61a9073197c8b4, type: 3}
+  - {fileID: 21300000, guid: f5e4c8c43feb7b646885dcb9db801908, type: 3}
+  - {fileID: 21300000, guid: 1d0e111ac45512b4e9bd9d787dc8539d, type: 3}
+  - {fileID: 21300000, guid: 498b2165a9976c8499eaf339e62b56b2, type: 3}
+  - {fileID: 21300000, guid: 3981bd1431c7af34f82a3574a4cc8206, type: 3}
+  - {fileID: 21300000, guid: 6f51a6e45224a5f48bdf24fa057280cd, type: 3}
+  - {fileID: 21300000, guid: 5fe09baeb3d36aa479414a1852c1a437, type: 3}
   - {fileID: 21300000, guid: 9a72829d97d328c458b282f9d8ba2bad, type: 3}
+  - {fileID: 21300000, guid: ad13b722e1ff4c942a55a91f68618e7c, type: 3}
+  - {fileID: 21300000, guid: a0799ea7b3c80254e9e933309cf21e0d, type: 3}
+  - {fileID: 21300000, guid: a21660409957d634aa122b8cebb8e089, type: 3}
   catNames:
   - Cheese
   - Violet
@@ -53,4 +83,9 @@ MonoBehaviour:
   - Pawpaw
   - Paws
   uniqueCatNames:
+  - Frog
+  - Komi
   - Loaf
+  - Momo
+  - Sky
+  - Witch

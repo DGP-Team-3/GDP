@@ -25,7 +25,7 @@ public class CatData : ScriptableObject
 {
     [Header("Cats")]
     [Min(0)]
-    [SerializeField] private int numUniqueCatTypes = 0;
+    [SerializeField] private int numUniqueCatTypes = 6;
     [SerializeField] private int numUniqueCatTraits = 8;
     [SerializeField] private List<GameObject> catPrefabs;
     [SerializeField] private List<int> relationshipValues;
@@ -69,7 +69,7 @@ public class CatData : ScriptableObject
         int numCatTypes = Enum.GetValues(typeof(CatType)).Length;
         int numCommonCatTypes = numCatTypes - numUniqueCatTypes;
 
-        int index = numCommonCatTypes - (int)cat;
+        int index = Mathf.Abs(numCommonCatTypes - (int)cat);
 
         return uniqueCatNames[index];
     }
