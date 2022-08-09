@@ -36,16 +36,12 @@ public class CatStorageContainer : MonoBehaviour
         UpdateRelationshipDisplay(associatedCat.Relationship);
         //Debug.Log("Current Relationship: " + associatedCat.Relationship);
     }
-    /*
     private void OnDisable()
     {
         if (associatedCat == null) return;
 
-        associatedCat.GetComponent<Cat>().OnRelationshipUpdated -= UpdateRelationshipDisplay;
-    }
-    */
-    private void Update()
-    {
+        associatedCat.OnRelationshipUpdated -= UpdateRelationshipDisplay;
+        associatedCat.OnRelationshipUpdated -= UpdateRelationshipText;
     }
 
     //////////////////////////////////////////
@@ -61,7 +57,8 @@ public class CatStorageContainer : MonoBehaviour
         secondTraitField.text = associatedCat.GetSecondTrait().ToString();
         catPortraitImg.sprite = catData.GetCatPortrait(associatedCat.CatType);
 
-        //associatedCat.OnRelationshipUpdated += UpdateRelationshipDisplay;
+        associatedCat.OnRelationshipUpdated += UpdateRelationshipDisplay;
+        associatedCat.OnRelationshipUpdated += UpdateRelationshipText;
 
         UpdateButtonDisplay();
         UpdateRelationshipText(associatedCat.Relationship);
@@ -80,14 +77,16 @@ public class CatStorageContainer : MonoBehaviour
 
         // There are 5 relationship images
         // image 0 is shown at < 25
-        // image 2 is shown at < 50
-        // image 3 is shown at < 75
-        // image 4 is shown at < 100
-        // image 5 is shown at 100
-        float catRelationshipRatio = associatedCat.MaxRelationship / catRelationshipImages.Count - 1;
+        // image 1 is shown at < 50
+        // image 2 is shown at < 75
+        // image 3 is shown at < 100
+        // image 4 is shown at 100
+        float catRelationshipRatio = associatedCat.MaxRelationship / (catRelationshipImages.Count - 1);
 
-        for (int i = 0; i <= catRelationshipImages.Count; i++)
+        for (int i = 0; i < catRelationshipImages.Count; i++)
         {
+            //Debug.Log("Checking RelationshipImage index:" + i);
+            //Debug.Log("Checking RelationshipRatioBreakPoint:" + catRelationshipRatio * (i + 1));
             if (relationship < catRelationshipRatio * (i + 1))
             {
                 relationshipIcon.sprite = catRelationshipImages[i];
@@ -110,6 +109,8 @@ public class CatStorageContainer : MonoBehaviour
 
         for (int i = 0; i <= 4; i++)
         {
+            Debug.Log("Checking RelationshipImage index:" + i);
+            Debug.Log("Checking RelationshipRatioBreakPoint:" + catRelationshipRatio * (i + 1));
             if (relationship < catRelationshipRatio * (i + 1))
             {
                 textField.text = catDexData.GetMilestoneText(associatedCat.CatType, associatedCat.GetName(), i);
