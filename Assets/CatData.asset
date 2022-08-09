@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CatData
   m_EditorClassIdentifier: 
   numUniqueCatTypes: 6
-  numUniqueCatTraits: 8
+  numUniqueCatTraits: 9
   catPrefabs:
   - {fileID: 135702524336014078, guid: e519591d793f45f41b87b883faaf861d, type: 3}
   - {fileID: 135702524336014078, guid: 0b4c4222dd4189b44abce0be1b37a420, type: 3}
@@ -83,9 +83,9 @@ MonoBehaviour:
   - Pawpaw
   - Paws
   uniqueCatNames:
-  - Frog
+  - Frederick
   - Komi
   - Loaf
   - Momo
-  - Sky
-  - Witch
+  - Akash
+  - Moon

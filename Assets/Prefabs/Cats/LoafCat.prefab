@@ -122,11 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: Loaf
-  firstTrait: 8
-  secondTrait: 33
+  firstTrait: 17
+  secondTrait: 40
   hungerProcTime: 5
   entertainmentProcTime: 1
-  relationshipDecreaseAmount: -20
+  relationshipDecreaseAmount: -3
   relationshipIncreaseAmount: 24
   feedAmount: 85
   entertainAmount: 90

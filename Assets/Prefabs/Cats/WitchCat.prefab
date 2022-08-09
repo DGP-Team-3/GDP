@@ -121,12 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99527a320aa191b46a7d034a207663a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catName: WitchCat
-  firstTrait: 8
+  catName: Moon
+  firstTrait: 34
   secondTrait: 33
   hungerProcTime: 5
   entertainmentProcTime: 1
-  relationshipDecreaseAmount: -20
+  relationshipDecreaseAmount: -3
   relationshipIncreaseAmount: 24
   feedAmount: 85
   entertainAmount: 90

@@ -126,7 +126,7 @@ MonoBehaviour:
   secondTrait: 33
   hungerProcTime: 5
   entertainmentProcTime: 1
-  relationshipDecreaseAmount: -20
+  relationshipDecreaseAmount: -3
   relationshipIncreaseAmount: 24
   feedAmount: 85
   entertainAmount: 90

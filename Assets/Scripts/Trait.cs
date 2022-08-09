@@ -45,5 +45,6 @@ public enum Trait
     Sweet,
     Frog,
     Aristocratic,
-    Friendshaped
+    Friendshaped,
+    Trickster
 }

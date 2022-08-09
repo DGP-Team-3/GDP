@@ -122,11 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catName: Komi
-  firstTrait: 8
-  secondTrait: 33
+  firstTrait: 7
+  secondTrait: 41
   hungerProcTime: 5
   entertainmentProcTime: 1
-  relationshipDecreaseAmount: -20
+  relationshipDecreaseAmount: -3
   relationshipIncreaseAmount: 24
   feedAmount: 85
   entertainAmount: 90
