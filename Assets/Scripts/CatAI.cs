@@ -120,7 +120,6 @@ public class CatAI : MonoBehaviour
     private void FindNewState()
     {
         mAnimator.SetBool("IsMoving", false);
-        mAnimator.SetBool("IsSpecial", false);
         mAnimator.SetBool("IsPose1", false);
         mAnimator.SetBool("IsPose2", false);
         mAnimator.SetBool("IsLoafing", false);
