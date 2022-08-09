@@ -7,7 +7,17 @@ using UnityEngine;
 //Have int for num of basic cats. put smaller chance for unique cats.
 public enum CatType
 {
+    normCat1,
+    normCat2,
+    normCat3,
+    normCat4,
+    normCat5,
+    frogCat,
+    komiCat,
     loafCat,
+    momoCat,
+    skyCat,
+    witchCat
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CatData", order = 1)]
@@ -15,7 +25,7 @@ public class CatData : ScriptableObject
 {
     [Header("Cats")]
     [Min(0)]
-    [SerializeField] private int numUniqueCatTypes = 0;
+    [SerializeField] private int numUniqueCatTypes = 6;
     [SerializeField] private int numUniqueCatTraits = 8;
     [SerializeField] private List<GameObject> catPrefabs;
     [SerializeField] private List<int> relationshipValues;
@@ -59,7 +69,7 @@ public class CatData : ScriptableObject
         int numCatTypes = Enum.GetValues(typeof(CatType)).Length;
         int numCommonCatTypes = numCatTypes - numUniqueCatTypes;
 
-        int index = numCommonCatTypes - (int)cat;
+        int index = Mathf.Abs(numCommonCatTypes - (int)cat);
 
         return uniqueCatNames[index];
     }
