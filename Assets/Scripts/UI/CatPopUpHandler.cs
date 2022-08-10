@@ -9,6 +9,11 @@ public class CatPopUpHandler : MonoBehaviour
     [SerializeField] private CatData catData;
     [SerializeField] private RehomeManager rehomeManager;
     [SerializeField] private CatStorageHandler storageHandler;
+    [SerializeField] private SelectionManager selectionManager;
+    [SerializeField] private GameObject catRehomeDisplay;
+    
+    [Space]
+
     [SerializeField] private Image catFullnessBar;
     [SerializeField] private Image catEntertainmentBar;
     [SerializeField] private Image catRelationshipImage;
@@ -24,6 +29,7 @@ public class CatPopUpHandler : MonoBehaviour
     [SerializeField] private TMP_Text progressRelationshipText;
     [SerializeField] private GameObject maxRelationshipDialogueBox;
     [SerializeField] private TMP_Text maxRelationshipText;
+    [SerializeField] private GameObject uniqueCatDialogueBox;
 
     [Space]
 
@@ -283,7 +289,19 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void RehomeSelectedCat()
     {
-        rehomeManager.SetCatDisplay(currentCat.gameObject);
+        if (!catData.IsUniqueCatType(currentCat.CatType))
+        {
+            rehomeManager.SetCatDisplay(currentCat.gameObject);
+            CloseOpenDialogueBoxes();
+            selectionManager.DeselectCat();
+            gameObject.SetActive(false);
+            catRehomeDisplay.SetActive(true);
+        }
+        else
+        {
+            CloseOpenDialogueBoxes();
+            uniqueCatDialogueBox.SetActive(true);
+        }
     }
 
     //////////////////////////////////////////
