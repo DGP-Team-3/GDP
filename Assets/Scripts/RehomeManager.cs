@@ -19,6 +19,13 @@ public class RehomeManager : MonoBehaviour
 
     [Header("Assets")]
     [SerializeField] private List<Sprite> ownerPortraits;
+    [SerializeField] private Sprite rehomeButtonImage;
+    [SerializeField] private Sprite successfulRehomeButtonImage;
+
+    [Header("Text Assets")]
+    [SerializeField] private List<string> failedResponces;
+    [SerializeField] private List<string> successResponces;
+    [SerializeField] private List<string> traitRequestText;
 
     private Cat selectedCat;
 
@@ -63,6 +70,8 @@ public class RehomeManager : MonoBehaviour
             {
                 GenerateNewOwnerDisplay(container);
             }
+
+            EnableRehomeButtons();
         }
     }
 
@@ -74,11 +83,15 @@ public class RehomeManager : MonoBehaviour
     {
         OwnerContainer ownerContainer = container.GetComponent<OwnerContainer>();
 
-        int index = Random.Range(0, ownerPortraits.Count);
-        ownerContainer.GetOwnerPortrait().overrideSprite = ownerPortraits[index];
+        ownerContainer.SetRehomed(false);
+        ownerContainer.SetRehomeButtonImage(rehomeButtonImage);
 
-        //TODO: SET REQUEST TEXT
-        ownerContainer.GetTextField().text = "I am looking for a cute cat!";
+        int ownerIndex = Random.Range(0, ownerPortraits.Count);
+        ownerContainer.GetOwnerPortrait().sprite = ownerPortraits[ownerIndex];
+
+        Trait requiredTrait = catData.GetRandomTrait();
+        ownerContainer.SetRequiredTrait(requiredTrait);
+        ownerContainer.GetTextField().text = traitRequestText[(int)requiredTrait];
     }
 
 
@@ -100,7 +113,6 @@ public class RehomeManager : MonoBehaviour
         else
         {
             selectedCat = cat.GetComponent<Cat>();
-            EnableRehomeButtons();
             catImage.overrideSprite = catData.GetCatSittingImage(selectedCat.CatType);
             catImage.color = Color.white;
             catNameText.text = selectedCat.GetName();
@@ -134,15 +146,64 @@ public class RehomeManager : MonoBehaviour
     }
 
     //////////////////////////////////////////
+    ///
+    ///
+    private void DisableOtherRehomeButtons(int indexToNotDisable)
+    {
+        GameObject containerToNotDisable = containers[indexToNotDisable];
+        foreach (GameObject container in containers)
+        {
+            if (containerToNotDisable != container)
+            {
+                container.GetComponent<OwnerContainer>().GetRehomeButton().interactable = false;
+            }
+        }
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    private void DisableRehomeButton(int containerIdx)
+    {
+        containers[containerIdx].GetComponent<OwnerContainer>().GetRehomeButton().interactable = false;
+    }
+
+    //////////////////////////////////////////
     /// Initiates cat delete from game
     ///
     public void RehomeSelectedCat(int containerIndex)
     {
-        DisableRehomeButtons();
+        OwnerContainer ownerContainer = containers[containerIndex].GetComponent<OwnerContainer>();
 
-        containers[containerIndex].GetComponent<OwnerContainer>().GetTextField().text = "Thank you!";
+        if (ownerContainer.GetIsRehomed())
+        {
+            return;
+        }
 
-        GameManager.Instance.RemoveCat(selectedCat.gameObject);
-        GameManager.Instance.IncrementNumCatsRehomed();
+        bool success = false;
+        if (selectedCat.GetFirstTrait() == ownerContainer.GetRequiredTrait() || selectedCat.GetSecondTrait() == ownerContainer.GetRequiredTrait())
+        {
+            success = true;
+        }
+
+        if (success)
+        {
+            ownerContainer.SetRehomeButtonImage(successfulRehomeButtonImage);
+            ownerContainer.SetRehomed(true);
+            ownerContainer.GetTextField().text = successResponces[Random.Range(0, successResponces.Count)];
+
+            DisableOtherRehomeButtons(containerIndex);
+
+            GameManager.Instance.RemoveCat(selectedCat.gameObject);
+            GameManager.Instance.IncrementNumCatsRehomed();
+        }
+        else
+        {
+            DisableRehomeButton(containerIndex);
+            ownerContainer.GetTextField().text = failedResponces[Random.Range(0, failedResponces.Count)];
+        }
     }
+
+
+
 }

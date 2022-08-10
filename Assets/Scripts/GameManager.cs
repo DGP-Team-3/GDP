@@ -529,7 +529,11 @@ public class GameManager : MonoBehaviour
         {
             if (activeCats[i] == catGO)
             {
-                activeCatPositions.RemoveAt(i);
+                if (i < activeCatPositions.Count)
+                {
+                    activeCatPositions.RemoveAt(i);
+                }
+
                 activeCats.RemoveAt(i);
                 break;
             }
