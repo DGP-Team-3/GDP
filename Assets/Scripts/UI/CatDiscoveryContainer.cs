@@ -12,7 +12,6 @@ public class CatDiscoveryContainer : MonoBehaviour
     [SerializeField] private Image catPortraitImg;
     [SerializeField] private Button fosterButton;
 
-
     private CatType catType;
     private Trait firstTrait;
     private Trait secondTrait;
@@ -33,7 +32,7 @@ public class CatDiscoveryContainer : MonoBehaviour
     public void FosterCat()
     {
         fosterButton.interactable = false;
-        GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, 0, 100, 100, true);
+        GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, 0, 80, 80, true);
         GameManager.Instance.IncrementNumCatsFound(catType);
     }
 

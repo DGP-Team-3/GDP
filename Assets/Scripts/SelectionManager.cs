@@ -12,9 +12,12 @@ public class SelectionManager : MonoBehaviour
     
 
     [SerializeField] private GameObject catPopUpDisplay;
+    [SerializeField] private GameObject tutorialTextDisplay;
+    [SerializeField] private GameObject tutorialButton;
     [SerializeField] private LayerMask collidableLayers;
 
     private CatPopUpHandler popupHandler;
+    private bool isTutorialDisplaying = false;
 
     private Cat selectedCat;
 
@@ -79,20 +82,33 @@ public class SelectionManager : MonoBehaviour
     ///
     private void HandleCatSelection(Vector2 inputPosition)
     {
-        RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero, 10, collidableLayers);
-
-        if (hit.collider == null) return;
-
-        Cat cat = hit.transform.gameObject.GetComponent<Cat>();
-
-        if (cat == null)
+        if (!isTutorialDisplaying)
         {
-            DeselectCat();
-            return;
+            RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero, 10, collidableLayers);
+
+            if (hit.collider == null) return;
+
+            Cat cat = hit.transform.gameObject.GetComponent<Cat>();
+
+            if (cat == null)
+            {
+                DeselectCat();
+                return;
+            }
+            SelectCat(cat);
         }
-        SelectCat(cat);
+        else
+        {
+            tutorialTextDisplay.SetActive(false);
+            isTutorialDisplaying = false;
+        }
     }
 
+    public void SetTutorialActive()
+    {
+        isTutorialDisplaying = true;
+        tutorialTextDisplay.SetActive(true);
+    }
 
     //////////////////////////////////////////
     ///
@@ -103,6 +119,7 @@ public class SelectionManager : MonoBehaviour
         selectedCat.GetComponent<CatAI>().selectCat();
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
+        tutorialButton.SetActive(false);
         GameManager.Instance.SetSelectedCat(newCat);
     }
 
@@ -114,6 +131,7 @@ public class SelectionManager : MonoBehaviour
         selectedCat.GetComponent<CatAI>().deselectCat();
         selectedCat = null;
         popupHandler.AssignCat(null);
+        tutorialButton.SetActive(true);
         catPopUpDisplay.SetActive(false);
     }
 

@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     private int numCatsRehomed = 0;
     private int numSpecialCatsFound = 0;
     private int numNormalCatsFound = 0;
+    private List<CatType> availableUniqueCats;
 
 
 
@@ -79,9 +80,12 @@ public class GameManager : MonoBehaviour
         //try loading saved data
         if (!LoadData())
         {
+            Debug.Log("New Data created.");
             CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
+            availableUniqueCats = new List<CatType> { CatType.frogCat, CatType.komiCat, CatType.loafCat, CatType.momoCat, CatType.skyCat, CatType.witchCat };
             IncrementNumCatsFound(CatType.loafCat);
         }
+        Debug.Log("Save Data found.");
     }
 
     //////////////////////////////////////////
@@ -139,6 +143,12 @@ public class GameManager : MonoBehaviour
         if (catData.IsUniqueCatType(catType))
         {
             numSpecialCatsFound++;
+            availableUniqueCats.Remove(catType);
+            Debug.Log("Available Unique Cats:");
+            foreach (CatType cat in availableUniqueCats)
+            {
+                Debug.Log(cat);
+            }
         }
         else
         {
@@ -172,6 +182,11 @@ public class GameManager : MonoBehaviour
         return numSpecialCatsFound;
     }
 
+    public List<CatType> GetAvailableUniqueCats()
+    {
+        return availableUniqueCats;
+    }
+
 
     //////////////////////////////////////////
     ///
@@ -203,7 +218,7 @@ public class GameManager : MonoBehaviour
         }
 
         SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
-            relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed);
+            relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed, availableUniqueCats);
     }
 
 
@@ -227,6 +242,8 @@ public class GameManager : MonoBehaviour
         numNormalCatsFound = data.numNormalCatsFound;
         numSpecialCatsFound = data.numSpecialCatsFound;
         numCatsRehomed = data.numCatsRehomed;
+
+        availableUniqueCats = data.availableUniqueCats;
 
         return true;
     }
