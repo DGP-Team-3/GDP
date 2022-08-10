@@ -34,7 +34,6 @@ public class Discover : MonoBehaviour
                 generatedUnique = GenerateNewCatDisplay(container, true);
             }
         }
-        generatedUnique = false;
     }
 
     //////////////////////////////////////////
@@ -69,7 +68,6 @@ public class Discover : MonoBehaviour
                 }
                 container.GetComponent<CatDiscoveryContainer>().EnableButton();
             }
-            generatedUnique = false;
         }
     }
 
@@ -85,6 +83,7 @@ public class Discover : MonoBehaviour
         string catName;
         Sprite catPortrait;
         CatType catType;
+
         // The three conditions are
         // 1) Has not generated a Unique cat in this group of three
         // 2) a percentage chance roll
@@ -92,34 +91,25 @@ public class Discover : MonoBehaviour
         if (canGenUnique && (UnityEngine.Random.Range(0, 100) <= percentChanceOfUnique) && GameManager.Instance.GetAvailableUniqueCats() != null)
         {
             availableUniqueCats = new List<CatType>(GameManager.Instance.GetAvailableUniqueCats());
-            /*
-            Debug.Log("Generating Cat from Unique Cats:");
-            foreach (CatType cat in availableUniqueCats)
-            {
-                Debug.Log(cat);
-            }
-            */
+
             // Have to check if there are still unique cats available after checking if the list is valid
             if (availableUniqueCats.Count != 0)
             {
                 
-            catType = availableUniqueCats[UnityEngine.Random.Range(0, availableUniqueCats.Count)];
-            //Debug.Log("Creating Unique Cat of Type: " + catType);
+                catType = availableUniqueCats[UnityEngine.Random.Range(0, availableUniqueCats.Count)];
             }
             else
             {
-
                 int catTypeIndex = UnityEngine.Random.Range(0, 5);
                 catType = (CatType)catTypeIndex;
-                //Debug.Log("Creating Common Cat of Type: " + catType);
             }
         }
         else
         {
             int catTypeIndex = UnityEngine.Random.Range(0, 5);
             catType = (CatType)catTypeIndex;
-            //Debug.Log("Creating Common Cat of Type: " + catType);
         }
+
         catContainer.SetCatType(catType);
 
         //portrait

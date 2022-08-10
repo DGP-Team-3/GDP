@@ -99,16 +99,28 @@ public class SelectionManager : MonoBehaviour
         }
         else
         {
-            tutorialTextDisplay.SetActive(false);
-            isTutorialDisplaying = false;
+            ToggleTutorialActive();
         }
     }
 
-    public void SetTutorialActive()
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void ToggleTutorialActive()
     {
-        isTutorialDisplaying = true;
-        tutorialTextDisplay.SetActive(true);
+        if (isTutorialDisplaying)
+        {
+            tutorialTextDisplay.SetActive(false);
+            isTutorialDisplaying = false;
+        }
+        else
+        {
+            isTutorialDisplaying = true;
+            tutorialTextDisplay.SetActive(true);
+        }
     }
+
 
     //////////////////////////////////////////
     ///
