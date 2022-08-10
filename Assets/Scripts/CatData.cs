@@ -83,7 +83,7 @@ public class CatData : ScriptableObject
     }
 
     //////////////////////////////////////////
-    ///
+    /// returns a random trait that are not listed as unique
     ///
     public Trait GetRandomTrait()
     {

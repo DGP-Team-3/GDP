@@ -10,6 +10,8 @@ public class OwnerContainer : MonoBehaviour
     [SerializeField] private TMP_Text textField;
     [SerializeField] private Image ownerPortrait;
     [SerializeField] private Button rehomeButton;
+    private Trait requiredTrait;
+    private bool isRehomed = false;
 
     //////////////////////////////////////////
     ///
@@ -17,6 +19,22 @@ public class OwnerContainer : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.AddToClearList(gameObject);
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void SetRequiredTrait(Trait trait)
+    {
+        requiredTrait = trait;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public Trait GetRequiredTrait()
+    {
+        return requiredTrait;
     }
 
     //////////////////////////////////////////
@@ -36,6 +54,14 @@ public class OwnerContainer : MonoBehaviour
         return rehomeButton;
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
+    public void SetRehomeButtonImage(Sprite buttonImage)
+    {
+        rehomeButton.gameObject.GetComponent<Image>().sprite = buttonImage;
+    }
+
 
     //////////////////////////////////////////
     ///
@@ -43,5 +69,21 @@ public class OwnerContainer : MonoBehaviour
     public TMP_Text GetTextField()
     {
         return textField;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public bool GetIsRehomed()
+    {
+        return isRehomed;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void SetRehomed(bool isRehomed)
+    {
+        this.isRehomed = isRehomed;
     }
 }
