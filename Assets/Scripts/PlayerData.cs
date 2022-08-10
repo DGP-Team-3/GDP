@@ -17,13 +17,14 @@ public class PlayerData
     public int[] entertainmentValues;
     public string[] names;
     public bool[] activeStates;
+    public List<CatType> availableUniqueCats;
 
 
     //////////////////////////////////////////
     /// Class Constructor
     ///
     public PlayerData(int numCats, string[] names, int[] catTypes, int[] firstTraits, int[] secondTraits, 
-        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed)
+        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed, List<CatType> availableUniqueCats)
     {
         this.numCats = numCats;
         
@@ -51,5 +52,7 @@ public class PlayerData
         this.numNormalCatsFound = numNormalCatsFound;
         this.numSpecialCatsFound = numSpecialCatsFound;
         this.numCatsRehomed = numCatsRehomed;
+
+        this.availableUniqueCats = new List<CatType>(availableUniqueCats);
     }
 }

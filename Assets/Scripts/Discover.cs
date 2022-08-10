@@ -9,7 +9,9 @@ public class Discover : MonoBehaviour
     [SerializeField] private CatData catData;
 
     [SerializeField] private float timeTillCatReshuffle = 30f;
+    [SerializeField] private int percentChanceOfUnique = 5;
 
+    private List<CatType> availableUniqueCats;
     private float reshuffleTimeElapsed = 0f;
 
 
@@ -20,10 +22,19 @@ public class Discover : MonoBehaviour
     {
         GameManager.Instance.AddToClearList(gameObject);
 
+        bool generatedUnique = false;
         foreach (GameObject container in containers)
         {
-            GenerateNewCatDisplay(container);
+            if (generatedUnique)
+            {
+                GenerateNewCatDisplay(container, false);
+            }
+            else
+            {
+                generatedUnique = GenerateNewCatDisplay(container, true);
+            }
         }
+        generatedUnique = false;
     }
 
     //////////////////////////////////////////
@@ -45,35 +56,71 @@ public class Discover : MonoBehaviour
         if (reshuffleTimeElapsed >= timeTillCatReshuffle)
         {
             reshuffleTimeElapsed = 0f;
-            
+            bool generatedUnique = false;
             foreach (GameObject container in containers)
             {
-                GenerateNewCatDisplay(container);
+                if (generatedUnique)
+                {
+                    GenerateNewCatDisplay(container, false);
+                }
+                else
+                {
+                    generatedUnique = GenerateNewCatDisplay(container, true);
+                }
                 container.GetComponent<CatDiscoveryContainer>().EnableButton();
             }
+            generatedUnique = false;
         }
     }
 
 
     //////////////////////////////////////////
     ///
-    ///
-    private void GenerateNewCatDisplay(GameObject container)
+    ///Returns true if it generates a unique cat
+    private bool GenerateNewCatDisplay(GameObject container, bool canGenUnique)
     {
         CatDiscoveryContainer catContainer = container.GetComponent<CatDiscoveryContainer>();
         Trait firstTrait;
         Trait secondTrait;
         string catName;
         Sprite catPortrait;
+        CatType catType;
+        // The three conditions are
+        // 1) Has not generated a Unique cat in this group of three
+        // 2) a percentage chance roll
+        // 3) that GameManager has finished loading the list of Available Unique Cats. There was a problem where this was executing before it loaded in
+        if (canGenUnique && (UnityEngine.Random.Range(0, 100) <= percentChanceOfUnique) && GameManager.Instance.GetAvailableUniqueCats() != null)
+        {
+            availableUniqueCats = new List<CatType>(GameManager.Instance.GetAvailableUniqueCats());
+            /*
+            Debug.Log("Generating Cat from Unique Cats:");
+            foreach (CatType cat in availableUniqueCats)
+            {
+                Debug.Log(cat);
+            }
+            */
+            // Have to check if there are still unique cats available after checking if the list is valid
+            if (availableUniqueCats.Count != 0)
+            {
+                
+            catType = availableUniqueCats[UnityEngine.Random.Range(0, availableUniqueCats.Count)];
+            //Debug.Log("Creating Unique Cat of Type: " + catType);
+            }
+            else
+            {
 
-
-        //TODO: Use probability instead for each cat type
-        int catTypeIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(CatType)).Length);
-        CatType catType = (CatType)catTypeIndex;
-
-
+                int catTypeIndex = UnityEngine.Random.Range(0, 5);
+                catType = (CatType)catTypeIndex;
+                //Debug.Log("Creating Common Cat of Type: " + catType);
+            }
+        }
+        else
+        {
+            int catTypeIndex = UnityEngine.Random.Range(0, 5);
+            catType = (CatType)catTypeIndex;
+            //Debug.Log("Creating Common Cat of Type: " + catType);
+        }
         catContainer.SetCatType(catType);
-
 
         //portrait
         catPortrait = catData.GetCatPortrait(catType);
@@ -84,6 +131,10 @@ public class Discover : MonoBehaviour
             //name
             catName = catData.GetUniqueCatName(catType);
             catContainer.SetName(catName);
+            catContainer.SetCatType(catType);
+            catContainer.SetFirstTrait(catData.GetCatPrefab(catType).GetComponent<Cat>().GetFirstTrait());
+            catContainer.SetSecondTrait(catData.GetCatPrefab(catType).GetComponent<Cat>().GetSecondTrait());
+            return true;
         }
         else
         {
@@ -102,9 +153,8 @@ public class Discover : MonoBehaviour
 
             catContainer.SetFirstTrait(firstTrait);
             catContainer.SetSecondTrait(secondTrait);
-
+            return false;
         }
     }
-
 }
 
