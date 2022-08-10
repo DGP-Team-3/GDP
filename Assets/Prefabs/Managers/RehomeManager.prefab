@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2615607665633671939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2615607665633671936}
+  - component: {fileID: 2615607665633671937}
+  m_Layer: 0
+  m_Name: RehomeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2615607665633671936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615607665633671939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2615607665633671937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615607665633671939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff88550593b6cf42a2d850c4546a47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containers:
+  - {fileID: 0}
+  - {fileID: 0}
+  timeTillOwnerReshuffle: 30
+  catData: {fileID: 11400000, guid: f547036c07280544f8d3440bf724cebc, type: 2}
+  catImage: {fileID: 0}
+  catNameText: {fileID: 0}
+  firstTraitText: {fileID: 0}
+  secondTraitText: {fileID: 0}
+  ownerPortraits:
+  - {fileID: 21300000, guid: 2c40fea69cbf0564ab5dbbee7cf3b4b9, type: 3}
+  - {fileID: 21300000, guid: 7bb0196348415074dafc131edefe58e9, type: 3}
+  - {fileID: 21300000, guid: 731f8cd8c266fc2429e6bd5574a6d9de, type: 3}
+  - {fileID: 21300000, guid: cdb7c9e3a7f6d824ca4213315bf3406a, type: 3}
+  - {fileID: 21300000, guid: 55a1421d98aba374ebc8da25c6627755, type: 3}
+  - {fileID: 21300000, guid: 8a8afd62629a3ba46a5f40bea407c18e, type: 3}
+  - {fileID: 21300000, guid: 72518d27a57715d478cec7393f4f7046, type: 3}
+  - {fileID: 21300000, guid: a9dcb6332fcc2304c8dc0ce28109d9d6, type: 3}
+  failedResponces:
+  - "No? Okay, then\u2026"
+  - "I don\u2019t think we\u2019re the best match."
+  - "Aw, not quite what I was looking for\u2026"
+  - "Hmm\u2026 let\u2019s try again some other time."
+  - "Please find this buddy a home they\u2019ll really love!"
+  successResponces:
+  - Thank you so much!
+  - "Thanks! I\u2019ll take good care of them!"
+  - "Wow\u2026 I\u2019m so happy\u2026!"
+  - Yes! This is just the cat I was looking for!
+  - "Let\u2019s go home, little buddy!"
+  traitRequestText:
+  - I have ten cats at home, and I'm looking for one more!
+  - I work long hours, so I can't be home too often.
+  - I've got a whole box of cat toys waiting at home!
+  - "It takes me a while to warm up to people\u2026 I wish I had a friend who understood
+    my feelings\u2026"
+  - I can't hear too good, so I need a cat with a good pair of lungs in 'em.
+  - I can't have a pet that's too loud, or I'll get headaches...
+  - Don't you think cats are so adorable when they make stinky little faces?
+  - I'm looking for a companion to travel the world with me!
+  - Do any of your cats enjoy meditation? Yoga, perhaps?
+  - I want a cat that's always ready to tussle!!
+  - "I'm looking for a buddy who will love me\u2026 even when I don't really love
+    myself\u2026"
+  - I love pulling pranks on people. But not like a total menace, you know? Just
+    harmless fun.
+  - Hey, you know how you can train dogs to learn commands? Do you think you could
+    train a cat like that, too?
+  - We can learn a lot from those who are always asking questions of the world.
+  - "A cat who could help me with my math homework\u2026? No, there aren't any cats
+    like that. \u2026are there?"
+  - "Please\u2026 huff\u2026 I need a cat\u2026 who will just sit in one spot\u2026
+    all day\u2026"
+  - I like to go jogging in the mornings. Got any cats who can keep up?
+  - I'm looking for a BESTEST friend! We'll be together FOREVER!
+  - It's so cute when pets trip over themselves, hehe.
+  - I'm looking for a cat that's as elegant as myself!
+  - I'm not a very expressive person, but I hope my cat will still know that I love
+    them.
+  - I just LOVE cuddling my cats!! But not all cats love to cuddle back, ahaha.
+  - "To be honest, I'm a little scared of cats. But I might be okay with a cat that's
+    very soft and kind\u2026!"
+  - I make a lot of mistakes, so I'm worried that a cat would just get annoyed with
+    me, heh...
+  - "My old cat used to notice EVERYTHING\u2014she was like a guard cat, haha. I
+    don't know if I'll ever find another cat like her."
+  - I don't want a very flashy cat or anything. Just need a good buddy to spend my
+    time with.
+  - My cat's gotta be the number one cat in the whole world! I won't accept anything
+    less, and they shouldn't, either!
+  - I simply adore tiny cats! Have you seen their little paws?
+  - Hey, buddy, you got any cats that are BEEFY? You know, like, TOTALLY SWOLE?
+  - "Why is it so hard to find a cat with basic manners\u2026?"
+  - My cat and I will become a threat to society! We're going to take over the world!
+  - heh heh heh heh heh heh heh heh heh heh
+  - (This patron is silent, with huge eyes. They appear to be miming a circular shape
+    with their hands, over and over.)
