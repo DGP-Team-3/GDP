@@ -226,6 +226,8 @@ public class RehomeManager : MonoBehaviour
 
         if (success)
         {
+            SFXPlayer.Instance.PlayPurrSound();
+
             ownerContainer.SetRehomeButtonImage(successfulRehomeButtonImage);
             ownerContainer.SetRehomed(true);
             ownerContainer.GetTextField().text = successResponces[Random.Range(0, successResponces.Count)];
@@ -237,6 +239,8 @@ public class RehomeManager : MonoBehaviour
         }
         else
         {
+            SFXPlayer.Instance.PlayMeow2Sound();
+
             DisableRehomeButton(containerIndex);
             ownerContainer.GetTextField().text = failedResponces[Random.Range(0, failedResponces.Count)];
         }

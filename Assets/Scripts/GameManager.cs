@@ -81,12 +81,10 @@ public class GameManager : MonoBehaviour
         //try loading saved data
         if (!LoadData())
         {
-            Debug.Log("New Data created.");
             CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
-            availableUniqueCats = new List<CatType> { CatType.frogCat, CatType.komiCat, CatType.loafCat, CatType.momoCat, CatType.skyCat, CatType.witchCat };
+            availableUniqueCats = new List<CatType> { CatType.frogCat, CatType.komiCat, CatType.momoCat, CatType.skyCat, CatType.witchCat };
             IncrementNumCatsFound(CatType.loafCat);
         }
-        Debug.Log("Save Data found.");
     }
 
     //////////////////////////////////////////
@@ -145,11 +143,6 @@ public class GameManager : MonoBehaviour
         {
             numSpecialCatsFound++;
             availableUniqueCats.Remove(catType);
-            Debug.Log("Available Unique Cats:");
-            foreach (CatType cat in availableUniqueCats)
-            {
-                Debug.Log(cat);
-            }
         }
         else
         {
@@ -294,7 +287,7 @@ public class GameManager : MonoBehaviour
 
         MoveAllActiveCats(true);
 
-        SceneManager.LoadScene(SceneBuildData.mainSceneBuildIndex);
+        SceneManager.LoadScene(SceneBuildData.mainGameSceneBuildIndex);
     }
 
     //////////////////////////////////////////
@@ -306,6 +299,12 @@ public class GameManager : MonoBehaviour
 
         isBlackingOut = true;
         blackout = GameObject.FindGameObjectWithTag("Blackout");
+
+        GameObject tutorialButton = GameObject.FindGameObjectWithTag("TutorialButton");
+        if (tutorialButton != null)
+        {
+            tutorialButton.SetActive(false);
+        }
 
         CatPopUpHandler popup = FindObjectOfType<CatPopUpHandler>();
         if (popup != null)

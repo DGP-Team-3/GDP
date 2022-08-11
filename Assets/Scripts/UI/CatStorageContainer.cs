@@ -146,13 +146,14 @@ public class CatStorageContainer : MonoBehaviour
     {
         if (associatedCat.IsCatActive())
         {
+            SFXPlayer.Instance.PlayOpenSound();
             GameManager.Instance.MakeCatInactive(associatedCatGO, true);
             UpdateButtonDisplay();
         }
         else
         {
             if (!GameManager.Instance.CanActivateMoreCats()) return;
-
+            SFXPlayer.Instance.PlaySelectSound();
             GameManager.Instance.MakeCatActive(associatedCatGO, true);
             UpdateButtonDisplay();
         }

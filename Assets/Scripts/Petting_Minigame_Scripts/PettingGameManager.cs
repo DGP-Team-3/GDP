@@ -30,6 +30,11 @@ public class PettingGameManager : MonoBehaviour
     [Tooltip("List of mad cat icons.")]
     [SerializeField] List<GameObject> madCatIcons;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource successSFX;
+    [SerializeField] private AudioSource failureSFX;
+    [SerializeField] private AudioSource pettingSFX;
+
     private Collider2D[] spawnAreas;
     
     private GameObject cat;
@@ -67,6 +72,7 @@ public class PettingGameManager : MonoBehaviour
 
     public void CircleClicked()
     {
+        pettingSFX.Play();
         AwardPoints();
         if (!CheckForWin())
         {
@@ -127,6 +133,8 @@ public class PettingGameManager : MonoBehaviour
     /// 
     private IEnumerator WinTransition()
     {
+        greenCheck.SetActive(true);
+        successSFX.Play();
         yield return new WaitForSeconds(2f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
@@ -147,6 +155,7 @@ public class PettingGameManager : MonoBehaviour
 
     private IEnumerator LoseTransition()
     {
+        failureSFX.Play();
         yield return new WaitForSeconds(2f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();

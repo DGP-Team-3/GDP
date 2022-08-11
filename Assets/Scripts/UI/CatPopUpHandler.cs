@@ -211,10 +211,12 @@ public class CatPopUpHandler : MonoBehaviour
             maxRelationshipDialogueBox.SetActive(false);
             progressRelationshipDialogueBox.SetActive(true);
         }
+        SFXPlayer.Instance.PlaySelectSound();
     }
 
     public void CloseRelationshipDialogueBox()
     {
+        SFXPlayer.Instance.PlayCloseSound();
         maxRelationshipDialogueBox.SetActive(false);
         progressRelationshipDialogueBox.SetActive(false);
     }    
@@ -224,8 +226,8 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void OpenEntertainmentDialogueBox()
     {
+        SFXPlayer.Instance.PlaySelectSound();
         entertainmentDialogueBox.SetActive(true);
-
     }
 
     //////////////////////////////////////////
@@ -233,6 +235,7 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void CloseEntertainmentDialogueBox()
     {
+        SFXPlayer.Instance.PlayCloseSound();
         entertainmentDialogueBox.SetActive(false);
     }
 
@@ -241,6 +244,7 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void OpenFullnessDialogueBox()
     {
+        SFXPlayer.Instance.PlaySelectSound();
         if (currentCat.Fullness == currentCat.MaxFullness)
         {
             maxFeedDialogueBox.SetActive(true);
@@ -260,6 +264,7 @@ public class CatPopUpHandler : MonoBehaviour
     {
         maxFeedDialogueBox.SetActive(false);
         progressFeedDialogueBox.SetActive(false);
+        SFXPlayer.Instance.PlayCloseSound();
     }
 
     //////////////////////////////////////////
@@ -310,6 +315,7 @@ public class CatPopUpHandler : MonoBehaviour
     ///
     public void StoreCat()
     {
+        SFXPlayer.Instance.PlayOpenSound();
         GameManager.Instance.MakeCatInactive(currentCat.gameObject, true);
         storageHandler.RefreshStorage(GameManager.Instance.GetCatList());
     }

@@ -97,18 +97,28 @@ public class SelectionManager : MonoBehaviour
             }
             SelectCat(cat);
         }
-        else
+    }
+
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public void ToggleTutorialActive()
+    {
+        if (isTutorialDisplaying)
         {
             tutorialTextDisplay.SetActive(false);
             isTutorialDisplaying = false;
+            SFXPlayer.Instance.PlayCloseSound();
+        }
+        else
+        {
+            isTutorialDisplaying = true;
+            tutorialTextDisplay.SetActive(true);
+            SFXPlayer.Instance.PlayOpenSound();
         }
     }
 
-    public void SetTutorialActive()
-    {
-        isTutorialDisplaying = true;
-        tutorialTextDisplay.SetActive(true);
-    }
 
     //////////////////////////////////////////
     ///
@@ -120,8 +130,10 @@ public class SelectionManager : MonoBehaviour
         popupHandler.AssignCat(newCat);
         catPopUpDisplay.SetActive(true);
         tutorialButton.SetActive(false);
+        SFXPlayer.Instance.PlayCatSound(selectedCat);
         GameManager.Instance.SetSelectedCat(newCat);
     }
+
 
     //////////////////////////////////////////
     ///
@@ -134,5 +146,6 @@ public class SelectionManager : MonoBehaviour
         tutorialButton.SetActive(true);
         catPopUpDisplay.SetActive(false);
     }
+
 
 }

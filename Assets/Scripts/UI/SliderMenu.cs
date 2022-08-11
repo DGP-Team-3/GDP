@@ -28,6 +28,15 @@ public class SliderMenu : MonoBehaviour
     {
         bool isOpen = panelAnimator.GetBool("show");
         panelAnimator.SetBool("show", !isOpen);
+
+        if (isOpen)
+        {
+            SFXPlayer.Instance.PlayCloseSound();
+        }
+        else
+        {
+            SFXPlayer.Instance.PlayOpenSound();
+        }
     }
 
 
@@ -51,6 +60,7 @@ public class SliderMenu : MonoBehaviour
     ///
     public void OnDiscoverButtonClicked()
     {
+        SFXPlayer.Instance.PlayDiscoverSound();
         homeButton.interactable = true;
         discoverButton.interactable = false;
         storageButton.interactable = true;
@@ -65,6 +75,7 @@ public class SliderMenu : MonoBehaviour
     ///
     public void OnStorageButtonClicked()
     {
+        SFXPlayer.Instance.PlayStorageSound();
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = false;
@@ -79,6 +90,7 @@ public class SliderMenu : MonoBehaviour
     ///
     public void OnIDButtonClicked()
     {
+        SFXPlayer.Instance.PlayHomeSound();
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = true;
@@ -96,6 +108,7 @@ public class SliderMenu : MonoBehaviour
     ///
     public void OnSettingsButtonClicked()
     {
+        SFXPlayer.Instance.PlaySettingsSound();
         homeButton.interactable = true;
         discoverButton.interactable = true;
         storageButton.interactable = true;

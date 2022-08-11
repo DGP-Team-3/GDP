@@ -6,6 +6,7 @@ public class ExpressionAudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip happySound;
     [SerializeField] private AudioClip madSound;
+    [SerializeField] private AudioClip successSound;
     [SerializeField] private AudioSource source;
 
 
@@ -24,6 +25,11 @@ public class ExpressionAudioPlayer : MonoBehaviour
     public void PlayMadSound()
     {
         source.PlayOneShot(madSound);
+    }    
+    
+    public void PlaySuccessSound()
+    {
+        source.PlayOneShot(successSound);
     }
     
 }
