@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     ///
     private void Start()
     {
+        availableUniqueCats = new List<CatType>();
         //try loading saved data
         if (!LoadData())
         {

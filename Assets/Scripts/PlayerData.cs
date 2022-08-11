@@ -36,7 +36,9 @@ public class PlayerData
         this.fullnessValues = new int[numCats];
         this.entertainmentValues = new int[numCats];
         this.activeStates = new bool[numCats];
-        
+        this.availableUniqueCats = new int[availableUniqueCats.Count];
+
+
         for (int i = 0; i < numCats; i++)
         {
             this.names[i] = names[i];
