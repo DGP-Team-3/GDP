@@ -32,6 +32,7 @@ public class CatDiscoveryContainer : MonoBehaviour
     public void FosterCat()
     {
         fosterButton.interactable = false;
+        SFXPlayer.Instance.PlayMeowSound(catType);
         GameManager.Instance.CreateCat(catType, catName, firstTrait, secondTrait, 0, 80, 80, true);
         GameManager.Instance.IncrementNumCatsFound(catType);
     }
