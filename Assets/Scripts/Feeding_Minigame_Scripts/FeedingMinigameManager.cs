@@ -29,6 +29,7 @@ public class FeedingMinigameManager : MonoBehaviour
     [SerializeField] private GameObject successIcon;
 
 
+
     private FoodType wantedFoodType;
 
     private bool isCatMad = false;
@@ -136,6 +137,7 @@ public class FeedingMinigameManager : MonoBehaviour
     {
         DisableDragControls();
         expressionAudioPlayer.PlayHappySound();
+        expressionAudioPlayer.PlaySuccessSound();
         isCatHappy = true;
         foodDeposit.SetExpressionSprite(true, draggedFoodType);
         Destroy(foodObjects[wantedFoodItemIndex].gameObject);

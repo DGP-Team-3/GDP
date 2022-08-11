@@ -8,6 +8,7 @@ TagManager:
   - InvalidDrop
   - ScoreManager
   - Blackout
+  - TutorialButton
   layers:
   - Default
   - TransparentFX

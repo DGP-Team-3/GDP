@@ -25,8 +25,6 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         
         stream.Close();
-
-        Debug.Log("Data Saved");
     }
 
     //////////////////////////////////////////
@@ -44,13 +42,10 @@ public static class SaveSystem
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
 
-            Debug.Log("Save file loaded in " + GetPath());
-
             return data;
         }
         else
         {
-            Debug.LogError("Save file not found in " + GetPath());
             return null;
         }
     }
@@ -64,11 +59,6 @@ public static class SaveSystem
         if (DoesSaveDataExist())
         {
             File.Delete(GetPath());
-            Debug.Log("Saved data deleted.");
-        }
-        else
-        {
-            Debug.LogError("No existing data found in " + GetPath());
         }
     }
 
