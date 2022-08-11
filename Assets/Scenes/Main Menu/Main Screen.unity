@@ -4357,7 +4357,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 99
   m_TargetDisplay: 0
 --- !u!224 &807704972
 RectTransform:
@@ -5633,8 +5633,8 @@ MonoBehaviour:
   - {fileID: 102626376}
   - {fileID: 75073917}
   catData: {fileID: 11400000, guid: f547036c07280544f8d3440bf724cebc, type: 2}
-  timeTillCatReshuffle: 25
-  percentChanceOfUnique: 5
+  timeTillCatReshuffle: 5
+  percentChanceOfUnique: 100
 --- !u!1 &911256311
 GameObject:
   m_ObjectHideFlags: 0
