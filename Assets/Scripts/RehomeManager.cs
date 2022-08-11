@@ -40,10 +40,7 @@ public class RehomeManager : MonoBehaviour
     {
         GameManager.Instance.AddToClearList(gameObject);
 
-        foreach (GameObject container in containers)
-        {
-            GenerateNewOwnerDisplay(container);
-        }
+        //GenerateAllOwners();
     }
 
     //////////////////////////////////////////
@@ -51,9 +48,8 @@ public class RehomeManager : MonoBehaviour
     ///
     private void Update()
     {
-        HandleCatReshuffle();
+        //HandleCatReshuffle();
     }
-
 
     //////////////////////////////////////////
     ///
@@ -66,20 +62,34 @@ public class RehomeManager : MonoBehaviour
         {
             reshuffleTimeElapsed = 0f;
 
-            foreach (GameObject container in containers)
-            {
-                GenerateNewOwnerDisplay(container);
-            }
+            GenerateAllOwners();
 
             EnableRehomeButtons();
         }
     }
 
+    public void GenerateAllOwners()
+    {
+        // choose random container to guarantee a trait
+        int index = UnityEngine.Random.Range(0, containers.Count);
+        for (int i = 0; i < containers.Count; i++)
+        {
+            if (i == index)
+            {
+                Debug.Log("Trying to rig an owner");
+                GenerateNewOwnerDisplay(containers[i], true);
+            }
+            else
+            {
+                GenerateNewOwnerDisplay(containers[i], false);
+            }
+        }
+    }
 
     //////////////////////////////////////////
     ///
     ///
-    private void GenerateNewOwnerDisplay(GameObject container)
+    private void GenerateNewOwnerDisplay(GameObject container, bool rigged)
     {
         OwnerContainer ownerContainer = container.GetComponent<OwnerContainer>();
 
@@ -89,11 +99,39 @@ public class RehomeManager : MonoBehaviour
         int ownerIndex = Random.Range(0, ownerPortraits.Count);
         ownerContainer.GetOwnerPortrait().sprite = ownerPortraits[ownerIndex];
 
-        Trait requiredTrait = catData.GetRandomTrait();
+        Trait requiredTrait;
+        if (rigged)
+        {
+            if (System.Enum.TryParse<Trait>(GetRiggedTrait(), out requiredTrait ))
+            {
+
+                Debug.Log("Rigged: " + requiredTrait);
+            }
+            else
+            {
+                requiredTrait = catData.GetRandomTrait();
+            }
+        }
+        else
+        {
+            requiredTrait = catData.GetRandomTrait();
+        }
+
         ownerContainer.SetRequiredTrait(requiredTrait);
         ownerContainer.GetTextField().text = traitRequestText[(int)requiredTrait];
     }
 
+    private string GetRiggedTrait()
+    {
+        if (Random.Range(0, 2) == 0)
+        {
+            return firstTraitText.text;
+        }
+        else
+        {
+            return secondTraitText.text;
+        }
+    }
 
     //////////////////////////////////////////
     /// loads page with selected cat
