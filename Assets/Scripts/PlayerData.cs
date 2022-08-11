@@ -17,7 +17,7 @@ public class PlayerData
     public int[] entertainmentValues;
     public string[] names;
     public bool[] activeStates;
-    public List<CatType> availableUniqueCats;
+    public int[] availableUniqueCats;
 
 
     //////////////////////////////////////////
@@ -53,6 +53,9 @@ public class PlayerData
         this.numSpecialCatsFound = numSpecialCatsFound;
         this.numCatsRehomed = numCatsRehomed;
 
-        this.availableUniqueCats = new List<CatType>(availableUniqueCats);
+        for (int j = 0; j < availableUniqueCats.Count; j++)
+        {
+            this.availableUniqueCats[j] = (int)availableUniqueCats[j];
+        }
     }
 }

@@ -243,7 +243,10 @@ public class GameManager : MonoBehaviour
         numSpecialCatsFound = data.numSpecialCatsFound;
         numCatsRehomed = data.numCatsRehomed;
 
-        availableUniqueCats = data.availableUniqueCats;
+        for (int j = 0; j < data.availableUniqueCats.Length; j++)
+        {
+            availableUniqueCats.Add((CatType)data.availableUniqueCats[j]);
+        }
 
         return true;
     }
