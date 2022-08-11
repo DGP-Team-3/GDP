@@ -283,7 +283,7 @@ public class GameManager : MonoBehaviour
 
         MoveAllActiveCats(true);
 
-        SceneManager.LoadScene(SceneBuildData.mainSceneBuildIndex);
+        SceneManager.LoadScene(SceneBuildData.mainGameSceneBuildIndex);
     }
 
     //////////////////////////////////////////

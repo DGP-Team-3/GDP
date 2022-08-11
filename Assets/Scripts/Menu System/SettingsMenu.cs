@@ -15,8 +15,16 @@ namespace MenuAsset
     {
         [Tooltip("The first button selected to hover when navigating to Main Menu.")]
         [SerializeField] private GameObject menuFirstButton;
+
+        [Header("Audio")]
         [Tooltip("The Audio Mixer to modify volume from.")]
         [SerializeField] private AudioMixer audioMixer;
+
+        [SerializeField] private Slider masterSlider;
+        [SerializeField] private Slider bgmSlider;
+        [SerializeField] private Slider sfxSlider;
+        
+
 
         [Header("Dropdowns | Choose only one.")]
         [Tooltip("Resolution Dropdown from TextMeshPro.")]
@@ -28,6 +36,12 @@ namespace MenuAsset
         private int currentResolutionIndex;
 
         private void Start()
+        {
+            SetupResolutionSettings();
+            SetupAudio();
+        }
+
+        private void SetupResolutionSettings()
         {
             resolutions = Screen.resolutions;
 
@@ -79,11 +93,6 @@ namespace MenuAsset
             Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         }
 
-        public void SetVolume(float volume)
-        {
-            audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20); //represents slider value to log base 10 and mult by factor of 20
-        }
-
         public void SetQuality(int qualityIndex)
         {
             QualitySettings.SetQualityLevel(qualityIndex);
@@ -97,7 +106,62 @@ namespace MenuAsset
         public void ExitOptions()
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(menuFirstButton);
+
+            if (menuFirstButton != null)
+                EventSystem.current.SetSelectedGameObject(menuFirstButton);
         }
+
+#region Audio
+
+        private void SetupAudio()
+        {
+            float masterVol = PlayerPrefs.GetFloat("masterVolume", 0);
+            float bgmVol = PlayerPrefs.GetFloat("bgmVolume", 0);
+            float sfxVol = PlayerPrefs.GetFloat("sfxVolume", 0);
+
+            SetMasterSlider(masterVol);
+            SetMasterVolume(masterVol);
+            SetBGMSlider(bgmVol);
+            SetBGMVolume(bgmVol);
+            SetSFXSlider(sfxVol);
+            SetSFXVolume(sfxVol);
+        }
+
+        public void SetMasterVolume(float volume)
+        {
+            audioMixer.SetFloat("masterVolume", volume);
+            PlayerPrefs.SetFloat("masterVolume", volume);
+        }
+
+        public void SetBGMVolume(float volume)
+        {
+            audioMixer.SetFloat("bgmVolume", volume);
+            PlayerPrefs.SetFloat("bgmVolume", volume);
+        }
+
+        public void SetSFXVolume(float volume)
+        {
+            audioMixer.SetFloat("sfxVolume", volume);
+            PlayerPrefs.SetFloat("sfxVolume", volume);
+        }
+
+        public void SetMasterSlider(float value)
+        {
+            masterSlider.value = value;
+        }
+
+        public void SetBGMSlider(float value)
+        {
+            bgmSlider.value = value;
+        }
+
+        public void SetSFXSlider(float value)
+        {
+            sfxSlider.value = value;
+        }
+
+#endregion //Audio
+
+
     }
 }

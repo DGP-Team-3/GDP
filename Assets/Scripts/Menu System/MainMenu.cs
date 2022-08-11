@@ -41,7 +41,9 @@ namespace MenuAsset
         public void ToOptionsPage()
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+
+            if (optionsFirstButton != null)
+                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
         }
 
     }
