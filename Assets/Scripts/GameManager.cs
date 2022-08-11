@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     ///
     private void Start()
     {
+        availableUniqueCats = new List<CatType>();
         //try loading saved data
         if (!LoadData())
         {
@@ -236,7 +237,10 @@ public class GameManager : MonoBehaviour
         numSpecialCatsFound = data.numSpecialCatsFound;
         numCatsRehomed = data.numCatsRehomed;
 
-        availableUniqueCats = data.availableUniqueCats;
+        for (int j = 0; j < data.availableUniqueCats.Length; j++)
+        {
+            availableUniqueCats.Add((CatType)data.availableUniqueCats[j]);
+        }
 
         return true;
     }

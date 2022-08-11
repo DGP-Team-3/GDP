@@ -7,13 +7,23 @@ public class TargetCircleScript : MonoBehaviour
 {
     [Tooltip("Time it takes to disappear.")]
     [Min(0.1f)]
-    [SerializeField] private float time;
+    [SerializeField] private float totalTime;
+    private float timer;
+    private SpriteRenderer mRenderer;
+
     GameObject _owner;
+
+    private void Start()
+    {
+        timer = totalTime;
+        mRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
-        time -= Time.deltaTime;
-        if (time <= 0.0f)
+        timer -= Time.deltaTime;
+        mRenderer.material.SetFloat("_Arc1", (360 - ((timer / totalTime) * 360)));
+        if (timer <= 0.0f)
         {
             TimedOut();
         }

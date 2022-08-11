@@ -301,6 +301,7 @@ public class CatPopUpHandler : MonoBehaviour
             selectionManager.DeselectCat();
             gameObject.SetActive(false);
             catRehomeDisplay.SetActive(true);
+            rehomeManager.GenerateAllOwners();
         }
         else
         {
