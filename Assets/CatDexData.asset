@@ -17,7 +17,7 @@ MonoBehaviour:
   - '''s ears flatten as you approach.'
   - ' walks away from you.'
   - Frederick regards you from afar with an air of cold indifference.
-  - '[Komi Placeholder 1]'
+  - Komi immediately hides away, but you can feel eyes on the back of your head.
   - Loaf is loafing around.
   - Momo flicks her ears at you and yawns.
   - 'Small rainclouds follow Akash as he scampers away from you. Forecast: Stormy'
@@ -27,7 +27,7 @@ MonoBehaviour:
   - ' watches you carefully.'
   - ' is staring at you from across the room.'
   - Frederick eyes you with apprehension, but permits you to approach.
-  - '[Komi Placeholder 2]'
+  - Komi meows at you, coming out from her hiding place.
   - 'Loaf is happily sleeping, warm and toasty. '
   - Momo is rolling away from you. It's almost as if she's waiting for you to give
     chase.
@@ -40,7 +40,8 @@ MonoBehaviour:
   - ' allows you to brush their fur.'
   - ' headbutts your leg.'
   - Having recognized your noble spirit, Frederick beckons for you to sit with him.
-  - '[Komi Placeholder 3]'
+  - Komi chirps out and runs circles around you, begging to be chased and played
+    with!
   - Loaf rolls over and allows you to pet the dough!
   - Momo nestles in next to your leg for her afternoon nap.
   - 'It''s a bit warm today in the inn, but a mysterious breeze is keeping you cool.
@@ -52,7 +53,7 @@ MonoBehaviour:
   - ' rubs up on your ankles with a meow.'
   - 'Frederick has bestowed upon you his highest honor: a lovingly crafted replica
     of his suit. You''ll wear it always, won''t you?'
-  - Komi has chosen you. Each day is spent exploring the wilds together, and each
+  - Komi has chosen you. Each day is spent exploring the wilds together, and every
     night you are at each other's sides.
   - Loaf loves making biscuits on you! They're fresh and full of love!
   - Momo touches her nose to yours and blinks very slowly. She smells like soft summer
