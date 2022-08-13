@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
     private int numNormalCatsFound = 0;
     private List<CatType> availableUniqueCats;
 
-
+    [Header("Rehome History")]
+    private string[] ownerNames;
 
     //////////////////////////////////////////
     ///
@@ -155,6 +156,8 @@ public class GameManager : MonoBehaviour
     //////////////////////////////////////////
     ///
     ///
+    
+    // need Owner Name Owner Portait Cat Name Cat Type
     public void IncrementNumCatsRehomed()
     {
         numCatsRehomed++;

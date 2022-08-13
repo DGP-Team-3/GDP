@@ -8,6 +8,11 @@ public class OwnerContainer : MonoBehaviour
     [SerializeField] private TMP_Text textField;
     [SerializeField] private Image ownerPortrait;
     [SerializeField] private Button rehomeButton;
+    [SerializeField] private TMP_Text ownerTextField;
+
+    private string ownerName;
+    private int ownerIndex;
+
     private Trait requiredTrait;
     private bool isRehomed = false;
 
@@ -33,6 +38,33 @@ public class OwnerContainer : MonoBehaviour
     public Trait GetRequiredTrait()
     {
         return requiredTrait;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+
+    public void SetOwnerIndex(int ownerIndex)
+    {
+        this.ownerIndex = ownerIndex;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+
+    public void SetOwnerName(string ownerName)
+    {
+        this.ownerName = ownerName;
+        ownerTextField.text = ownerName;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+    public string GetOwnerName()
+    {
+        return ownerName;
     }
 
     //////////////////////////////////////////

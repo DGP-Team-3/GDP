@@ -100,7 +100,7 @@ public class PettingGameManager : MonoBehaviour
         var i = Random.Range(0, spawnAreas.Length);
         var x_pos = Random.Range(spawnAreas[i].bounds.min.x, spawnAreas[i].bounds.max.x);
         var y_pos = Random.Range(spawnAreas[i].bounds.min.y, spawnAreas[i].bounds.max.y);
-        GameObject target = Instantiate(targetCirclePrefab, new Vector3(x_pos, y_pos), Quaternion.identity);
+        GameObject target = Instantiate(targetCirclePrefab, new Vector3(x_pos, y_pos, 1), Quaternion.identity);
         TargetCircleScript script = target.GetComponent<TargetCircleScript>();
         script.setOwner(gameObject);
     }
