@@ -15,6 +15,10 @@ public class PlayerData
     public int[] entertainmentValues;
     public string[] names;
     public bool[] activeStates;
+    public string[] rehomedCatNames;
+    public int[] rehomedCatTypes;
+    public string[] ownerNames;
+    public int[] ownerIndexes;
     public int[] availableUniqueCats;
 
 
@@ -22,7 +26,8 @@ public class PlayerData
     /// Class Constructor
     ///
     public PlayerData(int numCats, string[] names, int[] catTypes, int[] firstTraits, int[] secondTraits, 
-        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed, List<CatType> availableUniqueCats)
+        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed,
+        string[] rehomedCatNames, int[] rehomedCatTypes, string[] ownerNames, int[] ownerIndexes, List<CatType> availableUniqueCats)
     {
         this.numCats = numCats;
         
@@ -53,9 +58,22 @@ public class PlayerData
         this.numSpecialCatsFound = numSpecialCatsFound;
         this.numCatsRehomed = numCatsRehomed;
 
-        for (int j = 0; j < availableUniqueCats.Count; j++)
+        this.rehomedCatNames = new string[numCatsRehomed];
+        this.rehomedCatTypes = new int[numCatsRehomed];
+        this.ownerNames = new string[numCatsRehomed];
+        this.ownerIndexes = new int[numCatsRehomed];
+
+        for (int j = 0; j < numCatsRehomed; j++)
         {
-            this.availableUniqueCats[j] = (int)availableUniqueCats[j];
+            this.rehomedCatNames[j] = rehomedCatNames[j];
+            this.rehomedCatTypes[j] = rehomedCatTypes[j];
+            this.ownerNames[j] = ownerNames[j];
+            this.ownerIndexes[j] = ownerIndexes[j];
+        }
+
+        for (int k = 0; k < availableUniqueCats.Count; k++)
+        {
+            this.availableUniqueCats[k] = (int)availableUniqueCats[k];
         }
     }
 }

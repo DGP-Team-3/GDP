@@ -237,7 +237,7 @@ public class RehomeManager : MonoBehaviour
 
             DisableOtherRehomeButtons(containerIndex);
 
-            GameManager.Instance.RemoveCat(selectedCat.gameObject);
+            GameManager.Instance.RehomeCat(selectedCat.gameObject, ownerContainer.GetOwnerName(), ownerContainer.GetOwnerIndex());
             GameManager.Instance.IncrementNumCatsRehomed();
         }
         else

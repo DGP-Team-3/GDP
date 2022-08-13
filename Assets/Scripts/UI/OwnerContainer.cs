@@ -53,6 +53,15 @@ public class OwnerContainer : MonoBehaviour
     ///
     ///
 
+    public int GetOwnerIndex()
+    {
+        return ownerIndex;
+    }
+
+    //////////////////////////////////////////
+    ///
+    ///
+
     public void SetOwnerName(string ownerName)
     {
         this.ownerName = ownerName;
