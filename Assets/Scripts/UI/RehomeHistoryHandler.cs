@@ -31,13 +31,20 @@ public class RehomeHistoryHandler : MonoBehaviour
         rehomeHistoryContainers.Add(container);
 
         RehomeHistoryContainer rehomeHistoryContainerScript = container.GetComponent<RehomeHistoryContainer>();
-        rehomeHistoryContainerScript.SetupDisplay(catName, catType, ownerName, ownerIndex);
+        rehomeHistoryContainerScript.SetupDisplay(catName, ownerName);
         rehomeHistoryContainerScript.GetCatPortraitField().sprite = catData.GetCatPortrait(catType);
         rehomeHistoryContainerScript.GetOwnerPortraitField().sprite = ownerPortraits[ownerIndex];
     }
 
     public List<GameObject> GetRehomeHistoryContainers()
     {
-        return rehomeHistoryContainers;
+        if (rehomeHistoryContainers.Count !=0)
+        {
+            return rehomeHistoryContainers;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

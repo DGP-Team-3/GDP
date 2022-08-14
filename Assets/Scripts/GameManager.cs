@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     private int numCatsRehomed = 0;
     private int numSpecialCatsFound = 0;
     private int numNormalCatsFound = 0;
+    private List<GameObject>  rehomeRecords;
     private List<CatType> availableUniqueCats;
 
     //////////////////////////////////////////
@@ -146,7 +147,6 @@ public class GameManager : MonoBehaviour
         {
             numNormalCatsFound++;
         }
-
         SaveData();
     }
     
@@ -211,14 +211,14 @@ public class GameManager : MonoBehaviour
         string[] ownerNames = new string[numCatsRehomed];
         int[] ownerIndexes = new int[numCatsRehomed];
 
-        RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
+
         for (int j = 0; j < numCatsRehomed; j++)
         {
-            RehomeHistoryContainer container = rehomeHandler.GetRehomeHistoryContainers()[j].GetComponent<RehomeHistoryContainer>();
-            rehomedCatNames[j] = container.GetCatName();
-            rehomedCatTypes[j] = (int)container.GetCatType();
-            ownerNames[j] = container.GetOwnerName();
-            ownerIndexes[j] = container.GetOwnerIndex();
+            RehomeRecord record = rehomeRecords[j].GetComponent<RehomeRecord>();
+            rehomedCatNames[j] = record.GetCatName();
+            rehomedCatTypes[j] = (int)record.GetCatType();
+            ownerNames[j] = record.GetOwnerName();
+            ownerIndexes[j] = record.GetOwnerIndex();
         }
 
         SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
@@ -252,7 +252,7 @@ public class GameManager : MonoBehaviour
         RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
         for (int j = 0; j < numCatsRehomed; j++)
         {
-            rehomeHandler.AddRehomeHistoryContainer(data.rehomedCatNames[j], (CatType)data.rehomedCatTypes[j], data.ownerNames[j], data.ownerIndexes[j]);
+            RecordRehome(data.rehomedCatNames[j], (CatType)data.rehomedCatTypes[j], data.ownerNames[j], data.ownerIndexes[j]);
         }
 
         for (int k = 0; k < data.availableUniqueCats.Length; k++)
@@ -557,9 +557,17 @@ public class GameManager : MonoBehaviour
     public void RehomeCat(GameObject catGO, string ownerName, int ownerIndex)
     {
         Cat catScript = catGO.GetComponent<Cat>();
-        RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
-        rehomeHandler.AddRehomeHistoryContainer(catScript.GetName(), catScript.CatType, ownerName, ownerIndex);
+        RecordRehome(catScript.GetName(), catScript.CatType, ownerName, ownerIndex);
         RemoveCat(catGO);
+    }
+    public void RecordRehome(string catName, CatType catType, string ownerName, int ownerIndex)
+    {
+        GameObject record = new GameObject();
+        record.AddComponent<RehomeRecord>();
+        record.GetComponent<RehomeRecord>().InitRehomeRecord(catName, catType, ownerName, ownerIndex);
+        rehomeRecords.Add(record);
+        RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
+        rehomeHandler.AddRehomeHistoryContainer(catName, catType, ownerName, ownerIndex);
     }
 
     //////////////////////////////////////////

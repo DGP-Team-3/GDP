@@ -11,17 +11,11 @@ public class RehomeHistoryContainer : MonoBehaviour
     [SerializeField] private TMP_Text ownerNameField;
     [SerializeField] private Image catImage;
     [SerializeField] private Image ownerImage;
-    private CatType catType;
-    private int ownerIndex;
 
-    public void SetupDisplay(string catName, CatType catType, string ownerName, int ownerIndex)
+    public void SetupDisplay(string catName, string ownerName)
     {
         catNameField.text = catName;
         ownerNameField.text = ownerName;
-
-        // These two are stored for saving purposes
-        this.catType = catType;
-        this.ownerIndex = ownerIndex;
     }
     public Image GetCatPortraitField()
     {
@@ -36,18 +30,9 @@ public class RehomeHistoryContainer : MonoBehaviour
     {
         return catNameField.text;
     }
-    public CatType GetCatType()
-    {
-        return catType;
-    }
 
     public string GetOwnerName()
     {
         return ownerNameField.text;
-    }
-
-    public int GetOwnerIndex()
-    {
-        return ownerIndex;
     }
 }
