@@ -76,6 +76,7 @@ public class PettingGameManager : MonoBehaviour
         AwardPoints();
         if (!CheckForWin())
         {
+            catAI.SetHappy();
             SpawnCircle();
         }
     }
@@ -91,6 +92,10 @@ public class PettingGameManager : MonoBehaviour
             StartCoroutine(LoseTransition());
             StartCoroutine(MoveCatOffScreen(cat.transform, new Vector3(-13, 0, 0), 2.0f));
             return;
+        }
+        else
+        {
+            catAI.SetAngry();
         }
         SpawnCircle();
     }

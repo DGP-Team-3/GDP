@@ -9064,6 +9064,7 @@ MonoBehaviour:
   blackoutSpeed: 1
   autoSaveTime: 30
   spawnArea: {fileID: 11400000, guid: 5aec5acd266da73449461f3e3e487041, type: 2}
+  rehomeRecords: []
 --- !u!4 &1297295332
 Transform:
   m_ObjectHideFlags: 0

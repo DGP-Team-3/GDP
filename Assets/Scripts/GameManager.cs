@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private int numCatsRehomed = 0;
     private int numSpecialCatsFound = 0;
     private int numNormalCatsFound = 0;
-    private List<GameObject>  rehomeRecords;
+    [SerializeField] private List<GameObject> rehomeRecords;
     private List<CatType> availableUniqueCats;
 
     //////////////////////////////////////////
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         availableUniqueCats = new List<CatType>();
+        rehomeRecords = new List<GameObject>();
         //try loading saved data
         if (!LoadData())
         {
@@ -563,8 +564,13 @@ public class GameManager : MonoBehaviour
     public void RecordRehome(string catName, CatType catType, string ownerName, int ownerIndex)
     {
         GameObject record = new GameObject();
+        DontDestroyOnLoad(record);
         record.AddComponent<RehomeRecord>();
         record.GetComponent<RehomeRecord>().InitRehomeRecord(catName, catType, ownerName, ownerIndex);
+        if (Object.ReferenceEquals(rehomeRecords, null))
+        {
+            Debug.Log("rehomeRecords is null");
+        }
         rehomeRecords.Add(record);
         RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
         rehomeHandler.AddRehomeHistoryContainer(catName, catType, ownerName, ownerIndex);
