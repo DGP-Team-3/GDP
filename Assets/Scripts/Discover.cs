@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Discover : MonoBehaviour
 {
     [SerializeField] private List<GameObject> containers;
     [SerializeField] private CatData catData;
+
+    [SerializeField] private TMP_Text timerText;
 
     [SerializeField] private float timeTillCatReshuffle = 30f;
     [SerializeField] private int percentChanceOfUnique = 5;
@@ -40,8 +43,18 @@ public class Discover : MonoBehaviour
     private void Update()
     {
         HandleCatReshuffle();
+        HandleTimerDisplay();
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
+    private void HandleTimerDisplay()
+    {
+        int timeElapsed = Mathf.FloorToInt(reshuffleTimeElapsed);
+        int displayTimer = (int)timeTillCatReshuffle - timeElapsed;
+        timerText.text = "Cats will refresh in " + displayTimer;
+    }
 
     //////////////////////////////////////////
     ///
