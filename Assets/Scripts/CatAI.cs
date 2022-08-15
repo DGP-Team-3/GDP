@@ -22,6 +22,7 @@ public class CatAI : MonoBehaviour
     private Vector3 targetLocation;
     private bool isSelected;
     private bool isAngry;
+    private bool isHappy;
     private int prevRelationship;
 
 
@@ -30,7 +31,7 @@ public class CatAI : MonoBehaviour
     {
         if (!mCat.IsCatActive() || GameManager.Instance.IsMinigameActive) return;
 
-        if (isSelected || isAngry)
+        if (isSelected || isAngry || isHappy)
         {
 
         }
@@ -153,7 +154,24 @@ public class CatAI : MonoBehaviour
         }
     }
 
-
+    public void SetAngry()
+    {
+        mAnimator.SetBool("IsAngry", true);
+        mAnimator.SetBool("IsHappy", false);
+        mAnimator.SetBool("IsSelected", false);
+        isAngry = true;
+        isHappy = false;
+        isSelected = false;
+    }
+    public void SetHappy()
+    {
+        mAnimator.SetBool("IsAngry", false);
+        mAnimator.SetBool("IsHappy", true);
+        mAnimator.SetBool("IsSelected", false);
+        isAngry = false;
+        isHappy = true;
+        isSelected = false;
+    }
     private Vector2 RetrieveRandomPosition()
     {
         float xPos = Random.Range(area.XMinSpawn, area.XMaxSpawn);
@@ -176,6 +194,8 @@ public class CatAI : MonoBehaviour
 
     public void PlayWin()
     {
+        mAnimator.SetBool("IsAngry", false);
+        mAnimator.SetBool("IsHappy", false);
         mAnimator.SetBool("IsSelected", false);
         isSelected = false;
         mAnimator.SetBool("Win", true);
@@ -183,6 +203,8 @@ public class CatAI : MonoBehaviour
 
     public void PlayLose()
     {
+        mAnimator.SetBool("IsAngry", false);
+        mAnimator.SetBool("IsHappy", false);
         mAnimator.SetBool("IsSelected", false);
         isSelected = false;
         mAnimator.SetBool("Lose", true);

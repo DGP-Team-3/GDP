@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: normcat1_gameFail_0
+      name: normcat1_gameSuccess_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce9ddee5b8dff81459a0911eca9486c7
-      internalID: 1717215786
+      spriteID: 82550c9345868eb4c944e8c8a767c5aa
+      internalID: 920782090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_1
+      name: normcat1_gameSuccess_1
       rect:
         serializedVersion: 2
         x: 48
@@ -151,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 753d3162f54e18843be2beffb0cac5a8
-      internalID: 1438898208
+      spriteID: 2ede9439e65a360469aaa9fcf072be67
+      internalID: 1001733733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_2
+      name: normcat1_gameSuccess_2
       rect:
         serializedVersion: 2
         x: 96
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2190e9a67ef43c64db7d7597041634fd
-      internalID: -513428284
+      spriteID: 98840af2b510b9c449e55dd5eed57d87
+      internalID: 187682612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_3
+      name: normcat1_gameSuccess_3
       rect:
         serializedVersion: 2
         x: 144
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 824d7223583d040409d5d5f43b19aac3
-      internalID: -2025690154
+      spriteID: 79ea8542c22a640439a3b0b74ee55cf9
+      internalID: 1725090636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_4
+      name: normcat1_gameSuccess_4
       rect:
         serializedVersion: 2
         x: 192
@@ -214,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6126fee297b2eed45b9bd4ee30ad7cff
-      internalID: -1020782923
+      spriteID: 7caf2a50573d36c40aa72fd3fe41893d
+      internalID: -206698799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_5
+      name: normcat1_gameSuccess_5
       rect:
         serializedVersion: 2
         x: 240
@@ -235,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 154789c055c88924a9c1b9d6b8703178
-      internalID: -1936466815
+      spriteID: 9bb9ea71ce3ce5f4c8754459b19497ed
+      internalID: -1321466178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_6
+      name: normcat1_gameSuccess_6
       rect:
         serializedVersion: 2
         x: 288
@@ -256,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7d377b400b0fbf40ade000fdedaf730
-      internalID: -1338467738
+      spriteID: 83544b452989c8e4e8245452ef43e85b
+      internalID: 370209826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_7
+      name: normcat1_gameSuccess_7
       rect:
         serializedVersion: 2
         x: 336
@@ -277,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6c484007084a0343a799e6ae8905262
-      internalID: 43168660
+      spriteID: 4fc588ea1249ab146ad19f717eb8c9c9
+      internalID: 47300892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_8
+      name: normcat1_gameSuccess_8
       rect:
         serializedVersion: 2
         x: 384
@@ -298,14 +298,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66480ce42ec9fa043a634a4cc652f406
-      internalID: -807724513
+      spriteID: 3d12a6af3fe2b3244b1bf4e015fb136a
+      internalID: -743330799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_9
+      name: normcat1_gameSuccess_9
       rect:
         serializedVersion: 2
         x: 432
@@ -319,14 +319,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b570477598b3df46902b3478ffe8561
-      internalID: 1403051286
+      spriteID: ffe6d1c0eb36ea141a27ce72b593ffff
+      internalID: -909465101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_10
+      name: normcat1_gameSuccess_10
       rect:
         serializedVersion: 2
         x: 480
@@ -340,14 +340,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb479949ed424944f8f0b2ee931fa5c1
-      internalID: -1317336046
+      spriteID: 929c71c1b538bd64ebb0867ade11102c
+      internalID: -903114043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normcat1_gameFail_11
+      name: normcat1_gameSuccess_11
       rect:
         serializedVersion: 2
         x: 528
@@ -361,8 +361,197 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e82b0bc6e2eac994baca03aa6f93762a
-      internalID: 1327851777
+      spriteID: 9d0372bb7e695a043b3450ef67e144e0
+      internalID: 72069443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_12
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70c94bd8647c5d842bf6388569cc90de
+      internalID: -1800208039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_13
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ee4d2bd7b35b3498089e680ca6c772
+      internalID: -1847979433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_14
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 118b35738159bbf4b893d21915d9f04a
+      internalID: -1538984877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_15
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c722e631d5454d4781552d1b9b1e947
+      internalID: 929431411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_16
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b83a16b5e028dc4cad88762c92aafd9
+      internalID: 1145894189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_17
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29daa751413a5344cbad782abc8f3f4b
+      internalID: -341215271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_18
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbba7b291936d6d44979bfe2efaadf68
+      internalID: -271791132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_19
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d726ae82be8d8ef4784a2434c6b39583
+      internalID: 421789509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: normcat1_gameSuccess_20
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e59032d9d168b51498f296cef2a6965e
+      internalID: 292488241
       vertices: []
       indices: 
       edges: []
@@ -378,18 +567,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      normcat1_gameFail_8: -807724513
-      normcat1_gameFail_10: -1317336046
-      normcat1_gameFail_9: 1403051286
-      normcat1_gameFail_2: -513428284
-      normcat1_gameFail_5: -1936466815
-      normcat1_gameFail_3: -2025690154
-      normcat1_gameFail_0: 1717215786
-      normcat1_gameFail_7: 43168660
-      normcat1_gameFail_4: -1020782923
-      normcat1_gameFail_11: 1327851777
-      normcat1_gameFail_1: 1438898208
-      normcat1_gameFail_6: -1338467738
+      normcat1_gameSuccess_15: 929431411
+      normcat1_gameSuccess_1: 1001733733
+      normcat1_gameSuccess_13: -1847979433
+      normcat1_gameSuccess_0: 920782090
+      normcat1_gameSuccess_4: -206698799
+      normcat1_gameSuccess_18: -271791132
+      normcat1_gameSuccess_2: 187682612
+      normcat1_gameSuccess_19: 421789509
+      normcat1_gameSuccess_5: -1321466178
+      normcat1_gameSuccess_11: 72069443
+      normcat1_gameSuccess_16: 1145894189
+      normcat1_gameSuccess_14: -1538984877
+      normcat1_gameSuccess_3: 1725090636
+      normcat1_gameSuccess_9: -909465101
+      normcat1_gameSuccess_7: 47300892
+      normcat1_gameSuccess_8: -743330799
+      normcat1_gameSuccess_17: -341215271
+      normcat1_gameSuccess_10: -903114043
+      normcat1_gameSuccess_6: 370209826
+      normcat1_gameSuccess_12: -1800208039
+      normcat1_gameSuccess_20: 292488241
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

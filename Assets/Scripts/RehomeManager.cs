@@ -26,6 +26,8 @@ public class RehomeManager : MonoBehaviour
     [SerializeField] private List<string> successResponces;
     [SerializeField] private List<string> traitRequestText;
 
+    [SerializeField] private List<string> ownerNames;
+
     private Cat selectedCat;
 
     private float reshuffleTimeElapsed = 0f;
@@ -96,6 +98,7 @@ public class RehomeManager : MonoBehaviour
         ownerContainer.SetRehomeButtonImage(rehomeButtonImage);
 
         int ownerIndex = Random.Range(0, ownerPortraits.Count);
+        ownerContainer.SetOwnerIndex(ownerIndex);
         ownerContainer.GetOwnerPortrait().sprite = ownerPortraits[ownerIndex];
 
         Trait requiredTrait;
@@ -118,6 +121,7 @@ public class RehomeManager : MonoBehaviour
 
         ownerContainer.SetRequiredTrait(requiredTrait);
         ownerContainer.GetTextField().text = traitRequestText[(int)requiredTrait];
+        ownerContainer.SetOwnerName(ownerNames[Random.Range(0, ownerNames.Count)]);
     }
 
     private string GetRiggedTrait()
@@ -233,7 +237,7 @@ public class RehomeManager : MonoBehaviour
 
             DisableOtherRehomeButtons(containerIndex);
 
-            GameManager.Instance.RemoveCat(selectedCat.gameObject);
+            GameManager.Instance.RehomeCat(selectedCat.gameObject, ownerContainer.GetOwnerName(), ownerContainer.GetOwnerIndex());
             GameManager.Instance.IncrementNumCatsRehomed();
         }
         else

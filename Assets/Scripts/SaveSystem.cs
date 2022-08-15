@@ -11,7 +11,8 @@ public static class SaveSystem
     /// Save player data to disk
     ///
     public static void SavePlayerData(int numCats, string[] names, int[] catTypes, int[] firstTraits, int[] secondTraits, 
-        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed, List<CatType> availableUniqueCats)
+        int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed,
+        string[] rehomedCatNames, int[] rehomedCatTypes, string[] ownerNames, int[] ownerIndexes, List<CatType> availableUniqueCats)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         
@@ -20,7 +21,8 @@ public static class SaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
         
         PlayerData data = new PlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
-            relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed, availableUniqueCats);
+            relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed,
+            rehomedCatNames, rehomedCatTypes, ownerNames, ownerIndexes, availableUniqueCats);
 
         formatter.Serialize(stream, data);
         
