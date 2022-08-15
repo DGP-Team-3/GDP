@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpawnArea spawnArea;
 
 
+
     private float timeElapsedTillSave = 0f;
     private float blackoutTVal = 0f;
 
@@ -48,11 +49,11 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> gameObjectsToClear = new List<GameObject>();
 
+    private List<GameObject> rehomeRecords;
 
     private int numCatsRehomed = 0;
     private int numSpecialCatsFound = 0;
     private int numNormalCatsFound = 0;
-    [SerializeField] private List<GameObject> rehomeRecords;
     private List<CatType> availableUniqueCats;
 
     //////////////////////////////////////////
@@ -77,8 +78,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         availableUniqueCats = new List<CatType>();
+
         rehomeRecords = new List<GameObject>();
-        //try loading saved data
+
         if (!LoadData())
         {
             CreateCat(CatType.loafCat, "Loaf", Trait.Loyal, Trait.Intelligent, 0, 100, 100, true);
@@ -121,6 +123,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     private void OnApplicationFocus(bool focus)
     {
         if (!focus)
@@ -150,28 +155,43 @@ public class GameManager : MonoBehaviour
         }
         SaveData();
     }
-    
+
+    //////////////////////////////////////////
+    /// 
+    ///
     public void IncrementNumCatsRehomed()
     {
         numCatsRehomed++;
         SaveData();
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     public int GetNumCatsRehomed()
     {
         return numCatsRehomed;
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     public int GetNumNormalCatsFound()
     {
         return numNormalCatsFound;
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     public int GetNumSpecialCatsFound()
     {
         return numSpecialCatsFound;
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     public List<CatType> GetAvailableUniqueCats()
     {
         return availableUniqueCats;
@@ -249,8 +269,6 @@ public class GameManager : MonoBehaviour
         numSpecialCatsFound = data.numSpecialCatsFound;
         numCatsRehomed = data.numCatsRehomed;
 
-        //Load Rehome History
-        RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
         for (int j = 0; j < numCatsRehomed; j++)
         {
             RecordRehome(data.rehomedCatNames[j], (CatType)data.rehomedCatTypes[j], data.ownerNames[j], data.ownerIndexes[j]);
@@ -421,6 +439,9 @@ public class GameManager : MonoBehaviour
         storageHandler.AddContainer(catGO);
     }
 
+    //////////////////////////////////////////
+    ///
+    ///
     private Vector2 RetrieveRandomPosition()
     {
         float xPos = Random.Range(spawnArea.XMinSpawn, spawnArea.XMaxSpawn);
@@ -525,7 +546,7 @@ public class GameManager : MonoBehaviour
     ///
     public Cat GetSelectedCat()
     {
-        return this.selectedCat;
+        return selectedCat;
     }
     //////////////////////////////////////////
     ///
@@ -555,12 +576,19 @@ public class GameManager : MonoBehaviour
         return cats;
     }
 
+    //////////////////////////////////////////
+    /// 
+    ///
     public void RehomeCat(GameObject catGO, string ownerName, int ownerIndex)
     {
         Cat catScript = catGO.GetComponent<Cat>();
         RecordRehome(catScript.GetName(), catScript.CatType, ownerName, ownerIndex);
         RemoveCat(catGO);
     }
+
+    //////////////////////////////////////////
+    /// 
+    ///
     public void RecordRehome(string catName, CatType catType, string ownerName, int ownerIndex)
     {
         GameObject record = new GameObject();
