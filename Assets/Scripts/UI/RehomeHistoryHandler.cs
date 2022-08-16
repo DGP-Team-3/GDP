@@ -20,11 +20,12 @@ public class RehomeHistoryHandler : MonoBehaviour
     {
         GameManager.Instance.AddToClearList(gameObject);
 
+        RefreshRehomeHistory(GameManager.Instance.GetRehomeRecords());
     }
 
-    public void AddRehomeHistoryContainer(string catName, CatType catType, string ownerName, int ownerIndex)
+    public void AddRehomeHistoryContainer(GameObject rehomeRecordGO)
     {
-
+        RehomeRecord record = rehomeRecordGO.GetComponent<RehomeRecord>();
         GameObject container = Instantiate(rehomeHistoryPrefab);
         container.transform.SetParent(containerParentObject.transform);
 
@@ -32,20 +33,21 @@ public class RehomeHistoryHandler : MonoBehaviour
         container.transform.localScale = new Vector3(1.0707f, 1.0707f, 1.0707f);
 
         RehomeHistoryContainer rehomeHistoryContainerScript = container.GetComponent<RehomeHistoryContainer>();
-        rehomeHistoryContainerScript.SetupDisplay(catName, ownerName);
-        rehomeHistoryContainerScript.GetCatPortraitField().sprite = catData.GetCatPortrait(catType);
-        rehomeHistoryContainerScript.GetOwnerPortraitField().sprite = ownerPortraits[ownerIndex];
+        rehomeHistoryContainerScript.SetupDisplay(record.GetCatName(), record.GetOwnerName());
+        rehomeHistoryContainerScript.GetCatPortraitField().sprite = catData.GetCatPortrait(record.GetCatType());
+        rehomeHistoryContainerScript.GetOwnerPortraitField().sprite = ownerPortraits[record.GetOwnerIndex()];
     }
 
-    public List<GameObject> GetRehomeHistoryContainers()
+    public void RefreshRehomeHistory(List<GameObject> records)
     {
-        if (rehomeHistoryContainers.Count !=0)
+        foreach (GameObject container in rehomeHistoryContainers)
         {
-            return rehomeHistoryContainers;
+            Destroy(container);
         }
-        else
+        rehomeHistoryContainers.Clear();
+        foreach(GameObject record in records)
         {
-            return null;
+            AddRehomeHistoryContainer(record);
         }
     }
 }

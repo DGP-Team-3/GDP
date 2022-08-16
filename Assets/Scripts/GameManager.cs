@@ -576,6 +576,11 @@ public class GameManager : MonoBehaviour
         return cats;
     }
 
+    public List<GameObject> GetRehomeRecords()
+    {
+        return rehomeRecords;
+    }
+
     //////////////////////////////////////////
     /// 
     ///
@@ -601,7 +606,7 @@ public class GameManager : MonoBehaviour
         }
         rehomeRecords.Add(record);
         RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
-        rehomeHandler.AddRehomeHistoryContainer(catName, catType, ownerName, ownerIndex);
+        rehomeHandler.AddRehomeHistoryContainer(record);
     }
 
     //////////////////////////////////////////
