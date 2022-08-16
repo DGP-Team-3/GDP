@@ -29,6 +29,7 @@ public class RehomeHistoryHandler : MonoBehaviour
         container.transform.SetParent(containerParentObject.transform);
 
         rehomeHistoryContainers.Add(container);
+        container.transform.localScale = new Vector3(1.0707f, 1.0707f, 1.0707f);
 
         RehomeHistoryContainer rehomeHistoryContainerScript = container.GetComponent<RehomeHistoryContainer>();
         rehomeHistoryContainerScript.SetupDisplay(catName, ownerName);

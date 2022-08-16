@@ -77,7 +77,6 @@ public class RehomeManager : MonoBehaviour
         {
             if (i == index)
             {
-                Debug.Log("Trying to rig an owner");
                 GenerateNewOwnerDisplay(containers[i], true);
             }
             else
@@ -153,6 +152,7 @@ public class RehomeManager : MonoBehaviour
         }
         else
         {
+            EnableRehomeButtons();
             selectedCat = cat.GetComponent<Cat>();
             catImage.overrideSprite = catData.GetCatSittingImage(selectedCat.CatType);
             catImage.color = Color.white;
