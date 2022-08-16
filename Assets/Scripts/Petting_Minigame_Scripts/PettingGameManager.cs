@@ -22,7 +22,8 @@ public class PettingGameManager : MonoBehaviour
 
     [SerializeField] private GameObject catSprite;
     [SerializeField] private GameObject blackout;
-    [SerializeField] private GameObject greenCheck;
+    [SerializeField] private GameObject passIcon;
+    [SerializeField] private GameObject failIcon;
     [SerializeField] private GameObject progressBar;
 
     [Tooltip("List of happy cat icons.")]
@@ -138,7 +139,7 @@ public class PettingGameManager : MonoBehaviour
     /// 
     private IEnumerator WinTransition()
     {
-        greenCheck.SetActive(true);
+        passIcon.SetActive(true);
         successSFX.Play();
         yield return new WaitForSeconds(2f);
         isBlackingOut = true;
@@ -161,6 +162,7 @@ public class PettingGameManager : MonoBehaviour
     private IEnumerator LoseTransition()
     {
         failureSFX.Play();
+        failIcon.SetActive(true);
         yield return new WaitForSeconds(2f);
         isBlackingOut = true;
         SpriteRenderer spriteRenderer = blackout.GetComponent<SpriteRenderer>();
