@@ -62,6 +62,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a8afd62629a3ba46a5f40bea407c18e, type: 3}
   - {fileID: 21300000, guid: 72518d27a57715d478cec7393f4f7046, type: 3}
   - {fileID: 21300000, guid: a9dcb6332fcc2304c8dc0ce28109d9d6, type: 3}
+  rehomeButtonImage: {fileID: 0}
+  successfulRehomeButtonImage: {fileID: 0}
   failedResponces:
   - "No? Okay, then\u2026"
   - "I don\u2019t think we\u2019re the best match."
@@ -121,3 +123,204 @@ MonoBehaviour:
   - heh heh heh heh heh heh heh heh heh heh
   - (This patron is silent, with huge eyes. They appear to be miming a circular shape
     with their hands, over and over.)
+  ownerNames:
+  - Bob
+  - Logan
+  - Avery
+  - Riley
+  - Parker
+  - Cameron
+  - Ryan
+  - River
+  - Angel
+  - Reginald
+  - Rowan
+  - Sawyer
+  - Charlie
+  - Quinn
+  - Blake
+  - Peyton
+  - Hayden
+  - Emery
+  - Emerson
+  - Amari
+  - Eden
+  - Elliot
+  - Remi
+  - Remington
+  - Phoenix
+  - Sage
+  - Oakley
+  - Alfonso
+  - Reese
+  - Juan
+  - Carter
+  - Jose
+  - Tatum
+  - Morgan
+  - Ariel
+  - Dallas
+  - Lee
+  - Wong
+  - Park
+  - Peter
+  - Ari
+  - Ellie
+  - Payton
+  - Paige
+  - Milo
+  - Esteban
+  - Ramirez
+  - Kenny
+  - Yuno
+  - Noel
+  - Drew
+  - Jamie
+  - Monroe
+  - Frankie
+  - Keagan
+  - Banksy
+  - Quincy
+  - Santana
+  - Finnley
+  - Miller
+  - Apple
+  - Reece
+  - River
+  - Iris
+  - Lily
+  - Rose
+  - Violet
+  - Lavender
+  - Kingsley
+  - Sunny
+  - Charles
+  - Robin
+  - Titania
+  - Selena
+  - Huxley
+  - Sabrina
+  - Sky
+  - Rio
+  - Autumn
+  - Winter
+  - Spring
+  - Colby
+  - Cadence
+  - Scout
+  - Shay
+  - Joan
+  - Jonah
+  - Nlake
+  - Dominique
+  - Ashley
+  - Veronica
+  - Kevin
+  - Andrew
+  - Nolan
+  - Ripley
+  - Storm
+  - Isa
+  - Gray
+  - Rain
+  - Arrow
+  - Lenox
+  - Yuri
+  - Clarke
+  - Jean
+  - Amber
+  - Maria
+  - Mika
+  - Ren
+  - Haruto
+  - Riku
+  - Haruki
+  - Nathan
+  - Itsuki
+  - Yamato
+  - Sakura
+  - Hina
+  - Mei
+  - Madalasha
+  - Haru
+  - Dae Hyun
+  - Baek Hyun
+  - Seo Jun
+  - Si Woo
+  - Ji Ho
+  - Logan
+  - Ha Rin
+  - Eun Ae
+  - Jin Woo
+  - Jin Ho
+  - Kyung Hye
+  - Hae In
+  - Dong Soo
+  - James
+  - Bryan
+  - Robert
+  - Kathy
+  - Catherine
+  - Sherry
+  - Jacqueline
+  - Jenna
+  - Aaron
+  - Erin
+  - William
+  - Sara
+  - Ahmed
+  - Dina
+  - Aya
+  - Jackie
+  - Alexander
+  - Alexandra
+  - Amanda
+  - Alison
+  - Megan
+  - Edward
+  - Bella
+  - Aurora
+  - Fu Hua
+  - Marcel
+  - Kiana
+  - Bronya
+  - Russell
+  - Victoria
+  - Borys
+  - Jade
+  - Elijah
+  - Felicia
+  - Henryk
+  - Patrick
+  - Raul
+  - Yasmine
+  - Kryss
+  - Nhi
+  - Sheena
+  - Isaiah
+  - Chithra
+  - Dora
+  - Zachary
+  - Tristan
+  - Amar
+  - Ishani
+  - Rashanda
+  - Pravin
+  - Rajesh
+  - Tori
+  - Xavier
+  - Jamal
+  - Angelique
+  - Sanjay
+  - Tolulupe
+  - Max
+  - Nelina
+  - Ibrahim
+  - Alvitha
+  - Shanise
+  - Usain
+  - Ziggy
+  - Tamila
+  - Will
+  - Erica
+  - Vivian
