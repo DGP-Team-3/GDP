@@ -186,20 +186,6 @@ public class RehomeManager : MonoBehaviour
         }
     }
 
-    //////////////////////////////////////////
-    ///
-    ///
-    private void DisableOtherRehomeButtons(int indexToNotDisable)
-    {
-        GameObject containerToNotDisable = containers[indexToNotDisable];
-        foreach (GameObject container in containers)
-        {
-            if (containerToNotDisable != container)
-            {
-                container.GetComponent<OwnerContainer>().GetRehomeButton().interactable = false;
-            }
-        }
-    }
 
     //////////////////////////////////////////
     ///
@@ -235,7 +221,7 @@ public class RehomeManager : MonoBehaviour
             ownerContainer.SetRehomed(true);
             ownerContainer.GetTextField().text = successResponces[Random.Range(0, successResponces.Count)];
 
-            DisableOtherRehomeButtons(containerIndex);
+            DisableRehomeButton(containerIndex);
 
             GameManager.Instance.RehomeCat(selectedCat.gameObject, ownerContainer.GetOwnerName(), ownerContainer.GetOwnerIndex());
             GameManager.Instance.IncrementNumCatsRehomed();
