@@ -124,12 +124,12 @@ MonoBehaviour:
   catName: Loaf
   firstTrait: 17
   secondTrait: 40
-  hungerProcTime: 5
-  entertainmentProcTime: 1
-  relationshipDecreaseAmount: -3
-  relationshipIncreaseAmount: 24
-  feedAmount: 85
-  entertainAmount: 90
+  hungerProcTime: 900
+  entertainmentProcTime: 900
+  relationshipDecreaseAmount: -1
+  relationshipIncreaseAmount: 25
+  feedAmount: 100
+  entertainAmount: 100
   maxFullness: 100
   maxRelationship: 100
   maxEntertainment: 100

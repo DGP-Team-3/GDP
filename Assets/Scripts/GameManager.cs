@@ -621,6 +621,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 activeCats.RemoveAt(i);
+                currentActiveCats--;
                 break;
             }
         }
