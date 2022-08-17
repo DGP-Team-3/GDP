@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
 
-
     //////////////////////////////////////////
     /// Save player data to disk
     ///
@@ -14,16 +13,14 @@ public static class SaveSystem
         int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed,
         string[] rehomedCatNames, int[] rehomedCatTypes, string[] ownerNames, int[] ownerIndexes, List<CatType> availableUniqueCats)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        
         string path = GetPath();
-        
         FileStream stream = new FileStream(path, FileMode.Create);
         
         PlayerData data = new PlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
             relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed,
             rehomedCatNames, rehomedCatTypes, ownerNames, ownerIndexes, availableUniqueCats);
 
+        BinaryFormatter formatter = new BinaryFormatter();
         formatter.Serialize(stream, data);
         
         stream.Close();
@@ -38,9 +35,8 @@ public static class SaveSystem
 
         if (DoesSaveDataExist())
         {
-            BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-
+            BinaryFormatter formatter = new BinaryFormatter();
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
 

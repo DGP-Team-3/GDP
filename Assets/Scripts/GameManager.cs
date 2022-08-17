@@ -600,10 +600,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(record);
         record.AddComponent<RehomeRecord>();
         record.GetComponent<RehomeRecord>().InitRehomeRecord(catName, catType, ownerName, ownerIndex);
-        if (Object.ReferenceEquals(rehomeRecords, null))
-        {
-            Debug.Log("rehomeRecords is null");
-        }
+
         rehomeRecords.Add(record);
         RehomeHistoryHandler rehomeHandler = FindObjectOfType<RehomeHistoryHandler>();
         rehomeHandler.AddRehomeHistoryContainer(record);
