@@ -69,6 +69,7 @@ public class Cat : MonoBehaviour
     private CatType catType;
     public CatType CatType => catType;
 
+
     public delegate void HungerUpdated(int fullness);
     public event HungerUpdated OnHungerUpdated;
 
@@ -230,11 +231,12 @@ public class Cat : MonoBehaviour
     }
 
 
-    //////////////////////////////////////////
-    /// Removes cat from game
+        //////////////////////////////////////////
+    /// 
     ///
     public void DestroyCat()
     {
         Destroy(gameObject);
     }
+
 }
