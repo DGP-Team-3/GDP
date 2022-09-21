@@ -20,14 +20,14 @@ public class PlayerData
     public string[] ownerNames;
     public int[] ownerIndexes;
     public int[] availableUniqueCats;
-
+    public System.DateTime date;
 
     //////////////////////////////////////////
     /// Class Constructor
     ///
     public PlayerData(int numCats, string[] names, int[] catTypes, int[] firstTraits, int[] secondTraits, 
         int[] relationshipValues, int[] fullnessValues, int[] entertainmentValues, bool[] activeStates, int numNormalCatsFound, int numSpecialCatsFound, int numCatsRehomed,
-        string[] rehomedCatNames, int[] rehomedCatTypes, string[] ownerNames, int[] ownerIndexes, List<CatType> availableUniqueCats)
+        string[] rehomedCatNames, int[] rehomedCatTypes, string[] ownerNames, int[] ownerIndexes, List<CatType> availableUniqueCats, System.DateTime date)
     {
         this.numCats = numCats;
         
@@ -75,5 +75,7 @@ public class PlayerData
         {
             this.availableUniqueCats[k] = (int)availableUniqueCats[k];
         }
+
+        this.date = date;
     }
 }

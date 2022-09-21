@@ -231,7 +231,7 @@ public class Cat : MonoBehaviour
     }
 
 
-        //////////////////////////////////////////
+    //////////////////////////////////////////
     /// 
     ///
     public void DestroyCat()
@@ -239,4 +239,49 @@ public class Cat : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+    //////////////////////////////////////////
+    /// 
+    ///
+    public void ApplyTimeElapsed(int secondsElapsed)
+    {
+        ApplyCatValueChanges(secondsElapsed, Entertainment, entertainmentProcTime, ref entertainmentTimer, ref _entertainment, maxEntertainment);
+        OnEntertainmentUpdated?.Invoke(_entertainment);
+        ApplyCatValueChanges(secondsElapsed, Fullness, hungerProcTime, ref hungerTimer, ref _fullness, maxFullness);
+        OnHungerUpdated?.Invoke(_fullness);
+    }
+
+    //////////////////////////////////////////
+    /// 
+    ///
+    private void ApplyCatValueChanges(int secondsElapsed, int previousCatStatValue, float statValueProcTime, ref float statValueTimer, ref int valueToModify, int maxStatValue)
+    {
+        //check if secondsElapsed is less than the proc times. If so then add that time to each respective timer.
+        if (secondsElapsed < statValueProcTime)
+        {
+            statValueTimer += secondsElapsed;
+            return;
+        }
+        //Check how many procs occur and apply changes. For each proc passed 0 reduce relationship value.
+        else
+        {
+            int totalProcs = secondsElapsed / (int)statValueProcTime;
+            int procsTillZero = previousCatStatValue;
+
+            //if total procs wont affect relationship value
+            if (totalProcs <= procsTillZero)
+            {
+                valueToModify -= totalProcs;
+                Mathf.Clamp(valueToModify, 0, maxStatValue);
+                return;
+            }
+            else
+            {
+                valueToModify = 0;
+                totalProcs -= procsTillZero;
+                _relationship = Mathf.Clamp(_relationship - totalProcs, 0, maxRelationship);
+                OnRelationshipUpdated?.Invoke(_relationship);
+            }
+        }
+    }
 }

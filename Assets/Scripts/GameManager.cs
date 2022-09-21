@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -242,9 +243,12 @@ public class GameManager : MonoBehaviour
             ownerIndexes[j] = record.GetOwnerIndex();
         }
 
+        DateTime date = new System.DateTime();
+        date = System.DateTime.Now;
+
         SaveSystem.SavePlayerData(numCats, names, catTypes, firstTraits, secondTraits, 
             relationshipValues, fullnessValues, entertainmentValues, activeStates, numNormalCatsFound, numSpecialCatsFound, numCatsRehomed,
-            rehomedCatNames, rehomedCatTypes, ownerNames, ownerIndexes, availableUniqueCats);
+            rehomedCatNames, rehomedCatTypes, ownerNames, ownerIndexes, availableUniqueCats, date);
     }
 
 
@@ -279,15 +283,39 @@ public class GameManager : MonoBehaviour
             availableUniqueCats.Add((CatType)data.availableUniqueCats[k]);
         }
 
+        ApplyTimeElapsedToCats(data.date);
+
         return true;
     }
 
+    //////////////////////////////////////////
+    /// Applies value changes to each cat
+    ///
+    private void ApplyTimeElapsedToCats(System.DateTime previousDate)
+    {
+        System.DateTime currentDate = System.DateTime.Now;
+        int compare = System.DateTime.Compare(previousDate, currentDate);
 
-#endregion //Data Management
+        //current date is older than previous date
+        if (compare > 0)
+        {
+            return;
+        }
+
+        TimeSpan interval = currentDate - previousDate;
+        int secondsElapsed = (int)interval.TotalSeconds;
+
+        foreach (GameObject catGO in activeCats)
+        {
+            catGO.GetComponent<Cat>().ApplyTimeElapsed(secondsElapsed) ;
+        }
+    }
+
+    #endregion //Data Management
 
 
 
-#region Scene Management
+    #region Scene Management
 
     //////////////////////////////////////////
     ///
@@ -444,8 +472,8 @@ public class GameManager : MonoBehaviour
     ///
     private Vector2 RetrieveRandomPosition()
     {
-        float xPos = Random.Range(spawnArea.XMinSpawn, spawnArea.XMaxSpawn);
-        float yPos = Random.Range(spawnArea.YMinSpawn, spawnArea.YMaxSpawn);
+        float xPos = UnityEngine.Random.Range(spawnArea.XMinSpawn, spawnArea.XMaxSpawn);
+        float yPos = UnityEngine.Random.Range(spawnArea.YMinSpawn, spawnArea.YMaxSpawn);
         return new Vector2(xPos, yPos);
     }
 
