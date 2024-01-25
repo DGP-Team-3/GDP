@@ -64,6 +64,12 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+# Ignore .idea
+.idea/
+
+# Ignore .vscode
+.vscode/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
