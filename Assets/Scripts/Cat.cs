@@ -8,47 +8,49 @@ public class Cat : MonoBehaviour
 
     [Space]
 
-    [Tooltip("Seconds till cat's fullness decreases.")]
+    [Tooltip("Number of seconds until cat's fullness value decreases.")]
     [Min(0f)]
     [SerializeField] private float hungerProcTime = 1f;
 
-    [Tooltip("Seconds till cat's entertainment decreases.")]
+    [Tooltip("Number of seconds until cat's entertainment value decreases.")]
     [Min(0f)]
     [SerializeField] private float entertainmentProcTime = 1f;
 
-    [Tooltip("Amount to decrease relationship.")]
+    [Tooltip("Amount to modify relationship by. Negative values decrease and positive increase.")]
     [SerializeField] private int relationshipDecreaseAmount = 5;
 
-    [Tooltip("Amount to increase relationship.")]
+    [Tooltip("Amount to increase relationship by. Negative values decrease and positive increase.")]
     [Min(0f)]
     [SerializeField] private int relationshipIncreaseAmount = 10;
 
-    [Tooltip("Amount to increase fullness.")]
+    [Tooltip("Amount to increase fullness by. Negative values decrease and positive increase.")]
     [Min(0f)]
     [SerializeField] private int feedAmount = 85;
 
-    [Tooltip("Amount to increase entertainment.")]
+    [Tooltip("Amount to increase entertainment. Negative values decrease and positive increase.")]
     [Min(0f)]
     [SerializeField] private int entertainAmount = 90;
 
+    [Tooltip("Max value of fullness. Fullness is modified over time or feeding.")]
     [Min(0f)]
     [SerializeField] private int maxFullness = 100;
     public float MaxFullness => maxFullness;
 
-    [Min(0f)]
-    [SerializeField] private int maxRelationship = 100;
-    public float MaxRelationship => maxRelationship;
-
+    [Tooltip("Max value of entertainment. Entertainment is modified over time or playing.")]
     [Min(0f)]
     [SerializeField] private int maxEntertainment = 100;
     public float MaxEntertainment => maxEntertainment;
-
+    
+    [Tooltip("Max value of relationship. Relationship is decreased when not fed or played with, increased by interactions (minigames).")]
+    [Min(0f)]
+    [SerializeField] private int maxRelationship = 100;
+    public float MaxRelationship => maxRelationship;
+    
     [Space]
 
     [SerializeField] private Animator animator;
 
-
-
+    
     private int _fullness;
     public int Fullness => _fullness;
 
@@ -60,7 +62,7 @@ public class Cat : MonoBehaviour
     private int _entertainment;
     public int Entertainment => _entertainment;
 
-
+    // Timers
     private float hungerTimer = 0f;
     private float entertainmentTimer = 0f;
 
@@ -79,11 +81,7 @@ public class Cat : MonoBehaviour
     public delegate void EntertainmentUpdated(int entertainment);
     public event EntertainmentUpdated OnEntertainmentUpdated;
 
-
-
-    //////////////////////////////////////////
-    ///
-    ///
+    
     void Update()
     {
         if (IsCatActive() && !GameManager.Instance.IsMinigameActive)
@@ -93,10 +91,19 @@ public class Cat : MonoBehaviour
         }
     }
 
-    //////////////////////////////////////////
-    /// 
-    /// Note: Called when fostering a generated cat or when populating when loading data
-    ///
+    
+    /// <summary>
+    /// Initializes cat values.
+    /// Called when fostering a generated cat or when populating when loading data
+    /// </summary>
+    /// <param name="name">Name of the cat.</param>
+    /// <param name="traitOne">First triat.</param>
+    /// <param name="traitTwo">Second triat.</param>
+    /// <param name="relationshipMaxValue">Max relationship value.</param>
+    /// <param name="currentRelationshipValue">Current relationship value.</param>
+    /// <param name="currentFullnessValue">Current value of fullness.</param>
+    /// <param name="currentEntertainmentValue">Current value of entertainment.</param>
+    /// <param name="catType">Type of cat.</param>
     public void InitCatValues(string name, Trait traitOne, Trait traitTwo, int relationshipMaxValue, int currentRelationshipValue, int currentFullnessValue, int currentEntertainmentValue, CatType catType)
     {
         catName = name;
@@ -119,10 +126,8 @@ public class Cat : MonoBehaviour
         _fullness = currentFullnessValue;
         _entertainment = currentEntertainmentValue;
     }
-
-    //////////////////////////////////////////
+    
     /// update hunger value
-    ///
     private void HandleHunger()
     {
         hungerTimer += Time.deltaTime;
@@ -140,9 +145,7 @@ public class Cat : MonoBehaviour
         }
     }
 
-    //////////////////////////////////////////
     /// update entertainment value
-    ///
     private void HandleEntertainment()
     {
         entertainmentTimer += Time.deltaTime;
@@ -160,9 +163,7 @@ public class Cat : MonoBehaviour
         }
     }
 
-    //////////////////////////////////////////
     /// update fullness value
-    ///
     public void FeedCat()
     {
         _fullness = Mathf.Clamp(_fullness + feedAmount, 0, maxFullness);
@@ -170,79 +171,64 @@ public class Cat : MonoBehaviour
         OnHungerUpdated?.Invoke(_fullness);
     }
 
-    //////////////////////////////////////////
     /// update entertainment value
-    ///
     public void EntertainCat()
     {
         _entertainment = Mathf.Clamp(_entertainment + entertainAmount, 0, maxEntertainment);
         ModifyRelationship(relationshipIncreaseAmount);
         OnEntertainmentUpdated?.Invoke(_entertainment);
     }
-
-    //////////////////////////////////////////
+    
     /// update relationship value
-    ///
-    public void ModifyRelationship(int value)
+    private void ModifyRelationship(int value)
     {
         _relationship = Mathf.Clamp(value + _relationship, 0, maxRelationship);
         OnRelationshipUpdated?.Invoke(_relationship);
     }
 
-    //////////////////////////////////////////
-    /// 
-    ///
+    #region getters
+    
     public string GetName()
     {
         return catName;
     }
-
-    //////////////////////////////////////////
-    /// 
-    ///
+    
     public Trait GetFirstTrait()
     {
         return firstTrait;
     }
 
-    //////////////////////////////////////////
-    /// 
-    ///
     public Trait GetSecondTrait()
     {
         return secondTrait;
     }
+    
+    public bool IsCatActive()
+    {
+        return isActive;
+    }
+    
+    #endregion getters
 
-    //////////////////////////////////////////
-    /// 
-    ///
+    #region setters
+
     public void SetCatActive(bool active)
     {
         isActive = active;
     }
 
-
-    //////////////////////////////////////////
-    /// 
-    ///
-    public bool IsCatActive()
-    {
-        return isActive;
-    }
-
-
-    //////////////////////////////////////////
-    /// 
-    ///
+    #endregion setters
+    
+    
     public void DestroyCat()
     {
         Destroy(gameObject);
     }
 
-
-    //////////////////////////////////////////
-    /// 
-    ///
+    /// <summary>
+    /// Used to update the stats of a cat over given ammount of time.
+    /// </summary>
+    /// <param name="secondsElapsed">Seconds elapsed since last instance of play.</param>
     public void ApplyTimeElapsed(int secondsElapsed)
     {
         ApplyCatValueChanges(secondsElapsed, Entertainment, entertainmentProcTime, ref entertainmentTimer, ref _entertainment, maxEntertainment);
@@ -250,10 +236,7 @@ public class Cat : MonoBehaviour
         ApplyCatValueChanges(secondsElapsed, Fullness, hungerProcTime, ref hungerTimer, ref _fullness, maxFullness);
         OnHungerUpdated?.Invoke(_fullness);
     }
-
-    //////////////////////////////////////////
-    /// 
-    ///
+    
     private void ApplyCatValueChanges(int secondsElapsed, int previousCatStatValue, float statValueProcTime, ref float statValueTimer, ref int valueToModify, int maxStatValue)
     {
         //check if secondsElapsed is less than the proc times. If so then add that time to each respective timer.
